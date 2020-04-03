@@ -1,5 +1,4 @@
 <?php
-
 namespace Learning\Blog\Setup;
 
 use Magento\Framework\DB\Adapter\AdapterInterface;
