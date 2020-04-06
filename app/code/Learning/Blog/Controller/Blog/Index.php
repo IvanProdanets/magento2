@@ -4,11 +4,11 @@ namespace Learning\Blog\Controller\Blog;
 use Learning\Blog\Model\ResourceModel\Blog\CollectionFactory as BlogCollectionFactory;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
+use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\View\Result\PageFactory;
 
 /**
  * Class Index
- * @package Learning\Blog\Controller\Blog
  */
 class Index extends Action
 {
@@ -38,14 +38,15 @@ class Index extends Action
      */
     public function execute()
     {
-        $collection = $this->blogCollectionFactory->create();
-        foreach ($collection as $item) {
-            echo "<pre>";
-            print_r($item->getData());
-            echo "</pre>";
-        }
-        exit();
-
-        return $this->pageFactory->create();
+        return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+//        $collection = $this->blogCollectionFactory->create();
+//        foreach ($collection as $item) {
+//            echo "<pre>";
+//            print_r($item->getData());
+//            echo "</pre>";
+//        }
+//        exit();
+//
+//        return $this->pageFactory->create();
     }
 }

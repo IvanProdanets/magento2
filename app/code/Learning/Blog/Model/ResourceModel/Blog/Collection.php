@@ -7,7 +7,6 @@ use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 /**
  * Class Collection
- * @package Learning\Blog\Model\ResourceModel\Blog\
  */
 class Collection extends AbstractCollection
 {
