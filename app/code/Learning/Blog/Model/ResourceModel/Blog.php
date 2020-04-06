@@ -5,7 +5,6 @@ use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
 /**
  * Class Blog
- * @package Learning\Blog\Model\ResourceModel
  */
 class Blog extends AbstractDb
 {

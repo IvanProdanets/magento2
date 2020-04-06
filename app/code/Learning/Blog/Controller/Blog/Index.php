@@ -8,7 +8,6 @@ use Magento\Framework\View\Result\PageFactory;
 
 /**
  * Class Index
- * @package Learning\Blog\Controller\Blog
  */
 class Index extends Action
 {

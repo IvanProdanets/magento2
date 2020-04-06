@@ -9,7 +9,6 @@ use Magento\Framework\Setup\SchemaSetupInterface;
 
 /**
  * Class InstallSchema.
- * @package Learning\Blog\Setup
  */
 class InstallSchema implements InstallSchemaInterface
 {
