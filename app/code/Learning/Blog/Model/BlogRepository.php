@@ -1,11 +1,10 @@
 <?php
-namespace Learning\Blog\Model\ResourceModel;
+namespace Learning\Blog\Model;
 
 use Learning\Blog\Api\BlogRepositoryInterface;
 use Learning\Blog\Api\Data\BlogInterface;
 use Learning\Blog\Api\Data\BlogSearchResultInterface;
 use Learning\Blog\Api\Data\BlogSearchResultInterfaceFactory;
-use Learning\Blog\Model\BlogFactory;
 use Learning\Blog\Model\ResourceModel\Blog as BlogResource;
 use Learning\Blog\Model\ResourceModel\Blog\Collection;
 use Learning\Blog\Model\ResourceModel\Blog\CollectionFactory as BlogCollectionFactory;
@@ -48,7 +47,7 @@ class BlogRepository implements BlogRepositoryInterface
     /**
      * BlogRepository constructor.
      * @param BlogFactory $blogFactory
-     * @param Blog $blogResource
+     * @param BlogResource $blogResource
      * @param BlogCollectionFactory $blogCollectionFactory
      * @param BlogSearchResultInterfaceFactory $searchResultFactory
      * @param CollectionProcessorInterface $collectionProcessor
@@ -68,41 +67,52 @@ class BlogRepository implements BlogRepositoryInterface
     }
 
     /**
-     * @inheritDoc
+     * Create or update blog.
+     *
+     * @param BlogInterface $blog
+     * @return BlogInterface
+     * @throws CouldNotSaveException
+     * @throws NoSuchEntityException
      */
     public function save(BlogInterface $blog): BlogInterface
     {
         try {
             $this->resource->save($blog);
-        } catch (\Exception $e) {
+        } catch (\Exception $exception) {
             throw new CouldNotSaveException(
-                __(
-                    'Could not save category: %1',
-                    $e->getMessage()
-                ),
-                $e
+                __('Could not save blog: %1', $exception->getMessage()),
+                $exception
             );
         }
 
-        return $this->getById($blog->getId());
+        return $this->getById($blog->getBlogId());
     }
 
     /**
-     * @inheritDoc
+     * Retrieve blog by id.
+     *
+     * @param int $id
+     * @return BlogInterface
+     * @throws NoSuchEntityException
      */
     public function getById(int $id): BlogInterface
     {
         $blog = $this->blogFactory->create();
         $this->resource->load($blog, $id);
         if (!$blog->getId()) {
-            throw new NoSuchEntityException(__('Unable to find blog with ID "%1"', $id));
+            throw new NoSuchEntityException(
+                __('Unable to find blog with ID "%1"', $id)
+            );
         }
 
         return $blog;
     }
 
     /**
-     * @inheritDoc
+     * Retrieve blogs which match a specified criteria.
+     *
+     * @param SearchCriteriaInterface $criteria
+     * @return BlogSearchResultInterface
      */
     public function getList(SearchCriteriaInterface $criteria): BlogSearchResultInterface
     {
@@ -121,7 +131,11 @@ class BlogRepository implements BlogRepositoryInterface
     }
 
     /**
-     * @inheritDoc
+     * Delete blog.
+     *
+     * @param BlogInterface $blog
+     * @return bool
+     * @throws CouldNotDeleteException
      */
     public function delete(BlogInterface $blog): bool
     {
@@ -129,14 +143,20 @@ class BlogRepository implements BlogRepositoryInterface
             $this->resource->delete($blog);
         } catch (\Exception $exception) {
             throw new CouldNotDeleteException(
-                __('Could not delete the blog: %1', $exception->getMessage())
+                __('Could not delete the blog: %1', $exception->getMessage()),
+                $exception
             );
         }
         return true;
     }
 
     /**
-     * @inheritDoc
+     * Delete blog by id.
+     *
+     * @param int $id
+     * @return bool
+     * @throws CouldNotDeleteException
+     * @throws NoSuchEntityException
      */
     public function deleteById(int $id): bool
     {
