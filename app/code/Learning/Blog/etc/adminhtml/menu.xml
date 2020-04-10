@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Learning_Blog::blog" title="Blog" module="Learning_Blog" sortOrder="50" resource="Learning_Blog::blog"/>
+        <add id="Learning_Blog::blog_manage_items" title="Manage Items"
+             module="Learning_Blog" sortOrder="50" parent="Learning_Blog::blog"
+             action="adminhtml/blog" resource="Learning_Blog::blog_manage_items"/>
+        <add id="Learning_Blog::blog_configuration" title="Configuration"
+             module="Learning_Blog" sortOrder="50" parent="Learning_Blog::blog"
+             action="adminhtml/system_config/edit/section/blog"
+             resource="Learning_Blog::blog_configuration"/>
+    </menu>
+</config>
