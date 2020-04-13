@@ -2,7 +2,7 @@
 namespace Learning\Blog\Api\Data;
 
 /**
- * Blog entity data interface.
+ * Index entity data interface.
  */
 interface BlogInterface
 {

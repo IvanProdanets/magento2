@@ -15,7 +15,7 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
 /**
- * Blog entity repository interface implementation.
+ * Index entity repository interface implementation.
  */
 class BlogRepository implements BlogRepositoryInterface
 {

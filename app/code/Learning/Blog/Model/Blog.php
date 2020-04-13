@@ -6,7 +6,7 @@ use Magento\Framework\Model\AbstractModel;
 use Learning\Blog\Model\ResourceModel\Blog as BlogResourceModel;
 
 /**
- * Model Blog.
+ * Model Index.
  */
 class Blog extends AbstractModel implements BlogInterface
 {

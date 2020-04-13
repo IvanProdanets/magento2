@@ -56,7 +56,7 @@ class InstallSchema implements InstallSchemaInterface
                     'primary'  => true,
                     'unsigned' => true,
                 ],
-                'Blog ID'
+                'Index ID'
             )
             ->addColumn(
                 'subject',
@@ -70,7 +70,7 @@ class InstallSchema implements InstallSchemaInterface
                 Table::TYPE_TEXT,
                 '2M',
                 [ 'nullable' => false ],
-                'Blog\'s content'
+                'Index\'s content'
             )
             ->addColumn(
                 'image_url',
@@ -85,7 +85,7 @@ class InstallSchema implements InstallSchemaInterface
                 null,
                 [ 'nullable' => false, 'default' => Table::TIMESTAMP_INIT ],
                 'Created at'
-            )->setComment('Blog table');
+            )->setComment('Index table');
         $connection->createTable($table);
     }
 

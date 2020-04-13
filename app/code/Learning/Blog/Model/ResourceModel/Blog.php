@@ -4,7 +4,7 @@ namespace Learning\Blog\Model\ResourceModel;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
 /**
- * Class Blog
+ * Class Index
  */
 class Blog extends AbstractDb
 {
