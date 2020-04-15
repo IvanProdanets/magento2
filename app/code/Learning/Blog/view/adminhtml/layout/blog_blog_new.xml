@@ -4,7 +4,7 @@
     <update handle="styles"/>
     <body>
         <referenceContainer name="content">
-            <uiComponent name="learning_blog_listing"/>
+            <uiComponent name="learning_blog_form"/>
         </referenceContainer>
     </body>
 </page>
