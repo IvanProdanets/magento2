@@ -3,10 +3,12 @@
       xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
-            <item name="provider" xsi:type="string">learning_blog_listing.blog_form_data_source</item>
+            <item name="provider" xsi:type="string">
+                learning_blog_form.learning_blog_form_data_source
+            </item>
         </item>
         <item name="label" translate="true" xsi:type="string">General Information</item>
-<!--        <item name="template" xsi:type="string">templates/form/collapsible</item>-->
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
     <settings>
         <buttons>
@@ -19,19 +21,16 @@
                 <class>reset</class>
                 <label translate="true">Reset</label>
             </button>
-<!--            <button class="Tsg\Directory\Ui\Component\Control\City\SplitSaveButton" name="save"/>-->
-<!--            <button class="Tsg\Directory\Ui\Component\Control\City\SplitSaveButton" name="save"/>-->
-            <button name="save"/>
-            <button name="delete"/>
+            <button class="Learning\Blog\Ui\Component\Control\Blog\SaveButton" name="save"/>
+            <button class="Learning\Blog\Ui\Component\Control\Blog\DeleteButton" name="delete"/>
         </buttons>
         <namespace>learning_blog_form</namespace>
         <dataScope>data</dataScope>
         <deps>
-            <dep>learning_blog_form.blog_form_data_source</dep>
+            <dep>learning_blog_form.learning_blog_form_data_source</dep>
         </deps>
     </settings>
-
-    <dataSource name="blog_form_data_source">
+    <dataSource name="learning_blog_form_data_source">
         <argument name="data" xsi:type="array">
             <item name="js_config" xsi:type="array">
                 <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
@@ -40,9 +39,7 @@
         <settings>
             <submitUrl path="*/*/save"/>
         </settings>
-<!--        <dataProvider class="Tsg\Directory\Model\City\DataProvider" name="blog_form_data_source">-->
-<!--        <dataProvider name="blog_form_data_source">-->
-        <dataProvider name="blog_form_data_source">
+        <dataProvider class="Learning\Blog\Model\Blog\DataProvider" name="learning_blog_form_data_source">
             <settings>
                 <requestFieldName>blog_id</requestFieldName>
                 <primaryFieldName>id</primaryFieldName>
@@ -50,30 +47,11 @@
         </dataProvider>
     </dataSource>
 
-<!--    <dataSource name="blog_form_data_source">-->
-<!--        &lt;!&ndash;The data source&ndash;&gt;-->
-<!--        <argument name="dataProvider" xsi:type="configurableObject">-->
-<!--            <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>-->
-<!--            <argument name="name" xsi:type="string">blog_form_data_source</argument>-->
-<!--            <argument name="primaryFieldName" xsi:type="string">blog_id</argument>-->
-<!--            <argument name="requestFieldName" xsi:type="string">id</argument>-->
-<!--            <argument name="data" xsi:type="array">-->
-<!--                <item name="config" xsi:type="array">-->
-<!--                    <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>-->
-<!--                    <item name="update_url" xsi:type="url" path="mui/index/render"/>-->
-<!--                    <item name="storageConfig" xsi:type="array">-->
-<!--                        <item name="indexField" xsi:type="string">blog_id</item>-->
-<!--                    </item>-->
-<!--                </item>-->
-<!--            </argument>-->
-<!--        </argument>-->
-<!--    </dataSource>-->
-
     <fieldset name="general">
         <settings>
             <label>General</label>
         </settings>
-        <field formElement="input" name="name" sortOrder="10">
+        <field formElement="input" name="subject" sortOrder="10">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">Blog</item>
@@ -88,7 +66,7 @@
                 </validation>
             </settings>
         </field>
-        <field formElement="input" name="name_ua" sortOrder="20">
+        <field formElement="input" name="content" sortOrder="20">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">Blog</item>
@@ -103,7 +81,7 @@
                 </validation>
             </settings>
         </field>
-        <field formElement="input" name="name_ua" sortOrder="20">
+        <field formElement="input" name="unage_url" sortOrder="30">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">Blog</item>
@@ -118,21 +96,5 @@
                 </validation>
             </settings>
         </field>
-<!--        <field formElement="input" name="data_for_form[tu_dd]" sortOrder="130">-->
-<!--            <argument name="data" xsi:type="array">-->
-<!--                <item name="config" xsi:type="array">-->
-<!--                    <item name="source" xsi:type="string">City</item>-->
-<!--                </item>-->
-<!--            </argument>-->
-<!--            <settings>-->
-<!--                <disabled>true</disabled>-->
-<!--                <dataType>text</dataType>-->
-<!--                <label translate="true">Tu DD</label>-->
-<!--                <dataScope>data_for_form.tu_dd</dataScope>-->
-<!--                <validation>-->
-<!--                    <rule name="required-entry" xsi:type="boolean">false</rule>-->
-<!--                </validation>-->
-<!--            </settings>-->
-<!--        </field>-->
     </fieldset>
 </form>

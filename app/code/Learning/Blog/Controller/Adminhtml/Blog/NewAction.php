@@ -6,7 +6,6 @@ use Magento\Framework\App\Action\HttpGetActionInterface as HttpGetActionInterfac
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 
-
 class NewAction extends Action implements HttpGetActionInterface
 {
     /**

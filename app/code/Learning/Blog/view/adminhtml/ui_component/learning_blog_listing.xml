@@ -4,7 +4,7 @@
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">learning_blog_listing.learning_blog_form_data_source</item>
-            <item name="deps" xsi:type="string">learning_blog_listing.blog_form_data_source</item>
+            <item name="deps" xsi:type="string">learning_blog_listing.learning_blog_form_data_source</item>
             <!--Declare the data source name which will be defined below-->
         </item>
         <item name="spinner" xsi:type="string">example_blog_columns</item>
@@ -19,11 +19,12 @@
             <!--The button on the top of the Grid-->
         </item>
     </argument>
-    <dataSource name="blog_form_data_source">
+
+    <dataSource name="learning_blog_form_data_source">
         <!--The data source-->
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
-            <argument name="name" xsi:type="string">blog_form_data_source</argument>
+            <argument name="name" xsi:type="string">learning_blog_form_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">blog_id</argument>
             <argument name="requestFieldName" xsi:type="string">id</argument>
             <argument name="data" xsi:type="array">
@@ -139,11 +140,6 @@
                 </item>
             </argument>
         </column>
-<!--        <actionsColumn name="actions" class="Magento\Ui\Component\Listing\Column\Actions">-->
-<!--            <settings>-->
-<!--                <label translate="true">Actions</label>-->
-<!--            </settings>-->
-<!--        </actionsColumn>-->
         <actionsColumn name="actions" sortOrder="240" class="Learning\Blog\Ui\Component\Listing\Column\BlogActions">
             <settings>
                 <label translate="true">Actions</label>

@@ -1,6 +1,8 @@
 <?php
+
 namespace Learning\Blog\Ui\Component\Listing\Column;
 
+use Learning\Blog\Api\Data\BlogInterface;
 use Magento\Framework\UrlInterface;
 use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
@@ -20,11 +22,11 @@ class BlogActions extends Column
     /**
      * BlogActions constructor.
      *
-     * @param ContextInterface $context
+     * @param ContextInterface   $context
      * @param UiComponentFactory $uiComponentFactory
-     * @param UrlInterface $urlBuilder
-     * @param array $components
-     * @param array $data
+     * @param UrlInterface       $urlBuilder
+     * @param array              $components
+     * @param array              $data
      */
     public function __construct(
         ContextInterface $context,
@@ -41,6 +43,7 @@ class BlogActions extends Column
      * Prepare Data Source.
      *
      * @param array $dataSource
+     *
      * @return array
      */
     public function prepareDataSource(array $dataSource)
@@ -49,14 +52,19 @@ class BlogActions extends Column
             foreach ($dataSource['data']['items'] as & $item) {
                 if (isset($item['id'])) {
                     $item[$this->getData('name')] = [
-                        'edit' => [
-                            'href' => $this->urlBuilder->getUrl(
-                                'blog/blog/edit',
-                                [
-                                    'id' => $item['id']
-                                ]
+                        'edit'   => [
+                            'href'  => $this->urlBuilder->getUrl(
+                                '*/*/edit',
+                                [ BlogInterface::ID => $item[BlogInterface::ID] ]
                             ),
                             'label' => __('Edit')
+                        ],
+                        'delete' => [
+                            'href'  => $this->urlBuilder->getUrl(
+                                '*/*/delete',
+                                [ BlogInterface::ID => $item[BlogInterface::ID] ]
+                            ),
+                            'label' => __('Delete')
                         ]
                     ];
                 }
