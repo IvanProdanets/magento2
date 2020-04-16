@@ -41,7 +41,7 @@
         </settings>
         <dataProvider class="Learning\Blog\Model\Blog\DataProvider" name="learning_blog_form_data_source">
             <settings>
-                <requestFieldName>blog_id</requestFieldName>
+                <requestFieldName>id</requestFieldName>
                 <primaryFieldName>id</primaryFieldName>
             </settings>
         </dataProvider>

@@ -54,14 +54,14 @@ class BlogActions extends Column
                     $item[$this->getData('name')] = [
                         'edit'   => [
                             'href'  => $this->urlBuilder->getUrl(
-                                '*/*/edit',
+                                'blog/blog/edit',
                                 [ BlogInterface::ID => $item[BlogInterface::ID] ]
                             ),
                             'label' => __('Edit')
                         ],
                         'delete' => [
                             'href'  => $this->urlBuilder->getUrl(
-                                '*/*/delete',
+                                'blog/blog/delete',
                                 [ BlogInterface::ID => $item[BlogInterface::ID] ]
                             ),
                             'label' => __('Delete')
