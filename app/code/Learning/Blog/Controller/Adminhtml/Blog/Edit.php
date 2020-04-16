@@ -13,6 +13,13 @@ use Magento\Framework\View\Result\Page;
 
 class Edit extends Action implements HttpGetActionInterface
 {
+    /**
+     * Authorization level of a basic admin session
+     *
+     * @see _isAllowed()
+     */
+    const ADMIN_RESOURCE = 'Learning_Blog::blog_update';
+
     /** @var BlogRepositoryInterface */
     private $blogRepository;
 
@@ -35,7 +42,7 @@ class Edit extends Action implements HttpGetActionInterface
      */
     public function execute(): ResultInterface
     {
-        $id = $this->getRequest()->getParam(BlogInterface::ID) ?? null;
+        $id = $this->getRequest()->getParam(BlogInterface::ID, null);
 
         try {
             $this->blogRepository->getById($id);

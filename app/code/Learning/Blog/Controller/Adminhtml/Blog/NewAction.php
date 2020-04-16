@@ -9,6 +9,13 @@ use Magento\Framework\Controller\ResultInterface;
 class NewAction extends Action implements HttpGetActionInterface
 {
     /**
+     * Authorization level of a basic admin session
+     *
+     * @see _isAllowed()
+     */
+    const ADMIN_RESOURCE = 'Learning_Blog::blog_save';
+
+    /**
      * Create new blog action.
      *
      * @return ResultInterface

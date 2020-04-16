@@ -7,6 +7,13 @@ use Magento\Framework\View\Result\PageFactory;
 
 class Index extends Action
 {
+    /**
+     * Authorization level of a basic admin session
+     *
+     * @see _isAllowed()
+     */
+    const ADMIN_RESOURCE = 'Learning_Blog::blogs_view';
+
     protected $pageFactory;
 
     /**

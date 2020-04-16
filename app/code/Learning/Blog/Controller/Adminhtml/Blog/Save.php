@@ -7,7 +7,6 @@ use Learning\Blog\Api\Data\BlogInterface;
 use Learning\Blog\Model\Blog;
 use Learning\Blog\Model\BlogFactory;
 use Learning\Blog\Model\BlogRepository;
-use Learning\Blog\Model\ResourceModel\Blog as BlogResource;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
@@ -16,11 +15,15 @@ use Magento\Framework\Exception\NoSuchEntityException;
 
 class Save extends Action implements HttpPostActionInterface
 {
+    /**
+     * Authorization level of a basic admin session
+     *
+     * @see _isAllowed()
+     */
+    const ADMIN_RESOURCE = 'Learning_Blog::blog_save';
+
     /** @var Blog */
     private $blogFactory;
-
-    /** @var BlogResource */
-    private $blogResource;
 
     /** @var BlogRepository */
     private $blogRepository;
@@ -30,17 +33,14 @@ class Save extends Action implements HttpPostActionInterface
      *
      * @param Context                 $context
      * @param BlogFactory             $blogFactory
-     * @param BlogResource            $blogResource
      * @param BlogRepositoryInterface $blogRepository
      */
     public function __construct(
         Context $context,
         BlogFactory $blogFactory,
-        BlogResource $blogResource,
         BlogRepositoryInterface $blogRepository
     ) {
         $this->blogFactory    = $blogFactory;
-        $this->blogResource   = $blogResource;
         $this->blogRepository = $blogRepository;
         parent::__construct($context);
     }
@@ -60,7 +60,7 @@ class Save extends Action implements HttpPostActionInterface
             return $resultRedirect;
         }
 
-        $id = $this->getRequest()->getParam(BlogInterface::ID) ?? null;
+        $id = $this->getRequest()->getParam(BlogInterface::ID, null);
         $this->save($data, $id);
 
         return $resultRedirect;
