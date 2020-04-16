@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
-    <!--Declare data source, columns list, button...-->
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
             <item name="provider" xsi:type="string">learning_blog_listing.learning_blog_form_data_source</item>
             <item name="deps" xsi:type="string">learning_blog_listing.learning_blog_form_data_source</item>
-            <!--Declare the data source name which will be defined below-->
         </item>
-        <item name="spinner" xsi:type="string">example_blog_columns</item>
-        <!--Declare the listing of columns which will be defined below-->
+        <item name="spinner" xsi:type="string">blog_columns</item>
         <item name="buttons" xsi:type="array">
             <item name="add" xsi:type="array">
                 <item name="name" xsi:type="string">add</item>
@@ -16,12 +13,10 @@
                 <item name="class" xsi:type="string">primary</item>
                 <item name="url" xsi:type="string">*/*/new</item>
             </item>
-            <!--The button on the top of the Grid-->
         </item>
     </argument>
 
     <dataSource name="learning_blog_form_data_source">
-        <!--The data source-->
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
             <argument name="name" xsi:type="string">learning_blog_form_data_source</argument>
@@ -49,33 +44,11 @@
             <bookmark name="bookmarks"/>
             <columnsControls name="columns_controls"/>
             <filterSearch name="fulltext"/>
-            <filters name="listing_filters" />
-            <massaction name="listing_massaction">
-                <argument name="data" xsi:type="array">
-                    <item name="config" xsi:type="array">
-                        <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
-                    </item>
-                </argument>
-                <action name="delete">
-                    <argument name="data" xsi:type="array">
-                        <item name="config" xsi:type="array">
-                            <item name="type" xsi:type="string">delete</item>
-                            <item name="label" xsi:type="string" translate="true">Delete</item>
-                            <item name="url" xsi:type="url" path="learning_blog/blog/massDelete"/>
-                            <item name="confirm" xsi:type="array">
-                                <item name="title" xsi:type="string" translate="true">Delete Blog</item>
-                                <item name="message" xsi:type="string" translate="true">Are you sure you wan't to delete selected items?</item>
-                            </item>
-                        </item>
-                    </argument>
-                </action>
-            </massaction>
-            <paging name="listing_paging"/>
-            <exportButton name="export_button"/>
+            <filters name="listing_filters"/>
         </listingToolbar>
     </listing>
 
-    <columns name="example_blog_columns">
+    <columns name="blog_columns">
         <!--The list of columns-->
         <selectionsColumn name="ids">
             <argument name="data" xsi:type="array">

@@ -5,9 +5,18 @@ namespace Learning\Blog\Ui\Component\Control\Blog;
 use Magento\Cms\Block\Adminhtml\Page\Edit\GenericButton;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
+/**
+ * Class SaveButton
+ */
 class SaveButton extends GenericButton implements ButtonProviderInterface
 {
-    const ADMIN_RESOURCE = 'Blog';
+    /**
+     * Authorization level of a basic admin session
+     *
+     * @see _isAllowed()
+     */
+    const ADMIN_RESOURCE = 'Learning_Blog::blog_save';
+
     /**
      * @inheritDoc
      */

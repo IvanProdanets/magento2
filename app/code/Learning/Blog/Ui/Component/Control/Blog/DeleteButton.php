@@ -6,8 +6,18 @@ use Learning\Blog\Api\Data\BlogInterface;
 use Magento\Cms\Block\Adminhtml\Page\Edit\GenericButton;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
+/**
+ * Class DeleteButton.
+ */
 class DeleteButton extends GenericButton implements ButtonProviderInterface
 {
+    /**
+     * Authorization level of a basic admin session
+     *
+     * @see _isAllowed()
+     */
+    const ADMIN_RESOURCE = 'Learning_Blog::blog_delete';
+
     /**
      * @inheritDoc
      */
@@ -22,14 +32,16 @@ class DeleteButton extends GenericButton implements ButtonProviderInterface
     }
 
     /**
+     * Return url for delete action.
+     *
      * @return string
      */
     private function getDeleteUrl(): string
     {
         return $this->getUrl(
-            '*/*/delete',
+            'blog/blog/delete',
             [
-            'id' => $this->context->getRequest()->getParam(BlogInterface::ID, null)
+                'id' => $this->context->getRequest()->getParam(BlogInterface::ID, null)
             ]
         );
     }
