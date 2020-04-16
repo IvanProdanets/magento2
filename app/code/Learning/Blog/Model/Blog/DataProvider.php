@@ -2,6 +2,7 @@
 
 namespace Learning\Blog\Model\Blog;
 
+use Learning\Blog\Model\Blog;
 use Learning\Blog\Model\ResourceModel\Blog\Collection;
 use Learning\Blog\Model\ResourceModel\Blog\CollectionFactory;
 use Magento\Ui\DataProvider\AbstractDataProvider;
@@ -56,6 +57,7 @@ class DataProvider extends AbstractDataProvider
 
         $items = $this->collection->getItems();
 
+        /** @var Blog $blog */
         foreach ($items as $blog) {
             $this->loadedData[$blog->getId()] = $blog->getData();
         }

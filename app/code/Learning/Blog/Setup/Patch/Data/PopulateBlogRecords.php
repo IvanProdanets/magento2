@@ -4,7 +4,6 @@ namespace Learning\Blog\Setup\Patch\Data;
 use Learning\Blog\Model\ResourceModel\Blog as BlogResourceModel;
 use Magento\Framework\Setup\ModuleDataSetupInterface;
 use Magento\Framework\Setup\Patch\DataPatchInterface;
-use Magento\Framework\Setup\Patch\PatchInterface;
 
 class PopulateBlogRecords implements DataPatchInterface
 {

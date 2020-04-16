@@ -11,6 +11,9 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Result\Page;
 
+/**
+ * Edit Blog Action class.
+ */
 class Edit extends Action implements HttpGetActionInterface
 {
     /**

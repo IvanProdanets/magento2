@@ -2,10 +2,14 @@
 namespace Learning\Blog\Controller\Adminhtml\Blog;
 
 use Magento\Backend\App\Action;
+use Magento\Backend\Model\View\Result\Page;
 use Magento\Framework\App\Action\HttpGetActionInterface as HttpGetActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 
+/**
+ * New Blog Action class.
+ */
 class NewAction extends Action implements HttpGetActionInterface
 {
     /**
@@ -22,6 +26,7 @@ class NewAction extends Action implements HttpGetActionInterface
      */
     public function execute(): ResultInterface
     {
+        /** @var Page $resultPage */
         $resultPage = $this->resultFactory->create(ResultFactory::TYPE_PAGE);
         $resultPage->getConfig()->getTitle()->prepend(__('New Blog'));
 

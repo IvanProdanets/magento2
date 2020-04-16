@@ -13,10 +13,13 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
+/**
+ * Delete Blog Action class.
+ */
 class Delete extends Action implements HttpPostActionInterface
 {
     /**
-     * Authorization level of a basic admin session
+     * Authorization level of a basic admin session.
      *
      * @see _isAllowed()
      */
@@ -38,7 +41,7 @@ class Delete extends Action implements HttpPostActionInterface
     }
 
     /**
-     * Execute action based on request and return result
+     * Execute action based on request and return result.
      *
      * @return ResultInterface|ResponseInterface
      */

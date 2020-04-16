@@ -3,10 +3,14 @@ namespace Learning\Blog\Controller\Adminhtml\Blog;
 
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\View\Result\Page;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\View\Result\PageFactory;
 
+/**
+ * Index page Action class.
+ */
 class Index extends Action
 {
     /**
@@ -37,6 +41,7 @@ class Index extends Action
      */
     public function execute()
     {
+        /** @var Page $resultPage */
         $resultPage = $this->pageFactory->create();
         $resultPage->setActiveMenu('Learning_Blog::blog_manage');
 

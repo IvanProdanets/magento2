@@ -15,10 +15,13 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
+/**
+ * Save Blog Action class.
+ */
 class Save extends Action implements HttpPostActionInterface
 {
     /**
-     * Authorization level of a basic admin session
+     * Authorization level of a basic admin session.
      *
      * @see _isAllowed()
      */
@@ -48,7 +51,7 @@ class Save extends Action implements HttpPostActionInterface
     }
 
     /**
-     * Execute action based on request and return result
+     * Execute action based on request and return result.
      *
      * @return ResultInterface|ResponseInterface
      */
