@@ -19,7 +19,9 @@ class DeleteButton extends GenericButton implements ButtonProviderInterface
     const ADMIN_RESOURCE = 'Learning_Blog::blog_delete';
 
     /**
-     * @inheritDoc
+     * Retrieve button-specified settings
+     *
+     * @return array
      */
     public function getButtonData()
     {

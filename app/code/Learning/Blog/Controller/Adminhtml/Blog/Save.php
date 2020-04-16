@@ -10,6 +10,8 @@ use Learning\Blog\Model\BlogRepository;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
@@ -46,7 +48,9 @@ class Save extends Action implements HttpPostActionInterface
     }
 
     /**
-     * @inheritDoc
+     * Execute action based on request and return result
+     *
+     * @return ResultInterface|ResponseInterface
      */
     public function execute()
     {

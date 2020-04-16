@@ -18,7 +18,9 @@ class SaveButton extends GenericButton implements ButtonProviderInterface
     const ADMIN_RESOURCE = 'Learning_Blog::blog_save';
 
     /**
-     * @inheritDoc
+     * Retrieve button-specified settings
+     *
+     * @return array
      */
     public function getButtonData(): array
     {
