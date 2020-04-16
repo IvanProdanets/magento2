@@ -12,8 +12,8 @@
         name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="learning_blog_form_data_source"
-                      xsi:type="string">Learning\Blog\Model\ResourceModel\Blog\Collection
+                <item name="learning_blog_form_data_source" xsi:type="string">
+                    Learning\Blog\Model\ResourceModel\Blog\Collection
                 </item>
             </argument>
         </arguments>
