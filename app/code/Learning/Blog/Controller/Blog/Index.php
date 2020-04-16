@@ -11,9 +11,11 @@ use Magento\Framework\View\Result\PageFactory;
  */
 class Index extends Action
 {
-    protected $blogCollectionFactory;
+    /** @var BlogCollectionFactory  */
+    private $blogCollectionFactory;
 
-    protected $pageFactory;
+    /** @var PageFactory  */
+    private $pageFactory;
 
     /**
      * Index constructor.

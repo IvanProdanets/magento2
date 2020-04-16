@@ -15,12 +15,12 @@ class DataProvider extends AbstractDataProvider
     /**
      * @var Collection
      */
-    protected $collection;
+    private $collection;
 
     /**
      * @var array
      */
-    protected $loadedData;
+    private $loadedData;
 
     /**
      * DataProvider constructor.

@@ -20,7 +20,7 @@ class Index extends Action
      */
     const ADMIN_RESOURCE = 'Learning_Blog::blogs_view';
 
-    protected $pageFactory;
+    private $pageFactory;
 
     /**
      * Index constructor.

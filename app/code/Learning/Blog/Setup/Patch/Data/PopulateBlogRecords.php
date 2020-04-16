@@ -11,7 +11,7 @@ class PopulateBlogRecords implements DataPatchInterface
     /**
      * @var ModuleDataSetupInterface
      */
-    protected $moduleDataSetup;
+    private $moduleDataSetup;
 
     /**
      * PopulateBlogRecords constructor.
