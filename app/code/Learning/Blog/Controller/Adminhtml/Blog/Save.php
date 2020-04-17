@@ -9,10 +9,12 @@ use Learning\Blog\Model\BlogFactory;
 use Learning\Blog\Model\BlogRepository;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
+use Magento\Catalog\Model\ImageUploader;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
 /**
@@ -33,20 +35,26 @@ class Save extends Action implements HttpPostActionInterface
     /** @var BlogRepository */
     private $blogRepository;
 
+    /** @var ImageUploader */
+    private $imageUploader;
+
     /**
      * Save constructor.
      *
      * @param Context                 $context
      * @param BlogFactory             $blogFactory
      * @param BlogRepositoryInterface $blogRepository
+     * @param ImageUploader           $imageUploader
      */
     public function __construct(
         Context $context,
         BlogFactory $blogFactory,
-        BlogRepositoryInterface $blogRepository
+        BlogRepositoryInterface $blogRepository,
+        ImageUploader $imageUploader
     ) {
         $this->blogFactory    = $blogFactory;
         $this->blogRepository = $blogRepository;
+        $this->imageUploader  = $imageUploader;
         parent::__construct($context);
     }
 
@@ -54,6 +62,7 @@ class Save extends Action implements HttpPostActionInterface
      * Execute action based on request and return result.
      *
      * @return ResultInterface|ResponseInterface
+     * @throws LocalizedException
      */
     public function execute()
     {
@@ -79,19 +88,27 @@ class Save extends Action implements HttpPostActionInterface
      * @param array $data
      *
      * @return array
+     * @throws LocalizedException
      */
     private function prepareData(array $data): array
     {
+        // Remove empty keys.
+        $data = array_filter($data, function ($value) {
+            return $value !== '';
+        });
+
+        // Remove form_key.
         if (isset($data['form_key'])) {
             unset($data['form_key']);
         }
 
-        return array_filter(
-            $data,
-            function ($value) {
-                return $value !== '';
-            }
-        );
+        // Prepare image url for saving.
+        if (!empty($data[BlogInterface::IMAGE_URL] && !empty($data[BlogInterface::IMAGE_URL][0]))) {
+            $imageUrl = $this->imageUploader->moveFileFromTmp($data['image_url'][0]['file'] ?? '', true);
+            $data[BlogInterface::IMAGE_URL] = $imageUrl ?? '';
+        }
+
+        return $data;
     }
 
     /**
@@ -101,6 +118,7 @@ class Save extends Action implements HttpPostActionInterface
      * @param int|null $id
      *
      * @return BlogInterface
+     * @throws LocalizedException
      */
     private function save(array &$data, ?int $id = null): BlogInterface
     {

@@ -66,7 +66,7 @@
                 </validation>
             </settings>
         </field>
-        <field formElement="input" name="content" sortOrder="20">
+        <field formElement="textarea" name="content" sortOrder="20">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">Blog</item>
@@ -81,20 +81,23 @@
                 </validation>
             </settings>
         </field>
-        <field formElement="input" name="unage_url" sortOrder="30">
-            <argument name="data" xsi:type="array">
-                <item name="config" xsi:type="array">
-                    <item name="source" xsi:type="string">Blog</item>
-                </item>
-            </argument>
+        <field name="image_url" formElement="imageUploader" sortOrder="30">
             <settings>
-                <dataType>text</dataType>
-                <label translate="true">Image URL</label>
-                <dataScope>image_url</dataScope>
-                <validation>
-                    <rule name="required-entry" xsi:type="boolean">false</rule>
-                </validation>
+                <notice translate="true">Allowed file types: jpeg, gif, png.</notice>
+                <label translate="true">Image</label>
+                <componentType>imageUploader</componentType>
             </settings>
+            <formElements>
+                <imageUploader>
+                    <settings>
+                        <allowedExtensions>jpg jpeg gif png</allowedExtensions>
+                        <maxFileSize>2097152</maxFileSize>
+                        <uploaderConfig>
+                            <param xsi:type="string" name="url">*/*/upload</param>
+                        </uploaderConfig>
+                    </settings>
+                </imageUploader>
+            </formElements>
         </field>
     </fieldset>
 </form>
