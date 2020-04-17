@@ -57,7 +57,7 @@
                 </item>
             </argument>
         </selectionsColumn>
-        <column name="id">
+        <column name="id" sortOrder="10">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
@@ -66,7 +66,7 @@
                 </item>
             </argument>
         </column>
-        <column name="subject">
+        <column name="subject" sortOrder="20">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
@@ -75,7 +75,7 @@
                 </item>
             </argument>
         </column>
-        <column name="content">
+        <column name="content" sortOrder="30">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">text</item>
@@ -84,27 +84,18 @@
                 </item>
             </argument>
         </column>
-        <column name="image_url">
+        <column name="image" class="Learning\Blog\Ui\Component\Listing\Column\Thumbnail" sortOrder="40">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/thumbnail</item>
                     <item name="sortable" xsi:type="boolean">false</item>
-                    <item name="label" xsi:type="string" translate="true">Image URL</item>
+                    <item name="altField" xsi:type="string">Blog's image</item>
+                    <item name="has_preview" xsi:type="string">1</item>
+                    <item name="label" xsi:type="string" translate="true">Image</item>
                 </item>
             </argument>
         </column>
-<!--        <column name="image" class="Your\Modulename\Ui\Component\Listing\Column\Thumbnail">-->
-<!--        <column name="image">-->
-<!--            <argument name="data" xsi:type="array">-->
-<!--                <item name="config" xsi:type="array">-->
-<!--                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/thumbnail</item>-->
-<!--                    <item name="sortable" xsi:type="boolean">false</item>-->
-<!--                    <item name="altField" xsi:type="string">title</item>-->
-<!--                    <item name="has_preview" xsi:type="string">1</item>-->
-<!--                    <item name="label" xsi:type="string" translate="true">Image</item>-->
-<!--                </item>-->
-<!--            </argument>-->
-<!--        </column>-->
-        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" sortOrder="50">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="filter" xsi:type="string">dateRange</item>
