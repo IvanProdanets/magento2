@@ -80,7 +80,7 @@ class Save extends Action implements HttpPostActionInterface
      *
      * @return array
      */
-    private function prepareData(array &$data): array
+    private function prepareData(array $data): array
     {
         if (isset($data['form_key'])) {
             unset($data['form_key']);
