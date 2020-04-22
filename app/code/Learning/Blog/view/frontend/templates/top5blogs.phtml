@@ -1,0 +1,31 @@
+<?php
+
+use Learning\Blog\Block\Blog;
+
+/** @var Blog $block */
+?>
+
+<?php if ($block->display() && $blogs = $block->getBlogs()) :?>
+    <div class="product info related-blogs">
+        <div class="blog-item">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="image">
+                        image
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row publish-date"></div>
+                    <div class="row subject"></div>
+                </div>
+            </div>
+        </div>
+        <?php echo $block->getBlogs() ?>
+
+<!--        --><?php //foreach ($blogs as $blog) :?>
+<!--            <div class="blog-item">-->
+<!--            </div>-->
+<!--        --><?php //endforeach; ?>
+
+    </div>
+<?php endif; ?>

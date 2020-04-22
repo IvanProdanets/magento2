@@ -1,0 +1,11 @@
+/*.product {*/
+/*    .info {*/
+/*        .related-blogs {*/
+
+/*        }*/
+/*    }*/
+/*}*/
+.product.info.related-blogs {
+    clear: both;
+    margin-bottom: 30px;
+}
