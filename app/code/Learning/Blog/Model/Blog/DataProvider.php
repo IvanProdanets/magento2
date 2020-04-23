@@ -2,6 +2,8 @@
 
 namespace Learning\Blog\Model\Blog;
 
+use Learning\Blog\Api\Data\BlogInterface;
+use Learning\Blog\Helper\ImageHelper;
 use Learning\Blog\Model\Blog;
 use Learning\Blog\Model\ResourceModel\Blog\Collection;
 use Learning\Blog\Model\ResourceModel\Blog\CollectionFactory;
@@ -22,6 +24,9 @@ class DataProvider extends AbstractDataProvider
      */
     private $loadedData;
 
+    /** @var ImageHelper */
+    private $imageHelper;
+
     /**
      * DataProvider constructor.
      *
@@ -37,10 +42,12 @@ class DataProvider extends AbstractDataProvider
         string $primaryFieldName,
         string $requestFieldName,
         CollectionFactory $collectionFactory,
+        ImageHelper $imageHelper,
         array $meta = [],
         array $data = []
     ) {
-        $this->collection = $collectionFactory->create();
+        $this->collection  = $collectionFactory->create();
+        $this->imageHelper = $imageHelper;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
@@ -59,9 +66,30 @@ class DataProvider extends AbstractDataProvider
 
         /** @var Blog $blog */
         foreach ($items as $blog) {
-            $this->loadedData[$blog->getId()] = $blog->getData();
+            $this->loadedData[$blog->getId()] = $this->mapFields($blog->getData());
         }
 
         return $this->loadedData;
+    }
+
+
+    /**
+     * @param array $item
+     *
+     * @return array
+     */
+    private function mapFields(array $item): array
+    {
+        // Map BlogInterface::IMAGE_URL field for display.
+        $imageUrl = $item[BlogInterface::IMAGE_URL];
+        unset($item[BlogInterface::IMAGE_URL]);
+        $item[BlogInterface::IMAGE_URL][0] = [
+            'name' => basename($imageUrl),
+            'url'  => $this->imageHelper->getImageUrl($imageUrl),
+            'type' => 'image',
+            'size' => $this->imageHelper->getStat($imageUrl)['size'] ?? 0,
+        ];
+
+        return $item;
     }
 }

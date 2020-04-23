@@ -103,6 +103,22 @@ class ImageHelper extends AbstractHelper
     }
 
     /**
+     * Gathers the statistics of the given path.
+     *
+     * @param string $imagePath
+     * @return array
+     */
+    public function getStat(string $imagePath): array
+    {
+        $filePath = DIRECTORY_SEPARATOR . ltrim($imagePath, DIRECTORY_SEPARATOR);
+        if ($this->mediaDirectory->isExist($filePath)) {
+            return $this->mediaDirectory->stat($imagePath);
+        }
+
+        return [];
+    }
+
+    /**
      *  Reprieve default blog image.
      *
      * @return string
