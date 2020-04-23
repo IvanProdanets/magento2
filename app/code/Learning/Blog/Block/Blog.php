@@ -3,6 +3,7 @@
 namespace Learning\Blog\Block;
 
 use Learning\Blog\Api\Data\BlogInterface;
+use Learning\Blog\Helper\ImageHelper;
 use Learning\Blog\Model\BlogRepository;
 use Learning\Blog\Service\CurrentProductService;
 use Magento\Framework\Api\SearchCriteriaBuilder;
@@ -36,7 +37,10 @@ class Blog extends Template
     /**
      * @var ManagerInterface
      */
-    protected $messageManager;
+    private $messageManager;
+
+    /** @var ImageHelper */
+    private $imageHelper;
 
     /**
      * Blog constructor.
@@ -48,6 +52,7 @@ class Blog extends Template
      * @param SortOrder             $sortOrder
      * @param CurrentProductService $currentProduct
      * @param ManagerInterface      $messageManager
+     * @param ImageHelper           $imageHelper
      * @param array                 $data
      */
     public function __construct(
@@ -57,7 +62,8 @@ class Blog extends Template
         SearchCriteriaBuilder $criteriaBuilder,
         SortOrder $sortOrder,
         CurrentProductService $currentProduct,
-        ManagerInterface      $messageManager,
+        ManagerInterface $messageManager,
+        ImageHelper $imageHelper,
         array $data = []
     ) {
         $this->scopeConfig     = $scopeConfig;
@@ -66,6 +72,7 @@ class Blog extends Template
         $this->sortOrder       = $sortOrder;
         $this->currentProduct  = $currentProduct;
         $this->messageManager  = $messageManager;
+        $this->imageHelper     = $imageHelper;
 
         parent::__construct($context, $data);
     }
@@ -127,5 +134,16 @@ class Blog extends Template
         }
 
         return $relatedProducts ?? [];
+    }
+
+    /**
+     * Get full image url for display in front.
+     *
+     * @param string $relativePath
+     * @return string
+     */
+    public function fullImgPath(string $relativePath = ''): string
+    {
+        return $this->imageHelper->getImageUrl($this->escapeUrl($relativePath));
     }
 }

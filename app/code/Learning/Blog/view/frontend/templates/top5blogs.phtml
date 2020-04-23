@@ -1,5 +1,6 @@
 <?php
 
+use Learning\Blog\Api\Data\BlogInterface;
 use Learning\Blog\Block\Blog;
 use Magento\Framework\Api\SortOrder;
 
@@ -8,27 +9,36 @@ use Magento\Framework\Api\SortOrder;
 $items = $block->getItems(5, SortOrder::SORT_DESC);
 ?>
 
-<?php if ($block->showBlogSection() && count($items) > 0) :?>
+<?php if ($block->showBlogSection() && count($items) > 0) : ?>
     <div class="product info related-blogs">
-        <div class="blog-item">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="image">
-                        image
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="row publish-date"></div>
-                    <div class="row subject"></div>
-                </div>
-            </div>
-        </div>
-
-        <?php foreach ($items as $item) :?>
+        <p class="header">Top 5 latest posts</p>
+        <?php foreach ($items as $item) : ?>
+            <?php /** @var BlogInterface $item */ ?>
             <div class="blog-item">
-                <?php print_r($item->getSubject())?>
+                <div class="header">
+                    <span class="publish-date">
+                        <?php echo $block->formatDate(
+                            $item->getCreatedAt() ?? '',
+                            \IntlDateFormatter::SHORT,
+                            true
+                        ) ?>
+                    </span>
+                </div>
+                <div class="image-block">
+                    <a href="#" src="" title="<?php echo $block->escapeHtml($item->getSubject()) ?>">
+                        <img
+                            src="<?php echo $block->fullImgPath($item->getImageUrl()) ?>"
+                            alt="blog-image"
+                            width="100"
+                            height="100"
+                        />
+                    </a>
+                </div>
+                <div class="content-block">
+                    <a href="#" class="subject"><?php echo $block->escapeHtml($item->getSubject()) ?></a>
+                    <p class="content"><?php echo $block->escapeHtml($item->getContent()) ?></p>
+                </div>
             </div>
         <?php endforeach; ?>
-
     </div>
 <?php endif; ?>
