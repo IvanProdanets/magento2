@@ -14,7 +14,7 @@ interface BlogSearchResultInterface extends SearchResultsInterface
      *
      * @return BlogInterface[]
      */
-    public function getItems(): array;
+    public function getItems();
 
     /**
      * Set blogs list.

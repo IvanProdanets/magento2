@@ -5,9 +5,11 @@ namespace Learning\Blog\Block;
 use Learning\Blog\Api\Data\BlogInterface;
 use Learning\Blog\Model\BlogRepository;
 use Learning\Blog\Service\CurrentProductService;
-use Magento\Catalog\Block\Product\View;
+use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Framework\Api\SortOrder;
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\Phrase;
+use Magento\Framework\Exception\InputException;
+use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Store\Model\ScopeInterface;
@@ -22,27 +24,49 @@ class Blog extends Template
     /** @var BlogRepository */
     private $blogRepository;
 
+    /** @var CurrentProductService */
     private $currentProduct;
+
+    /** @var SearchCriteriaBuilder */
+    private $criteriaBuilder;
+
+    /** @var SortOrder */
+    private $sortOrder;
+
+    /**
+     * @var ManagerInterface
+     */
+    protected $messageManager;
 
     /**
      * Blog constructor.
      *
-     * @param Context                    $context
-     * @param ScopeConfigInterface       $scopeConfig
-     * @param BlogRepository             $blogRepository
-     * @param View $
-     * @param array                      $data
+     * @param Context               $context
+     * @param ScopeConfigInterface  $scopeConfig
+     * @param BlogRepository        $blogRepository
+     * @param SearchCriteriaBuilder $criteriaBuilder
+     * @param SortOrder             $sortOrder
+     * @param CurrentProductService $currentProduct
+     * @param ManagerInterface      $messageManager
+     * @param array                 $data
      */
     public function __construct(
         Context $context,
         ScopeConfigInterface $scopeConfig,
         BlogRepository $blogRepository,
+        SearchCriteriaBuilder $criteriaBuilder,
+        SortOrder $sortOrder,
         CurrentProductService $currentProduct,
+        ManagerInterface      $messageManager,
         array $data = []
     ) {
-        $this->scopeConfig    = $scopeConfig;
-        $this->blogRepository = $blogRepository;
-        $this->currentProduct = $currentProduct;
+        $this->scopeConfig     = $scopeConfig;
+        $this->blogRepository  = $blogRepository;
+        $this->criteriaBuilder = $criteriaBuilder;
+        $this->sortOrder       = $sortOrder;
+        $this->currentProduct  = $currentProduct;
+        $this->messageManager  = $messageManager;
+
         parent::__construct($context, $data);
     }
 
@@ -54,13 +78,28 @@ class Blog extends Template
      */
     public function getItems(int $size = null, string $order = 'ASC'): array
     {
+        try {
+            $sortOrder = $this->sortOrder
+                ->setField(BlogInterface::CREATED_AT)
+                ->setDirection($order === SortOrder::SORT_ASC ? SortOrder::SORT_ASC : SortOrder::SORT_DESC);
 
-//        $blogs = $this->blogRepository->getList();
+            $criteria = $this->criteriaBuilder->create();
+            $criteria = $criteria->setSortOrders([$sortOrder]);
 
-        return [];
+            if ($size) {
+                $criteria->setPageSize($size);
+            }
+        } catch (InputException $e) {
+            $this->messageManager->addErrorMessage($e->getMessage());
+        }
+
+        return $this->blogRepository->getList($criteria)->getItems();
     }
 
-    public function display(): bool
+    /**
+     * @return bool
+     */
+    public function showBlogSection(): bool
     {
         $currentProduct = $this->currentProduct->getProduct();
 
@@ -70,6 +109,7 @@ class Blog extends Template
 
         return false;
     }
+
     /**
      * Get products list from store config.
      *

@@ -1,11 +1,14 @@
 <?php
 
 use Learning\Blog\Block\Blog;
+use Magento\Framework\Api\SortOrder;
 
 /** @var Blog $block */
+
+$items = $block->getItems(5, SortOrder::SORT_DESC);
 ?>
 
-<?php if ($block->display() && $blogs = $block->getBlogs()) :?>
+<?php if ($block->showBlogSection() && count($items) > 0) :?>
     <div class="product info related-blogs">
         <div class="blog-item">
             <div class="row">
@@ -20,12 +23,12 @@ use Learning\Blog\Block\Blog;
                 </div>
             </div>
         </div>
-        <?php echo $block->getBlogs() ?>
 
-<!--        --><?php //foreach ($blogs as $blog) :?>
-<!--            <div class="blog-item">-->
-<!--            </div>-->
-<!--        --><?php //endforeach; ?>
+        <?php foreach ($items as $item) :?>
+            <div class="blog-item">
+                <?php print_r($item->getSubject())?>
+            </div>
+        <?php endforeach; ?>
 
     </div>
 <?php endif; ?>
