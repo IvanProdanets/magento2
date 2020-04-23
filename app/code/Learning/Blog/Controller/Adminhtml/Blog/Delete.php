@@ -7,7 +7,7 @@ use Learning\Blog\Api\Data\BlogInterface;
 use Learning\Blog\Model\BlogRepository;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
@@ -16,7 +16,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 /**
  * Delete Blog Action class.
  */
-class Delete extends Action implements HttpPostActionInterface
+class Delete extends Action implements HttpGetActionInterface
 {
     /**
      * Authorization level of a basic admin session.
@@ -29,7 +29,7 @@ class Delete extends Action implements HttpPostActionInterface
     private $blogRepository;
 
     /**
-     * Save constructor.
+     * Delete constructor.
      *
      * @param Context                 $context
      * @param BlogRepositoryInterface $blogRepository
