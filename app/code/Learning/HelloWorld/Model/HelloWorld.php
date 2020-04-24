@@ -4,6 +4,9 @@ namespace Learning\HelloWorld\Model;
 
 use Learning\HelloWorld\Api\HelloWorldInterface;
 
+/**
+ * Class HelloWorld.
+ */
 class HelloWorld implements HelloWorldInterface
 {
     /**
