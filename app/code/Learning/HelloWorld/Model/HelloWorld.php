@@ -12,12 +12,13 @@ class HelloWorld implements HelloWorldInterface
     /**
      * Return 'hello' message.
      *
+     * @param string $message
+     * @return string|null
      * @api
      *
-     * @return string|null
      */
-    public function hello(): ?string
+    public function hello(string $message = ''): ?string
     {
-        return __('Hello World from Magento2 API!');
+        return __($message . 'Hello World from Magento2 API!');
     }
 }

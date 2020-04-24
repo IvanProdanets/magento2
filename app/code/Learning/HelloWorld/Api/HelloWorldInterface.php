@@ -10,9 +10,10 @@ interface HelloWorldInterface
     /**
      * Return 'hello' message.
      *
+     * @param string $message
+     * @return string|null
      * @api
      *
-     * @return string|null
      */
-    public function hello(): ?string;
+    public function hello(string $message = ''): ?string;
 }

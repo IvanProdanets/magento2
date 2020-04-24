@@ -49,7 +49,8 @@ class Index extends Action implements HttpGetActionInterface
                 'error'     => $exception->getMessage(),
                 'errorCode' => $exception->getCode()
             ]);
-            $response->setHttpResponseCode(Exception::HTTP_INTERNAL_ERROR);
+
+            return $response->setHttpResponseCode(Exception::HTTP_INTERNAL_ERROR);
         }
 
         return $response;
