@@ -2,22 +2,32 @@
 
 namespace Learning\HelloWorld\Test\Integration\Controller\Index;
 
-use PHPUnit\Framework\TestCase;
+use Magento\Framework\Webapi;
 use Magento\TestFramework\TestCase\AbstractController;
 
 class IndexTest extends AbstractController
 {
+    /**
+     * Test that response Controller return JSON with expected data.
+     */
     public function testIndexControllerDisplayCorrectData()
     {
         $this->dispatch('hello/index/index');
 
-        $this->assertContains(''
-//            [
-//                'data' => [
-//                    'message' => '<h1>beforeHello World from Magento2 API!after</h1>'
-//                ]
-//            ]
-        , $this->getResponse()->getBody());
-    }
+        // Assert that response return 200 status code.
+        $this->assertEquals(Webapi\Response::HTTP_OK, $this->getResponse()->getHttpResponseCode());
 
+        $expectedJson = json_encode([
+            'data' => [
+                'message' => '<h1>beforeHello World from Magento2 API!after</h1>'
+            ]
+        ]);
+        $actualJson = $this->getResponse()->getBody();
+
+        //Assert that response return json.
+        $this->assertJson($actualJson);
+
+        // Assert that response return expected data
+        $this->assertJsonStringEqualsJsonString($expectedJson, $this->getResponse()->getBody());
+    }
 }
