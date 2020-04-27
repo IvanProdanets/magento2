@@ -19,7 +19,7 @@ class Before
      *
      * @return array
      */
-    public function beforeHello(HelloWorldInterface $subject, string $message): array
+    public function beforeHello(HelloWorldInterface $subject, string $message = ''): array
     {
         return [ self::PREFIX . $message ];
     }

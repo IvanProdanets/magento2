@@ -18,7 +18,7 @@ class Around
      *
      * @return string
      */
-    public function aroundHello(HelloWorldInterface $subject, callable $proceed, string $message)
+    public function aroundHello(HelloWorldInterface $subject, callable $proceed, string $message='')
     {
         return '<h1>' . $proceed($message) . '</h1>';
     }

@@ -15,11 +15,11 @@ class After
      * After Hello handler.
      *
      * @param HelloWorldInterface $subject
-     * @param string              $result
+     * @param string|null              $result
      *
      * @return string
      */
-    public function afterHello(HelloWorldInterface $subject, string $result): string
+    public function afterHello(HelloWorldInterface $subject, ?string $result): string
     {
         return $result . self::SUFFIX;
     }
