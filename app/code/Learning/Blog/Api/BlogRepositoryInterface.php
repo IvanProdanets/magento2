@@ -11,7 +11,6 @@ use Magento\Framework\Exception\NoSuchEntityException;
 
 /**
  * Blog CRUD interface.
- * @api
  */
 interface BlogRepositoryInterface
 {
