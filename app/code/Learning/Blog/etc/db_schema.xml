@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+  <table name="learning_blog_blog" resource="default" engine="innodb" comment="Blog table">
+    <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Blog ID"/>
+    <column xsi:type="varchar" name="subject" nullable="false" length="255" comment="Subject name"/>
+    <column xsi:type="mediumtext" name="content" nullable="false" comment="Blog's content"/>
+    <column xsi:type="varchar" name="image_url" nullable="true" length="255" comment="Url of the blog's image"/>
+    <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created at"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="id"/>
+    </constraint>
+    <index referenceId="LEARNING_BLOG_BLOG_SUBJECT_CONTENT" indexType="fulltext">
+      <column name="subject"/>
+      <column name="content"/>
+    </index>
+  </table>
+</schema>

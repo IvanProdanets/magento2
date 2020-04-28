@@ -1,0 +1,43 @@
+/**
+ * Blogs style.
+ */
+.product.info.related-blogs {
+    width: 57%;
+    margin-bottom: 100px;
+}
+
+.product.info.related-blogs>.header {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.product.info.related-blogs>.blog-item {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    padding-top: 10px;
+}
+
+.product.info.related-blogs>.blog-item>.header {
+    grid-column: span 12;
+}
+.product.info.related-blogs>.blog-item>.header>.publish-date {
+    font-size: 11px;
+    color: #9b9b9b;
+}
+
+.product.info.related-blogs>.blog-item>.image-block {
+    grid-column: span 3;
+    padding: 5px;
+}
+
+.product.info.related-blogs>.blog-item>.content-block {
+    grid-column: span 9;
+    padding: 5px;
+}
+
+.product.info.related-blogs>.blog-item>.content-block>.content {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
