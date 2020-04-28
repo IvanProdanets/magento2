@@ -2,7 +2,7 @@
 
 namespace Learning\HelloWorld\Test\Integration\Controller\Index;
 
-use Magento\Framework\Webapi;
+use Magento\Framework\Webapi\Response;
 use Magento\TestFramework\TestCase\AbstractController;
 
 class IndexTest extends AbstractController
@@ -15,7 +15,7 @@ class IndexTest extends AbstractController
         $this->dispatch('hello/index/index');
 
         // Assert that response return 200 status code.
-        $this->assertEquals(Webapi\Response::HTTP_OK, $this->getResponse()->getHttpResponseCode());
+        $this->assertEquals(Response::HTTP_OK, $this->getResponse()->getHttpResponseCode());
 
         $expectedJson = json_encode([
             'data' => [
