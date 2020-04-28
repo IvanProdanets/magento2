@@ -5,7 +5,6 @@ use Magento\Framework\Api\SearchResultsInterface;
 
 /**
  * Interface for blog search results.
- * @api
  */
 interface BlogSearchResultInterface extends SearchResultsInterface
 {

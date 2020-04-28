@@ -10,7 +10,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
 /**
- * Index CRUD interface.
+ * Blog CRUD interface.
  * @api
  */
 interface BlogRepositoryInterface

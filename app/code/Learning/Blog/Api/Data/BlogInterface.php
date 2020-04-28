@@ -2,7 +2,7 @@
 namespace Learning\Blog\Api\Data;
 
 /**
- * Index entity data interface.
+ * Blog entity data interface.
  */
 interface BlogInterface
 {
@@ -30,7 +30,7 @@ interface BlogInterface
      * @param int $id
      * @return void
      */
-    public function setBlogId($id);
+    public function setBlogId(?int $id);
 
     /**
      * Retrieve subject of the blog.
@@ -45,7 +45,7 @@ interface BlogInterface
      * @param string $subject
      * @return void
      */
-    public function setSubject(string $subject);
+    public function setSubject(?string $subject);
 
     /**
      * Retrieve blog\'s content.
@@ -60,7 +60,7 @@ interface BlogInterface
      * @param string $content
      * @return void
      */
-    public function setContent(string $content);
+    public function setContent(?string $content);
 
 
     /**
@@ -91,5 +91,5 @@ interface BlogInterface
      * @param string $timestamp
      * @return void
      */
-    public function setCreatedAt(string $timestamp);
+    public function setCreatedAt(?string $timestamp);
 }

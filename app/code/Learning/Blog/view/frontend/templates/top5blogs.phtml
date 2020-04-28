@@ -2,11 +2,10 @@
 
 use Learning\Blog\Api\Data\BlogInterface;
 use Learning\Blog\Block\Blog;
-use Magento\Framework\Api\SortOrder;
 
 /** @var Blog $block */
 
-$items = $block->getItems(5, SortOrder::SORT_DESC);
+$items = $block->getLastItems();
 ?>
 
 <?php if ($block->showBlogSection() && count($items) > 0) : ?>

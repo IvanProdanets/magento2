@@ -60,10 +60,10 @@ class Delete extends Action implements HttpGetActionInterface
         try {
             $this->blogRepository->deleteById($id);
             $this->messageManager->addSuccessMessage(__('You\'ve deleted the blog.'));
-        } catch (CouldNotDeleteException $e) {
-            $this->messageManager->addErrorMessage(__('Could not delete blog with ID %1.', $id));
         } catch (NoSuchEntityException $e) {
             $this->messageManager->addErrorMessage(__('Could not find blog with ID %1.', $id));
+        } catch (CouldNotDeleteException $e) {
+            $this->messageManager->addErrorMessage(__('Could not delete blog with ID %1.', $id));
         }
 
         return $resultRedirect;

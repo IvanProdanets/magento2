@@ -18,6 +18,7 @@ use Magento\Store\Model\ScopeInterface;
 class Blog extends Template
 {
     const XML_PATH_RELATED_PRODUCTS = 'catalog/catalog/blog_applied_to';
+    const PAGE_SIZE = 5;
 
     /** @var ScopeConfigInterface */
     private $scopeConfig;
@@ -78,24 +79,18 @@ class Blog extends Template
     }
 
     /**
-     * @param int|null $size
-     * @param string   $order
-     *
      * @return array
      */
-    public function getItems(int $size = null, string $order = 'ASC'): array
+    public function getLastItems(): array
     {
         try {
             $sortOrder = $this->sortOrder
                 ->setField(BlogInterface::CREATED_AT)
-                ->setDirection($order === SortOrder::SORT_ASC ? SortOrder::SORT_ASC : SortOrder::SORT_DESC);
+                ->setDirection(SortOrder::SORT_DESC);
 
             $criteria = $this->criteriaBuilder->create();
-            $criteria = $criteria->setSortOrders([$sortOrder]);
-
-            if ($size) {
-                $criteria->setPageSize($size);
-            }
+            $criteria->setSortOrders([$sortOrder]);
+            $criteria->setPageSize(self::PAGE_SIZE);
         } catch (InputException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
         }

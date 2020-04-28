@@ -31,10 +31,10 @@ class Blog extends AbstractModel implements BlogInterface
     /**
      * Set blog id.
      *
-     * @param int $id
+     * @param int|null $id
      * @return void
      */
-    public function setBlogId($id)
+    public function setBlogId(?int $id)
     {
         $this->setData(self::ID, $id);
     }
@@ -52,10 +52,10 @@ class Blog extends AbstractModel implements BlogInterface
     /**
      * Set subject of the blog.
      *
-     * @param string $subject
+     * @param string|null $subject
      * @return void
      */
-    public function setSubject(string $subject)
+    public function setSubject(?string $subject)
     {
         $this->setData(self::SUBJECT, $subject);
     }
@@ -73,10 +73,10 @@ class Blog extends AbstractModel implements BlogInterface
     /**
      * Set blog\'s content.
      *
-     * @param string $content
+     * @param string|null $content
      * @return void
      */
-    public function setContent(string $content)
+    public function setContent(?string $content)
     {
         $this->setData(self::CONTEXT, $content);
     }
@@ -115,10 +115,10 @@ class Blog extends AbstractModel implements BlogInterface
     /**
      * Set blog\'s time creation.
      *
-     * @param string $timestamp
+     * @param string|null $timestamp
      * @return void
      */
-    public function setCreatedAt(string $timestamp)
+    public function setCreatedAt(?string $timestamp)
     {
         $this->setData(self::CREATED_AT, $timestamp);
     }
