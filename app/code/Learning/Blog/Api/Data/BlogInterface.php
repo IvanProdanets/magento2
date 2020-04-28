@@ -27,7 +27,7 @@ interface BlogInterface
     /**
      * Set blog id.
      *
-     * @param int $id
+     * @param int|null $id
      * @return void
      */
     public function setBlogId(?int $id);
@@ -42,7 +42,7 @@ interface BlogInterface
     /**
      * Set subject of the blog.
      *
-     * @param string $subject
+     * @param string|null $subject
      * @return void
      */
     public function setSubject(?string $subject);
@@ -57,7 +57,7 @@ interface BlogInterface
     /**
      * Set blog\'s content.
      *
-     * @param string $content
+     * @param string|null $content
      * @return void
      */
     public function setContent(?string $content);
@@ -88,7 +88,7 @@ interface BlogInterface
     /**
      * Set blog\'s time creation.
      *
-     * @param string $timestamp
+     * @param string|null $timestamp
      * @return void
      */
     public function setCreatedAt(?string $timestamp);
