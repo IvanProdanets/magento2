@@ -42,6 +42,6 @@ class HelloWorldInterfaceTest extends WebapiAbstract
 
         $this->assertNotEmpty($response);
         $this->assertEquals($response->getHttpResponseCode(), Response::HTTP_OK);
-        $this->assertEquals('<h1>beforeHello World from Magento2 API!after</h1>', $responseData);
+        $this->assertContains('beforeHello World from Magento2!after', $responseData);
     }
 }

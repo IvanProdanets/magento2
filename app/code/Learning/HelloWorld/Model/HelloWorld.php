@@ -19,6 +19,6 @@ class HelloWorld implements HelloWorldInterface
      */
     public function hello(string $message = ''): ?string
     {
-        return __($message . 'Hello World from Magento2 API!');
+        return __($message . 'Hello World from Magento2!');
     }
 }

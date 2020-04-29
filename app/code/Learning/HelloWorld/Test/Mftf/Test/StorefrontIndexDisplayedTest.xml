@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="StorefrontIndexDisplayedTest">
+        <annotations>
+            <features value="HelloWorld"/>
+            <stories value="HelloWorld"/>
+            <title value="Сheck that hello block displayed on storefront"/>
+            <severity value="MAJOR"/>
+            <testCaseId value="M2-63368-testCase"/>
+            <group value="helloBlock"/>
+        </annotations>
+
+        <comment userInput="Open Storefront index page" stepKey="openStorefrontIndexPage"/>
+        <amOnPage url="{{StorefrontIndexPage.url}}" stepKey="goToStorefrontIndexPage"/>
+        <waitForPageLoad stepKey="waitForIndexPage"/>
+
+        <!--Check that hello block displayed on index page-->
+        <comment userInput="Check that hello block displayed on index page" stepKey="checkHelloBlockDisplayed"/>
+        <seeElement selector="{{StorefrontIndexMainSection.helloBlock}}" stepKey="seeHelloBlockOnIndexPage"/>
+
+        <!--Check that hello block print correct greeting-->
+        <comment userInput="Check that block print correct greeting" stepKey="checkHelloBlockPrintCorrectData"/>
+        <grabTextFrom selector="{{StorefrontIndexMainSection.greetingText}}" stepKey="grabHelloBlockClass"/>
+        <assertEquals stepKey="assertGreetingIsCorrect">
+            <expectedResult type="string">beforeHello World from Magento2!after</expectedResult>
+            <actualResult type="variable">$grabHelloBlockClass</actualResult>
+        </assertEquals>
+
+    </test>
+</tests>
