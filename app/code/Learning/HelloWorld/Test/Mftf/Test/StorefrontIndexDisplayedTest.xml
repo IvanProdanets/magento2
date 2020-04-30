@@ -16,11 +16,9 @@
         <amOnPage url="{{StorefrontIndexPage.url}}" stepKey="goToStorefrontIndexPage"/>
         <waitForPageLoad stepKey="waitForIndexPage"/>
 
-        <!--Check that hello block displayed on index page-->
         <comment userInput="Check that hello block displayed on index page" stepKey="checkHelloBlockDisplayed"/>
         <seeElement selector="{{StorefrontIndexMainSection.helloBlock}}" stepKey="seeHelloBlockOnIndexPage"/>
 
-        <!--Check that hello block print correct greeting-->
         <comment userInput="Check that block print correct greeting" stepKey="checkHelloBlockPrintCorrectData"/>
         <grabTextFrom selector="{{StorefrontIndexMainSection.greetingText}}" stepKey="grabHelloBlockClass"/>
         <assertEquals stepKey="assertGreetingIsCorrect">

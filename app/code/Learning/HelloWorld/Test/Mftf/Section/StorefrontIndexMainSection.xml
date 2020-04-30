@@ -2,7 +2,7 @@
 
 <sections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
-    <section name="StorefrontHelloMainSection">
+    <section name="StorefrontIndexMainSection">
         <element name="helloBlock" type="block" selector="#maincontent .hello-block"/>
         <element name="greetingText" type="text" selector="#maincontent .hello-block h1"/>
     </section>
