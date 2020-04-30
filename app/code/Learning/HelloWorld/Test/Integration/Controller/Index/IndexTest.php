@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Learning\HelloWorld\Test\Integration\Controller\Index;
 
 use Learning\HelloWorld\Block\HelloWorld;

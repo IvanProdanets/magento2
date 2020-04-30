@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Learning\HelloWorld\Test\Integration\Block;
 
 use Learning\HelloWorld\Api\HelloWorldInterface;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Learning\HelloWorld\Api;
 
 /**
@@ -12,7 +14,6 @@ interface HelloWorldInterface
      *
      * @param string $message
      * @return string|null
-     * @api
      *
      */
     public function hello(string $message = ''): ?string;

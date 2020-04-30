@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Learning\HelloWorld\Test\Api;
 
 use Magento\Framework\App\ResponseInterface;

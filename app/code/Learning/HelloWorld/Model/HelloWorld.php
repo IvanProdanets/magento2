@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Learning\HelloWorld\Model;
 
 use Learning\HelloWorld\Api\HelloWorldInterface;
@@ -14,11 +16,10 @@ class HelloWorld implements HelloWorldInterface
      *
      * @param string $message
      * @return string|null
-     * @api
      *
      */
     public function hello(string $message = ''): ?string
     {
-        return __($message . 'Hello World from Magento2!');
+        return __($message . 'Hello World from Magento2!')->render();
     }
 }

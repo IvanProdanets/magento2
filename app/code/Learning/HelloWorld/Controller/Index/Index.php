@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Learning\HelloWorld\Controller\Index;
 
 use Magento\Framework\App\Action\Action;

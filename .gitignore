@@ -68,5 +68,4 @@ atlassian*
 /generated/*
 !/generated/.htaccess
 .DS_Store
-phpunit.xml
 dev/tests/acceptance/tests/functional/Magento/_generated
