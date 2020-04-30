@@ -1,0 +1,19 @@
+{
+    "name": "learning/additional-description",
+    "version": "0.0.1",
+    "description": "Module extend attributes of Product and Customer entities",
+    "type": "magento2-module",
+    "require": {
+        "magento/framework": "*",
+        "magento/module-catalog": "*",
+        "magento/module-customer": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Learning\\AdditionalDescription\\": ""
+        }
+    }
+}
