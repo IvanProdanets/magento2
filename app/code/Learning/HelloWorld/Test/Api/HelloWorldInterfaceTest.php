@@ -27,7 +27,9 @@ class HelloWorldInterfaceTest extends WebapiAbstract
         parent::setUp();
     }
 
-
+    /**
+     * Test web-api endpoint.
+     */
     public function testHelloEndpointReturnData()
     {
         $serviceInfo = [

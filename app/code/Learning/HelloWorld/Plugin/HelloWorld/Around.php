@@ -7,7 +7,7 @@ namespace Learning\HelloWorld\Plugin\HelloWorld;
 use Learning\HelloWorld\Api\HelloWorldInterface;
 
 /**
- * Class Around.
+ * Around plugins implementation.
  */
 class Around
 {

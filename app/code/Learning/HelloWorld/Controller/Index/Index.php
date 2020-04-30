@@ -11,7 +11,7 @@ use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
 
 /**
- * Index Controller.
+ * Controller render 'index' page.
  */
 class Index extends Action implements HttpGetActionInterface
 {

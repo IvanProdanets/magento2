@@ -8,6 +8,9 @@ use Learning\HelloWorld\Api\HelloWorldInterface;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 
+/**
+ * Block used to send greeting to view.
+ */
 class HelloWorld extends Template
 {
     /** @var HelloWorldInterface */
@@ -30,6 +33,8 @@ class HelloWorld extends Template
     }
 
     /**
+     * Get greeting.
+     *
      * @return string
      */
     public function sayHello(): string

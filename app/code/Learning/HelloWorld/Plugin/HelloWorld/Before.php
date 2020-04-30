@@ -7,7 +7,7 @@ namespace Learning\HelloWorld\Plugin\HelloWorld;
 use Learning\HelloWorld\Api\HelloWorldInterface;
 
 /**
- * Class Before.
+ * Before plugins implementation.
  */
 class Before
 {

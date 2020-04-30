@@ -7,12 +7,12 @@ namespace Learning\HelloWorld\Model;
 use Learning\HelloWorld\Api\HelloWorldInterface;
 
 /**
- * Class HelloWorld.
+ * HelloWorld entity interface implementation.
  */
 class HelloWorld implements HelloWorldInterface
 {
     /**
-     * Return 'hello' message.
+     * Return greeting text.
      *
      * @param string $message
      * @return string|null

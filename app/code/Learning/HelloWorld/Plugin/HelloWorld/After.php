@@ -7,7 +7,7 @@ namespace Learning\HelloWorld\Plugin\HelloWorld;
 use Learning\HelloWorld\Api\HelloWorldInterface;
 
 /**
- * Class After.
+ * After plugins implementation.
  */
 class After
 {

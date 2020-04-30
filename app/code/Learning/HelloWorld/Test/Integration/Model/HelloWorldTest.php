@@ -19,7 +19,7 @@ class HelloWorldTest extends TestCase
     private $objectManager;
 
     /**
-     *
+     * Bootstrap application before any test.
      */
     public function setUp()
     {

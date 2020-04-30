@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Learning\HelloWorld\Api;
 
 /**
- * Interface HelloWorldInterface
+ * HelloWorld entity interface.
  */
 interface HelloWorldInterface
 {
     /**
-     * Return 'hello' message.
+     * Return greeting text.
      *
      * @param string $message
      * @return string|null
