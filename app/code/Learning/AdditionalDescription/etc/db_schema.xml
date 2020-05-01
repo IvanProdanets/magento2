@@ -9,5 +9,9 @@
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id"/>
         </constraint>
+        <constraint xsi:type="foreign" referenceId="CATALOG_PRODUCT_ENTITY_DESCRIPTION_ID_CATALOG_PRODUCT_ENTITY_ID"
+                    table="catalog_product_entity_additional_description" column="product_id"
+                    referenceTable="catalog_product_entity" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
     </table>
 </schema>
