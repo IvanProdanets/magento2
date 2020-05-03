@@ -3,10 +3,11 @@ declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Model;
 
-use Learning\AdditionalDescription\Api\Data\ProductAdditionalDescriptionInterface;
+use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
 use Magento\Framework\Api\ExtensionAttributesInterface;
+use Magento\Framework\Model\AbstractModel;
 
-class ProductAdditionalDescription implements ProductAdditionalDescriptionInterface
+class AdditionalDescription extends AbstractModel implements AdditionalDescriptionInterface
 {
 
     /**
@@ -16,7 +17,7 @@ class ProductAdditionalDescription implements ProductAdditionalDescriptionInterf
      */
     public function getAdditionalDescriptionId(): ?int
     {
-        // TODO: Implement getAdditionalDescriptionId() method.
+        return $this->getData(self::DESCRIPTION_ID);
     }
 
     /**
@@ -24,11 +25,11 @@ class ProductAdditionalDescription implements ProductAdditionalDescriptionInterf
      *
      * @param int|null $id
      *
-     * @return ProductAdditionalDescriptionInterface
+     * @return AdditionalDescriptionInterface
      */
-    public function setAdditionalDescriptionId(?int $id): ProductAdditionalDescriptionInterface
+    public function setAdditionalDescriptionId(?int $id): AdditionalDescriptionInterface
     {
-        // TODO: Implement setAdditionalDescriptionId() method.
+        return $this->setData(self::DESCRIPTION_ID, $id);
     }
 
 //    /**
@@ -52,15 +53,15 @@ class ProductAdditionalDescription implements ProductAdditionalDescriptionInterf
      */
     public function getAdditionalDescription(): ?string
     {
-        // TODO: Implement getAdditionalDescription() method.
+        return $this->getData(self::ADDITIONAL_DESCRIPTION);
     }
 
     /**
      * @inheritDoc
      */
-    public function setAdditionalDescription(?string $description): ProductAdditionalDescriptionInterface
+    public function setAdditionalDescription(?string $description): AdditionalDescriptionInterface
     {
-        // TODO: Implement setAdditionalDescription() method.
+        return $this->setData(self::ADDITIONAL_DESCRIPTION, $description);
     }
 
     /**
@@ -68,15 +69,15 @@ class ProductAdditionalDescription implements ProductAdditionalDescriptionInterf
      */
     public function getProductId(): ?int
     {
-        // TODO: Implement getProductId() method.
+        return $this->getData(self::PRODUCT_ID);
     }
 
     /**
      * @inheritDoc
      */
-    public function setProductId(): ProductAdditionalDescriptionInterface
+    public function setProductId(int $id): AdditionalDescriptionInterface
     {
-        // TODO: Implement setProductId() method.
+        return $this->setData(self::PRODUCT_ID, $id);
     }
 
     /**
@@ -92,7 +93,7 @@ class ProductAdditionalDescription implements ProductAdditionalDescriptionInterf
      */
     public function setExtensionAttributes(
         ExtensionAttributesInterface $extensionAttributes
-    ): ProductAdditionalDescriptionInterface {
+    ): AdditionalDescriptionInterface {
         // TODO: Implement setExtensionAttributes() method.
     }
 }

@@ -1,23 +1,22 @@
 <?xml version="1.0"?>
 
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
-    <table name="catalog_product_additional_description" resource="default" engine="innodb" comment="Catalog product additional description table">
-        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Additional description ID"/>
-        <column xsi:type="varchar" name="customer_email" nullable="false" length="255" comment="Customer email address"/>
-        <column xsi:type="mediumtext" name="additional_description" nullable="false" comment="Product additional description"/>
-        <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" comment="Product id"/>
+    <table name="customer_allow_add_description" resource="default" engine="innodb" comment="Customer allow description">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Permission ID"/>
+        <column xsi:type="boolean" name="permission_id" nullable="false" default="false"/>
+        <column xsi:type="int" name="customer_id" padding="10" unsigned="true" nullable="false" comment="Customer id"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">
             <column name="id"/>
         </constraint>
-        <constraint xsi:type="foreign" referenceId="CATALOG_PRODUCT_DESCRIPTION_ID_CATALOG_PRODUCT_ENTITY_ID"
-                    table="catalog_product_additional_description" column="product_id"
-                    referenceTable="catalog_product_entity" referenceColumn="entity_id"
+        <constraint xsi:type="foreign" referenceId="CUSTOMER_ALLOW_DESCRIPTION_ID_CUSTOMER_ENTITY_ID"
+                    table="customer_allow_add_description" column="customer_id"
+                    referenceTable="customer_entity" referenceColumn="entity_id"
                     onDelete="CASCADE"/>
     </table>
-    <table name="customer_allow_add_description" resource="default" engine="innodb" comment="Catalog product additional description table">
+
+    <table name="catalog_product_additional_description" resource="default" engine="innodb" comment="Catalog product additional description table">
         <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Additional description ID"/>
-        <column xsi:type="varchar" name="customer_email" nullable="false" length="255" comment="Customer email address"/>
-        <column xsi:type="smallint" name="is_html_allowed_on_front" padding="5" unsigned="true" nullable="false"
+<!--        <column xsi:type="varchar" name="customer_email" nullable="false" length="255" comment="Customer email address"/>-->
         <column xsi:type="mediumtext" name="additional_description" nullable="false" comment="Product additional description"/>
         <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" comment="Product id"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">

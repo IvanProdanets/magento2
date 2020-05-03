@@ -3,10 +3,11 @@ declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Model;
 
-use Learning\AdditionalDescription\Api\Data\CustomerAllowAddDescriptionInterface;
+use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface;
 use Magento\Framework\Api\ExtensionAttributesInterface;
+use Magento\Framework\Model\AbstractModel;
 
-class CustomerAllowAddDescription implements CustomerAllowAddDescriptionInterface
+class AllowAddDescription extends AbstractModel implements AllowAddDescriptionInterface
 {
 
     /**
@@ -14,15 +15,15 @@ class CustomerAllowAddDescription implements CustomerAllowAddDescriptionInterfac
      */
     public function getPermissionId(): ?int
     {
-        // TODO: Implement getPermissionId() method.
+        return $this->getData(self::PERMISSION_ID);
     }
 
     /**
      * @inheritDoc
      */
-    public function setPermissionId(?int $id): CustomerAllowAddDescriptionInterface
+    public function setPermissionId(?int $id): AllowAddDescriptionInterface
     {
-        // TODO: Implement setPermissionId() method.
+        return $this->setData(self::PERMISSION_ID, $id);
     }
 
     /**
@@ -30,15 +31,15 @@ class CustomerAllowAddDescription implements CustomerAllowAddDescriptionInterfac
      */
     public function getAllowAddDescription(): ?bool
     {
-        // TODO: Implement getAllowAddDescription() method.
+        return $this->getData(self::ALLOW_ADD_DESCRIPTION);
     }
 
     /**
      * @inheritDoc
      */
-    public function setAllowAddDescription(?bool $allow): CustomerAllowAddDescriptionInterface
+    public function setAllowAddDescription(?bool $allow): AllowAddDescriptionInterface
     {
-        // TODO: Implement setAllowAddDescription() method.
+        return $this->setData(self::ALLOW_ADD_DESCRIPTION, $allow);
     }
 
     /**
@@ -54,7 +55,7 @@ class CustomerAllowAddDescription implements CustomerAllowAddDescriptionInterfac
      */
     public function setExtensionAttributes(
         ExtensionAttributesInterface $extensionAttributes
-    ): CustomerAllowAddDescriptionInterface {
+    ): AllowAddDescriptionInterface {
         // TODO: Implement setExtensionAttributes() method.
     }
 }

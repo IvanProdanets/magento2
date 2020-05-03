@@ -9,9 +9,9 @@ use Magento\Framework\Api\ExtensionAttributesInterface;
 /**
  *  Product additional description entity interface.
  */
-interface ProductAdditionalDescriptionInterface extends ExtensibleDataInterface
+interface AdditionalDescriptionInterface extends ExtensibleDataInterface
 {
-    const ADDITIONAL_DESCRIPTION_ID = 'id';
+    const DESCRIPTION_ID = 'id';
 
 //    const CUSTOMER_EMAIL = 'customer_email';
 
@@ -31,9 +31,9 @@ interface ProductAdditionalDescriptionInterface extends ExtensibleDataInterface
      *
      * @param int|null $id
      *
-     * @return ProductAdditionalDescriptionInterface
+     * @return AdditionalDescriptionInterface
      */
-    public function setAdditionalDescriptionId(?int $id): ProductAdditionalDescriptionInterface;
+    public function setAdditionalDescriptionId(?int $id): AdditionalDescriptionInterface;
 
 //    /**
 //     * Retrieve customer email.
@@ -63,9 +63,9 @@ interface ProductAdditionalDescriptionInterface extends ExtensibleDataInterface
      *
      * @param string|null $description
      *
-     * @return ProductAdditionalDescriptionInterface
+     * @return AdditionalDescriptionInterface
      */
-    public function setAdditionalDescription(?string $description): ProductAdditionalDescriptionInterface;
+    public function setAdditionalDescription(?string $description): AdditionalDescriptionInterface;
 
     /**
      * Retrieve product entity id.
@@ -77,9 +77,11 @@ interface ProductAdditionalDescriptionInterface extends ExtensibleDataInterface
     /**
      * Set product entity id.
      *
-     * @return ProductAdditionalDescriptionInterface
+     * @param int $id
+     *
+     * @return AdditionalDescriptionInterface
      */
-    public function setProductId(): ProductAdditionalDescriptionInterface;
+    public function setProductId(int $id): AdditionalDescriptionInterface;
 
     /**
      * Retrieve existing extension attributes object or create a new one.
@@ -93,9 +95,9 @@ interface ProductAdditionalDescriptionInterface extends ExtensibleDataInterface
      *
      * @param ExtensionAttributesInterface $extensionAttributes
      *
-     * @return ProductAdditionalDescriptionInterface
+     * @return AdditionalDescriptionInterface
      */
     public function setExtensionAttributes(
         ExtensionAttributesInterface $extensionAttributes
-    ): ProductAdditionalDescriptionInterface;
+    ): AdditionalDescriptionInterface;
 }

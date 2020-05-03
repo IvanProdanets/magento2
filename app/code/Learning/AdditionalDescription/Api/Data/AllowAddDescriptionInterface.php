@@ -9,11 +9,11 @@ use Magento\Framework\Api\ExtensionAttributesInterface;
 /**
  *  Customer allow add description interface.
  */
-interface CustomerAllowAddDescriptionInterface extends ExtensibleDataInterface
+interface AllowAddDescriptionInterface extends ExtensibleDataInterface
 {
-    const PERMISSION_ID = 'permission_id';
+    const PERMISSION_ID = 'id';
 
-    const ALLOW_ADD_DESCRIPTION = 'allow_add_description';
+    const ALLOW_ADD_DESCRIPTION = 'permission_id';
 
 //    const CUSTOMER_EMAIL = 'customer_email';
 
@@ -31,9 +31,9 @@ interface CustomerAllowAddDescriptionInterface extends ExtensibleDataInterface
      *
      * @param int|null $id
      *
-     * @return CustomerAllowAddDescriptionInterface
+     * @return AllowAddDescriptionInterface
      */
-    public function setPermissionId(?int $id): CustomerAllowAddDescriptionInterface;
+    public function setPermissionId(?int $id): AllowAddDescriptionInterface;
 
     /**
      * Retrieve permission to add description for customer.
@@ -47,9 +47,9 @@ interface CustomerAllowAddDescriptionInterface extends ExtensibleDataInterface
      *
      * @param bool|null $allow
      *
-     * @return CustomerAllowAddDescriptionInterface
+     * @return AllowAddDescriptionInterface
      */
-    public function setAllowAddDescription(?bool $allow): CustomerAllowAddDescriptionInterface;
+    public function setAllowAddDescription(?bool $allow): AllowAddDescriptionInterface;
 
 //    public function getCustomerEmail(): ?string;
 //
@@ -84,9 +84,9 @@ interface CustomerAllowAddDescriptionInterface extends ExtensibleDataInterface
      *
      * @param ExtensionAttributesInterface $extensionAttributes
      *
-     * @return CustomerAllowAddDescriptionInterface
+     * @return AllowAddDescriptionInterface
      */
     public function setExtensionAttributes(
         ExtensionAttributesInterface $extensionAttributes
-    ): CustomerAllowAddDescriptionInterface;
+    ): AllowAddDescriptionInterface;
 }
