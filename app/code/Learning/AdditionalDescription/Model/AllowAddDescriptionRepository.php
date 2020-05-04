@@ -82,7 +82,32 @@ class AllowAddDescriptionRepository implements AllowAddDescriptionRepositoryInte
     }
 
     /**
-     * @inheritDoc
+     * Retrieve AllowAddDescription by customer email.
+     *
+     * @param string $customerEmail
+     *
+     * @return AllowAddDescriptionInterface
+     * @throws NoSuchEntityException
+     */
+    public function get(string $customerEmail): AllowAddDescriptionInterface
+    {
+        $allowAddDescription = $this->modelFactory->create();
+        $this->resource->load($allowAddDescription, $customerEmail, AllowAddDescriptionInterface::CUSTOMER_EMAIL);
+        if (!$allowAddDescription->getId()) {
+            throw new NoSuchEntityException(
+                __('Unable to find customer allow add description with email "%1"', $customerEmail)
+            );
+        }
+
+        return $allowAddDescription;
+    }
+
+    /**
+     * Retrieve AllowAddDescription by id.
+     *
+     * @param int $id
+     * @return AllowAddDescriptionInterface
+     * @throws NoSuchEntityException
      */
     public function getById(int $id): AllowAddDescriptionInterface
     {

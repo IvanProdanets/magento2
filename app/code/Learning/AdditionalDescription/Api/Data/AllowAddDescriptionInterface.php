@@ -2,21 +2,19 @@
 declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Api\Data;
-//
-//use Magento\Framework\Api\ExtensibleDataInterface;
-//use Magento\Framework\Api\ExtensionAttributesInterface;
+
+use Magento\Framework\Api\ExtensibleDataInterface;
 
 /**
  *  Customer allow add description interface.
  */
-//interface AllowAddDescriptionInterface extends ExtensibleDataInterface
-interface AllowAddDescriptionInterface
+interface AllowAddDescriptionInterface extends ExtensibleDataInterface
 {
     const PERMISSION_ID = 'id';
 
-    const ALLOW_ADD_DESCRIPTION = 'permission_id';
+    const ALLOW_ADD_DESCRIPTION = 'allow_add_description';
 
-    const CUSTOMER_ID = 'customer_id';
+    const CUSTOMER_EMAIL = 'customer_email';
 
     /**
      * Retrieve permission id.
@@ -50,21 +48,38 @@ interface AllowAddDescriptionInterface
      */
     public function setAllowAddDescription(?bool $allow): AllowAddDescriptionInterface;
 
-//    /**
-//     * Retrieve existing extension attributes object or create a new one.
-//     *
-//     * @return ExtensionAttributesInterface|null
-//     */
-//    public function getExtensionAttributes(): ?ExtensionAttributesInterface;
-//
-//    /**
-//     * Set an extension attributes object.
-//     *
-//     * @param ExtensionAttributesInterface $extensionAttributes
-//     *
-//     * @return AllowAddDescriptionInterface
-//     */
-//    public function setExtensionAttributes(
-//        ExtensionAttributesInterface $extensionAttributes
-//    ): AllowAddDescriptionInterface;
+    /**
+     * Retrieve customer email.
+     *
+     * @return string|null
+     */
+    public function getCustomerEmail(): ?string;
+
+    /**
+     * Set customer email.
+     *
+     * @param string|null $email
+     *
+     * @return AllowAddDescriptionInterface
+     */
+    public function setCustomerEmail(?string $email): AllowAddDescriptionInterface;
+
+    /**
+     * Retrieve existing extension attributes object or create a new one.
+     *
+     * @return \Learning\AdditionalDescription\Api\Data\AllowAddDescriptionExtensionInterface|null
+     */
+    public function getExtensionAttributes():
+        ?\Learning\AdditionalDescription\Api\Data\AllowAddDescriptionExtensionInterface;
+
+    /**
+     * Set an extension attributes object.
+     *
+     * @param \Learning\AdditionalDescription\Api\Data\AllowAddDescriptionExtensionInterface $extensionAttributes
+     *
+     * @return AllowAddDescriptionInterface
+     */
+    public function setExtensionAttributes(
+        \Learning\AdditionalDescription\Api\Data\AllowAddDescriptionExtensionInterface $extensionAttributes
+    ): AllowAddDescriptionInterface;
 }

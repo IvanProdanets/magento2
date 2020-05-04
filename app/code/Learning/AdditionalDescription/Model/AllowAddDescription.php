@@ -3,11 +3,11 @@ declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Model;
 
+use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionExtensionInterface;
 use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface;
-use Magento\Framework\Api\ExtensionAttributesInterface;
-use Magento\Framework\Model\AbstractModel;
+use Magento\Framework\Model\AbstractExtensibleModel;
 
-class AllowAddDescription extends AbstractModel implements AllowAddDescriptionInterface
+class AllowAddDescription extends AbstractExtensibleModel implements AllowAddDescriptionInterface
 {
 
     /**
@@ -54,26 +54,49 @@ class AllowAddDescription extends AbstractModel implements AllowAddDescriptionIn
         return $this->setData(self::ALLOW_ADD_DESCRIPTION, $allow);
     }
 
+
+    /**
+     * Retrieve customer email.
+     *
+     * @return string|null
+     */
+    public function getCustomerEmail(): ?string
+    {
+        return $this->getData(self::CUSTOMER_EMAIL);
+    }
+
+    /**
+     * Set customer email.
+     *
+     * @param string|null $email
+     *
+     * @return AllowAddDescriptionInterface
+     */
+    public function setCustomerEmail(?string $email): AllowAddDescriptionInterface
+    {
+        return $this->setData(self::CUSTOMER_EMAIL, $email);
+    }
+
     /**
      * Retrieve existing extension attributes object or create a new one.
      *
-     * @return ExtensionAttributesInterface|null
+     * @return AllowAddDescriptionExtensionInterface|null
      */
-    public function getExtensionAttributes(): ?ExtensionAttributesInterface
+    public function getExtensionAttributes(): ?AllowAddDescriptionExtensionInterface
     {
-        // TODO: Implement getExtensionAttributes() method.
+        return $this->_getExtensionAttributes();
     }
 
     /**
      * Set an extension attributes object.
      *
-     * @param ExtensionAttributesInterface $extensionAttributes
+     * @param AllowAddDescriptionExtensionInterface $extensionAttributes
      *
      * @return AllowAddDescriptionInterface
      */
     public function setExtensionAttributes(
-        ExtensionAttributesInterface $extensionAttributes
+        AllowAddDescriptionExtensionInterface $extensionAttributes
     ): AllowAddDescriptionInterface {
-        // TODO: Implement setExtensionAttributes() method.
+        return $this->_setExtensionAttributes($extensionAttributes);
     }
 }

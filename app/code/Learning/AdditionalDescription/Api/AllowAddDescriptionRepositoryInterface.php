@@ -26,6 +26,15 @@ interface AllowAddDescriptionRepositoryInterface
     ): AllowAddDescriptionInterface;
 
     /**
+     * Retrieve AllowAddDescription by customer email.
+     *
+     * @param string $customerEmail
+     *
+     * @return AllowAddDescriptionInterface
+     */
+    public function get(string $customerEmail): AllowAddDescriptionInterface;
+
+    /**
      * Retrieve AllowAddDescription by id.
      *
      * @param int $id

@@ -1,10 +1,26 @@
 <?xml version="1.0" ?>
 
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="Learning\AdditionalDescription\Api\AllowAddDescriptionRepositoryInterface" type="Learning\AdditionalDescription\Model\AllowAddDescriptionRepository"/>
-    <preference for="Learning\AdditionalDescription\Api\AdditionalDescriptionRepositoryInterface" type="Learning\AdditionalDescription\Model\AdditionalDescriptionRepository"/>
-    <preference for="Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface" type="Learning\AdditionalDescription\Model\AllowAddDescription"/>
-    <preference for="Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface" type="Learning\AdditionalDescription\Model\AdditionalDescription"/>
-    <preference for="Learning\AdditionalDescription\Api\AllowAddDescriptionSearchResultInterface" type="Learning\AdditionalDescription\Model\Data\AllowAddDescriptionSearchResult"/>
-    <preference for="Learning\AdditionalDescription\Api\AdditionalDescriptionSearchResultInterface" type="Learning\AdditionalDescription\Model\Data\AdditionalDescriptionSearchResult"/>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Learning\AdditionalDescription\Api\AllowAddDescriptionRepositoryInterface"
+                type="Learning\AdditionalDescription\Model\AllowAddDescriptionRepository"/>
+    <preference for="Learning\AdditionalDescription\Api\AdditionalDescriptionRepositoryInterface"
+                type="Learning\AdditionalDescription\Model\AdditionalDescriptionRepository"/>
+    <preference for="Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface"
+                type="Learning\AdditionalDescription\Model\AllowAddDescription"/>
+    <preference for="Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface"
+                type="Learning\AdditionalDescription\Model\AdditionalDescription"/>
+    <preference for="Learning\AdditionalDescription\Api\AllowAddDescriptionSearchResultInterface"
+                type="Learning\AdditionalDescription\Model\Data\AllowAddDescriptionSearchResult"/>
+    <preference for="Learning\AdditionalDescription\Api\AdditionalDescriptionSearchResultInterface"
+                type="Learning\AdditionalDescription\Model\Data\AdditionalDescriptionSearchResult"/>
+
+    <type name="Magento\Customer\Api\CustomerRepositoryInterface">
+        <plugin name="Learning_AdditionalDescription::RepositoryPlugin"
+                type="Learning\AdditionalDescription\Plugin\Model\Customer\RepositoryPlugin" sortOrder="1"/>
+    </type>
+    <type name="Magento\Customer\Api\Data\CustomerInterface">
+        <plugin name="Learning_AdditionalDescription::AttributesLoad"
+                type="Learning\AdditionalDescription\Plugin\Model\Customer\AttributesLoad" sortOrder="1"/>
+    </type>
 </config>
