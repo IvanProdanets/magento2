@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Api;
 
-use Learning\AdditionalDescription\Api\SearchResults\AllowAddDescriptionInterface;
+use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
@@ -38,10 +38,9 @@ interface AllowAddDescriptionRepositoryInterface
      * Retrieve AllowAddDescription which match a specified criteria.
      *
      * @param SearchCriteriaInterface $criteria
-     * @return AllowAddDescriptionInterface
-     * @throws LocalizedException
+     * @return AllowAddDescriptionSearchResultsInterface
      */
-    public function getList(SearchCriteriaInterface $criteria): AllowAddDescriptionInterface;
+    public function getList(SearchCriteriaInterface $criteria): AllowAddDescriptionSearchResultsInterface;
 
     /**
      * Delete AllowAddDescription.

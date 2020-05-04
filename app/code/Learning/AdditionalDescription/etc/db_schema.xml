@@ -16,7 +16,7 @@
 
     <table name="catalog_product_additional_description" resource="default" engine="innodb" comment="Catalog product additional description table">
         <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true" comment="Additional description ID"/>
-<!--        <column xsi:type="varchar" name="customer_email" nullable="false" length="255" comment="Customer email address"/>-->
+        <column xsi:type="varchar" name="customer_email" nullable="false" length="255" comment="Customer email address"/>
         <column xsi:type="mediumtext" name="additional_description" nullable="false" comment="Product additional description"/>
         <column xsi:type="int" name="product_id" padding="10" unsigned="true" nullable="false" comment="Product id"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">

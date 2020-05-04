@@ -1,11 +1,12 @@
 <?php
 declare(strict_types = 1);
 
-namespace Learning\AdditionalDescription\Api\SearchResults;
+namespace Learning\AdditionalDescription\Api;
 
+use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface;
 use Magento\Framework\Api\SearchResultsInterface;
 
-interface AllowAddDescriptionInterface extends SearchResultsInterface
+interface AllowAddDescriptionSearchResultsInterface extends SearchResultsInterface
 {
     /**
      * Get AllowAddDescription list.

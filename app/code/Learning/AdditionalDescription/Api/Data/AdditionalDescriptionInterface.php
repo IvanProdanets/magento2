@@ -13,7 +13,7 @@ interface AdditionalDescriptionInterface extends ExtensibleDataInterface
 {
     const DESCRIPTION_ID = 'id';
 
-//    const CUSTOMER_EMAIL = 'customer_email';
+    const CUSTOMER_EMAIL = 'customer_email';
 
     const ADDITIONAL_DESCRIPTION = 'additional_description';
 
@@ -35,21 +35,21 @@ interface AdditionalDescriptionInterface extends ExtensibleDataInterface
      */
     public function setAdditionalDescriptionId(?int $id): AdditionalDescriptionInterface;
 
-//    /**
-//     * Retrieve customer email.
-//     *
-//     * @return string|null
-//     */
-//    public function getCustomerEmail(): ?string;
-//
-//    /**
-//     * Set customer email.
-//     *
-//     * @param string|null $email
-//     *
-//     * @return ProductAdditionalDescriptionInterface
-//     */
-//    public function setCustomerEmail(?string $email): ProductAdditionalDescriptionInterface;
+    /**
+     * Retrieve customer email.
+     *
+     * @return string|null
+     */
+    public function getCustomerEmail(): ?string;
+
+    /**
+     * Set customer email.
+     *
+     * @param string|null $email
+     *
+     * @return AdditionalDescriptionInterface
+     */
+    public function setCustomerEmail(?string $email): AdditionalDescriptionInterface;
 
     /**
      * Get product additional description.

@@ -15,8 +15,6 @@ interface AllowAddDescriptionInterface extends ExtensibleDataInterface
 
     const ALLOW_ADD_DESCRIPTION = 'permission_id';
 
-//    const CUSTOMER_EMAIL = 'customer_email';
-
     const CUSTOMER_ID = 'customer_id';
 
     /**
@@ -50,27 +48,6 @@ interface AllowAddDescriptionInterface extends ExtensibleDataInterface
      * @return AllowAddDescriptionInterface
      */
     public function setAllowAddDescription(?bool $allow): AllowAddDescriptionInterface;
-
-//    public function getCustomerEmail(): ?string;
-//
-//    public function setCustomerEmail(?string $email): CustomerAllowAddDescriptionInterface;
-
-
-//    /**
-//     * Retrieve customer email.
-//     *
-//     * @return string|null
-//     */
-//    public function getCustomerEmail(): ?string;
-//
-//    /**
-//     * Set customer email.
-//     *
-//     * @param string|null $email
-//     *
-//     * @return ProductAdditionalDescriptionInterface
-//     */
-//    public function setCustomerEmail(?string $email): ProductAdditionalDescriptionInterface;
 
     /**
      * Retrieve existing extension attributes object or create a new one.

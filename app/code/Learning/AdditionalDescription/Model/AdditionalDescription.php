@@ -32,24 +32,32 @@ class AdditionalDescription extends AbstractModel implements AdditionalDescripti
         return $this->setData(self::DESCRIPTION_ID, $id);
     }
 
-//    /**
-//     * @inheritDoc
-//     */
-//    public function getCustomerEmail(): ?string
-//    {
-//        // TODO: Implement getCustomerEmail() method.
-//    }
-//
-//    /**
-//     * @inheritDoc
-//     */
-//    public function setCustomerEmail(?string $email): ProductAdditionalDescriptionInterface
-//    {
-//        // TODO: Implement setCustomerEmail() method.
-//    }
+    /**
+     * Retrieve customer email.
+     *
+     * @return string|null
+     */
+    public function getCustomerEmail(): ?string
+    {
+        // TODO: Implement getCustomerEmail() method.
+    }
 
     /**
-     * @inheritDoc
+     * Set customer email.
+     *
+     * @param string|null $email
+     *
+     * @return AdditionalDescriptionInterface
+     */
+    public function setCustomerEmail(?string $email): AdditionalDescriptionInterface
+    {
+        // TODO: Implement setCustomerEmail() method.
+    }
+
+    /**
+     * Get product additional description.
+     *
+     * @return string|null
      */
     public function getAdditionalDescription(): ?string
     {
@@ -57,7 +65,11 @@ class AdditionalDescription extends AbstractModel implements AdditionalDescripti
     }
 
     /**
-     * @inheritDoc
+     * Set product additional description.
+     *
+     * @param string|null $description
+     *
+     * @return AdditionalDescriptionInterface
      */
     public function setAdditionalDescription(?string $description): AdditionalDescriptionInterface
     {
@@ -65,7 +77,9 @@ class AdditionalDescription extends AbstractModel implements AdditionalDescripti
     }
 
     /**
-     * @inheritDoc
+     * Retrieve product entity id.
+     *
+     * @return int|null
      */
     public function getProductId(): ?int
     {
@@ -73,7 +87,11 @@ class AdditionalDescription extends AbstractModel implements AdditionalDescripti
     }
 
     /**
-     * @inheritDoc
+     * Set product entity id.
+     *
+     * @param int $id
+     *
+     * @return AdditionalDescriptionInterface
      */
     public function setProductId(int $id): AdditionalDescriptionInterface
     {
@@ -81,7 +99,9 @@ class AdditionalDescription extends AbstractModel implements AdditionalDescripti
     }
 
     /**
-     * @inheritDoc
+     * Retrieve existing extension attributes object or create a new one.
+     *
+     * @return ExtensionAttributesInterface|null
      */
     public function getExtensionAttributes(): ?ExtensionAttributesInterface
     {
@@ -89,7 +109,11 @@ class AdditionalDescription extends AbstractModel implements AdditionalDescripti
     }
 
     /**
-     * @inheritDoc
+     * Set an extension attributes object.
+     *
+     * @param ExtensionAttributesInterface $extensionAttributes
+     *
+     * @return AdditionalDescriptionInterface
      */
     public function setExtensionAttributes(
         ExtensionAttributesInterface $extensionAttributes

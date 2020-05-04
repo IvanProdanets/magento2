@@ -11,7 +11,9 @@ class AllowAddDescription extends AbstractModel implements AllowAddDescriptionIn
 {
 
     /**
-     * @inheritDoc
+     * Retrieve permission id.
+     *
+     * @return int|null
      */
     public function getPermissionId(): ?int
     {
@@ -19,7 +21,11 @@ class AllowAddDescription extends AbstractModel implements AllowAddDescriptionIn
     }
 
     /**
-     * @inheritDoc
+     * Set permission id.
+     *
+     * @param int|null $id
+     *
+     * @return AllowAddDescriptionInterface
      */
     public function setPermissionId(?int $id): AllowAddDescriptionInterface
     {
@@ -27,7 +33,9 @@ class AllowAddDescription extends AbstractModel implements AllowAddDescriptionIn
     }
 
     /**
-     * @inheritDoc
+     * Retrieve permission to add description for customer.
+     *
+     * @return bool|null
      */
     public function getAllowAddDescription(): ?bool
     {
@@ -35,7 +43,11 @@ class AllowAddDescription extends AbstractModel implements AllowAddDescriptionIn
     }
 
     /**
-     * @inheritDoc
+     * Set permission add description for customer.
+     *
+     * @param bool|null $allow
+     *
+     * @return AllowAddDescriptionInterface
      */
     public function setAllowAddDescription(?bool $allow): AllowAddDescriptionInterface
     {
@@ -43,7 +55,9 @@ class AllowAddDescription extends AbstractModel implements AllowAddDescriptionIn
     }
 
     /**
-     * @inheritDoc
+     * Retrieve existing extension attributes object or create a new one.
+     *
+     * @return ExtensionAttributesInterface|null
      */
     public function getExtensionAttributes(): ?ExtensionAttributesInterface
     {
@@ -51,7 +65,11 @@ class AllowAddDescription extends AbstractModel implements AllowAddDescriptionIn
     }
 
     /**
-     * @inheritDoc
+     * Set an extension attributes object.
+     *
+     * @param ExtensionAttributesInterface $extensionAttributes
+     *
+     * @return AllowAddDescriptionInterface
      */
     public function setExtensionAttributes(
         ExtensionAttributesInterface $extensionAttributes

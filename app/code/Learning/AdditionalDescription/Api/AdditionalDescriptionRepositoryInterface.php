@@ -38,10 +38,9 @@ interface AdditionalDescriptionRepositoryInterface
      * Retrieve AdditionalDescription which match a specified criteria.
      *
      * @param SearchCriteriaInterface $criteria
-     * @return AdditionalDescriptionInterface
-     * @throws LocalizedException
+     * @return AdditionalDescriptionSearchResultsInterface
      */
-    public function getList(SearchCriteriaInterface $criteria): AdditionalDescriptionInterface;
+    public function getList(SearchCriteriaInterface $criteria): AdditionalDescriptionSearchResultsInterface;
 
     /**
      * Delete AdditionalDescription.
