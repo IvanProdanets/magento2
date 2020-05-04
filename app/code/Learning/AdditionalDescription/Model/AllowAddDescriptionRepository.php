@@ -3,11 +3,11 @@ declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Model;
 
-use Learning\AdditionalDescription\Api\AllowAddDescriptionSearchResultsInterface;
+use Learning\AdditionalDescription\Api\AllowAddDescriptionSearchResultInterface;
 use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface;
 use Learning\AdditionalDescription\Api\AllowAddDescriptionRepositoryInterface;
-use Learning\AdditionalDescription\Api\AllowAddDescriptionSearchResultsInterfaceFactory as
-    SearchResultsInterfaceFactory;
+use Learning\AdditionalDescription\Api\AllowAddDescriptionSearchResultInterfaceFactory as
+    SearchResultInterfaceFactory;
 use Learning\AdditionalDescription\Model\ResourceModel\AllowAddDescription as ResourceModel;
 use Learning\AdditionalDescription\Model\ResourceModel\AllowAddDescription\CollectionFactory;
 use Learning\AdditionalDescription\Model\ResourceModel\AllowAddDescription\Collection;
@@ -32,7 +32,7 @@ class AllowAddDescriptionRepository implements AllowAddDescriptionRepositoryInte
     /** @var CollectionFactory */
     private $collectionFactory;
 
-    /** @var SearchResultsInterfaceFactory */
+    /** @var SearchResultInterfaceFactory */
     private $searchResultFactory;
 
     /**
@@ -41,14 +41,14 @@ class AllowAddDescriptionRepository implements AllowAddDescriptionRepositoryInte
      * @param AllowAddDescriptionFactory    $modelFactory
      * @param ResourceModel                 $resource
      * @param CollectionFactory             $collectionFactory
-     * @param SearchResultsInterfaceFactory $searchResultFactory
+     * @param SearchResultInterfaceFactory $searchResultFactory
      * @param CollectionProcessorInterface  $collectionProcessor
      */
     public function __construct(
         AllowAddDescriptionFactory $modelFactory,
         ResourceModel $resource,
         CollectionFactory $collectionFactory,
-        SearchResultsInterfaceFactory $searchResultFactory,
+        SearchResultInterfaceFactory $searchResultFactory,
         CollectionProcessorInterface $collectionProcessor
     ) {
         $this->modelFactory = $modelFactory;
@@ -101,16 +101,16 @@ class AllowAddDescriptionRepository implements AllowAddDescriptionRepositoryInte
      * Retrieve AllowAddDescription which match a specified criteria.
      *
      * @param SearchCriteriaInterface $criteria
-     * @return AllowAddDescriptionSearchResultsInterface
+     * @return AllowAddDescriptionSearchResultInterface
      */
-    public function getList(SearchCriteriaInterface $criteria): AllowAddDescriptionSearchResultsInterface
+    public function getList(SearchCriteriaInterface $criteria): AllowAddDescriptionSearchResultInterface
     {
         /** @var Collection $collection */
         $collection = $this->collectionFactory->create();
 
         $this->collectionProcessor->process($criteria, $collection);
 
-        /** @var AllowAddDescriptionSearchResultsInterface $searchResults */
+        /** @var AllowAddDescriptionSearchResultInterface $searchResults */
         $searchResults = $this->searchResultFactory->create();
         $searchResults->setSearchCriteria($criteria);
         $searchResults->setItems($collection->getItems());

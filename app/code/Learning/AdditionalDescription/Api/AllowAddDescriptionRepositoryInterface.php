@@ -38,9 +38,9 @@ interface AllowAddDescriptionRepositoryInterface
      * Retrieve AllowAddDescription which match a specified criteria.
      *
      * @param SearchCriteriaInterface $criteria
-     * @return AllowAddDescriptionSearchResultsInterface
+     * @return AllowAddDescriptionSearchResultInterface
      */
-    public function getList(SearchCriteriaInterface $criteria): AllowAddDescriptionSearchResultsInterface;
+    public function getList(SearchCriteriaInterface $criteria): AllowAddDescriptionSearchResultInterface;
 
     /**
      * Delete AllowAddDescription.

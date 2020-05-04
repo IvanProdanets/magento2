@@ -6,7 +6,7 @@ namespace Learning\AdditionalDescription\Api;
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
 use Magento\Framework\Api\SearchResultsInterface;
 
-interface AdditionalDescriptionSearchResultsInterface extends SearchResultsInterface
+interface AdditionalDescriptionSearchResultInterface extends SearchResultsInterface
 {
     /**
      * Get AdditionalDescription list.

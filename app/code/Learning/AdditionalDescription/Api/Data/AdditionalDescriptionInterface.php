@@ -3,13 +3,13 @@ declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Api\Data;
 
-use Magento\Framework\Api\ExtensibleDataInterface;
-use Magento\Framework\Api\ExtensionAttributesInterface;
+//use Magento\Framework\Api\ExtensibleDataInterface;
+//use Magento\Framework\Api\ExtensionAttributesInterface;
 
 /**
  *  Product additional description entity interface.
  */
-interface AdditionalDescriptionInterface extends ExtensibleDataInterface
+interface AdditionalDescriptionInterface
 {
     const DESCRIPTION_ID = 'id';
 
@@ -83,21 +83,21 @@ interface AdditionalDescriptionInterface extends ExtensibleDataInterface
      */
     public function setProductId(int $id): AdditionalDescriptionInterface;
 
-    /**
-     * Retrieve existing extension attributes object or create a new one.
-     *
-     * @return ExtensionAttributesInterface|null
-     */
-    public function getExtensionAttributes(): ?ExtensionAttributesInterface;
-
-    /**
-     * Set an extension attributes object.
-     *
-     * @param ExtensionAttributesInterface $extensionAttributes
-     *
-     * @return AdditionalDescriptionInterface
-     */
-    public function setExtensionAttributes(
-        ExtensionAttributesInterface $extensionAttributes
-    ): AdditionalDescriptionInterface;
+//    /**
+//     * Retrieve existing extension attributes object or create a new one.
+//     *
+//     * @return ExtensionAttributesInterface|null
+//     */
+//    public function getExtensionAttributes(): ?ExtensionAttributesInterface;
+//
+//    /**
+//     * Set an extension attributes object.
+//     *
+//     * @param ExtensionAttributesInterface $extensionAttributes
+//     *
+//     * @return AdditionalDescriptionInterface
+//     */
+//    public function setExtensionAttributes(
+//        ExtensionAttributesInterface $extensionAttributes
+//    ): AdditionalDescriptionInterface;
 }

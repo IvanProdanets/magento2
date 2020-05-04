@@ -5,8 +5,8 @@ namespace Learning\AdditionalDescription\Model;
 
 use Learning\AdditionalDescription\Api\AdditionalDescriptionRepositoryInterface;
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
-use Learning\AdditionalDescription\Api\AdditionalDescriptionSearchResultsInterfaceFactory as SearchResultsInterfaceFactory;
-use Learning\AdditionalDescription\Api\AdditionalDescriptionSearchResultsInterface;
+use Learning\AdditionalDescription\Api\AdditionalDescriptionSearchResultInterfaceFactory as SearchResultInterfaceFactory;
+use Learning\AdditionalDescription\Api\AdditionalDescriptionSearchResultInterface;
 use Learning\AdditionalDescription\Model\AdditionalDescriptionFactory;
 use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription as ResourceModel;
 use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\CollectionFactory;
@@ -32,7 +32,7 @@ class AdditionalDescriptionRepository implements AdditionalDescriptionRepository
     /** @var CollectionFactory */
     private $collectionFactory;
 
-    /** @var SearchResultsInterfaceFactory */
+    /** @var SearchResultInterfaceFactory */
     private $searchResultFactory;
 
     /**
@@ -41,14 +41,14 @@ class AdditionalDescriptionRepository implements AdditionalDescriptionRepository
      * @param AdditionalDescriptionFactory  $model
      * @param ResourceModel                 $resource
      * @param CollectionFactory             $collection
-     * @param SearchResultsInterfaceFactory $searchResult
+     * @param SearchResultInterfaceFactory $searchResult
      * @param CollectionProcessorInterface  $collectionProcessor
      */
     public function __construct(
         AdditionalDescriptionFactory $model,
         ResourceModel $resource,
         CollectionFactory $collection,
-        SearchResultsInterfaceFactory $searchResult,
+        SearchResultInterfaceFactory $searchResult,
         CollectionProcessorInterface $collectionProcessor
     ) {
         $this->modelFactory        = $model;
@@ -105,16 +105,16 @@ class AdditionalDescriptionRepository implements AdditionalDescriptionRepository
      * Retrieve AdditionalDescription which match a specified criteria.
      *
      * @param SearchCriteriaInterface $criteria
-     * @return AdditionalDescriptionSearchResultsInterface
+     * @return AdditionalDescriptionSearchResultInterface
      */
-    public function getList(SearchCriteriaInterface $criteria): AdditionalDescriptionSearchResultsInterface
+    public function getList(SearchCriteriaInterface $criteria): AdditionalDescriptionSearchResultInterface
     {
         /** @var Collection $collection */
         $collection = $this->collectionFactory->create();
 
         $this->collectionProcessor->process($criteria, $collection);
 
-        /** @var AdditionalDescriptionSearchResultsInterface $searchResults */
+        /** @var AdditionalDescriptionSearchResultInterface $searchResults */
         $searchResults = $this->searchResultFactory->create();
         $searchResults->setSearchCriteria($criteria);
         $searchResults->setItems($collection->getItems());

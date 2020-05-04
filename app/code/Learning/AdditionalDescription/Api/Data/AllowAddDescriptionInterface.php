@@ -2,14 +2,15 @@
 declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Api\Data;
-
-use Magento\Framework\Api\ExtensibleDataInterface;
-use Magento\Framework\Api\ExtensionAttributesInterface;
+//
+//use Magento\Framework\Api\ExtensibleDataInterface;
+//use Magento\Framework\Api\ExtensionAttributesInterface;
 
 /**
  *  Customer allow add description interface.
  */
-interface AllowAddDescriptionInterface extends ExtensibleDataInterface
+//interface AllowAddDescriptionInterface extends ExtensibleDataInterface
+interface AllowAddDescriptionInterface
 {
     const PERMISSION_ID = 'id';
 
@@ -49,21 +50,21 @@ interface AllowAddDescriptionInterface extends ExtensibleDataInterface
      */
     public function setAllowAddDescription(?bool $allow): AllowAddDescriptionInterface;
 
-    /**
-     * Retrieve existing extension attributes object or create a new one.
-     *
-     * @return ExtensionAttributesInterface|null
-     */
-    public function getExtensionAttributes(): ?ExtensionAttributesInterface;
-
-    /**
-     * Set an extension attributes object.
-     *
-     * @param ExtensionAttributesInterface $extensionAttributes
-     *
-     * @return AllowAddDescriptionInterface
-     */
-    public function setExtensionAttributes(
-        ExtensionAttributesInterface $extensionAttributes
-    ): AllowAddDescriptionInterface;
+//    /**
+//     * Retrieve existing extension attributes object or create a new one.
+//     *
+//     * @return ExtensionAttributesInterface|null
+//     */
+//    public function getExtensionAttributes(): ?ExtensionAttributesInterface;
+//
+//    /**
+//     * Set an extension attributes object.
+//     *
+//     * @param ExtensionAttributesInterface $extensionAttributes
+//     *
+//     * @return AllowAddDescriptionInterface
+//     */
+//    public function setExtensionAttributes(
+//        ExtensionAttributesInterface $extensionAttributes
+//    ): AllowAddDescriptionInterface;
 }

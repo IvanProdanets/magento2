@@ -38,9 +38,9 @@ interface AdditionalDescriptionRepositoryInterface
      * Retrieve AdditionalDescription which match a specified criteria.
      *
      * @param SearchCriteriaInterface $criteria
-     * @return AdditionalDescriptionSearchResultsInterface
+     * @return AdditionalDescriptionSearchResultInterface
      */
-    public function getList(SearchCriteriaInterface $criteria): AdditionalDescriptionSearchResultsInterface;
+    public function getList(SearchCriteriaInterface $criteria): AdditionalDescriptionSearchResultInterface;
 
     /**
      * Delete AdditionalDescription.
