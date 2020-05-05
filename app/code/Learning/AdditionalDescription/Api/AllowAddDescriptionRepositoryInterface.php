@@ -7,7 +7,6 @@ use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
 interface AllowAddDescriptionRepositoryInterface
@@ -31,6 +30,7 @@ interface AllowAddDescriptionRepositoryInterface
      * @param string $customerEmail
      *
      * @return AllowAddDescriptionInterface
+     * @throws NoSuchEntityException
      */
     public function get(string $customerEmail): AllowAddDescriptionInterface;
 

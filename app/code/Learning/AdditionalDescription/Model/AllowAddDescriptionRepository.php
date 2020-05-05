@@ -51,9 +51,9 @@ class AllowAddDescriptionRepository implements AllowAddDescriptionRepositoryInte
         SearchResultInterfaceFactory $searchResultFactory,
         CollectionProcessorInterface $collectionProcessor
     ) {
-        $this->modelFactory = $modelFactory;
-        $this->resource = $resource;
-        $this->collectionFactory = $collectionFactory;
+        $this->modelFactory        = $modelFactory;
+        $this->resource            = $resource;
+        $this->collectionFactory   = $collectionFactory;
         $this->searchResultFactory = $searchResultFactory;
         $this->collectionProcessor = $collectionProcessor;
     }

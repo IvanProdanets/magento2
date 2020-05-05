@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Controller\Index;
 
+use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\Action\Action;
@@ -39,7 +40,10 @@ class Index extends Action implements HttpGetActionInterface
 //        $criteria = $this->searchCriteriaBuilder->create();
 //        $customer = $this->customerRepository->getById(2);
         $customer = $this->customerRepository->getById(2);
-        var_dump($this->customerRepository->get($customer->getEmail())->getExtensionAttributes());
+        $customer = $this->customerRepository->getById(2);
+        /** @var AllowAddDescriptionInterface $ext */
+        $ext = $customer->getExtensionAttributes()->getAllowAddDescription();
+        var_dump($ext->getAllowAddDescription());
 //        $customers = $this->customerRepository->getList($criteria)->getItems();
 //        foreach ($customers as $customer) {
 //            $ext = $customer->getExtensionAttributes();

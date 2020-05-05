@@ -17,7 +17,7 @@ class AllowAddDescription extends AbstractExtensibleModel implements AllowAddDes
      */
     public function getPermissionId(): ?int
     {
-        return $this->getData(self::PERMISSION_ID);
+        return (int)$this->getData(self::PERMISSION_ID);
     }
 
     /**
@@ -39,7 +39,7 @@ class AllowAddDescription extends AbstractExtensibleModel implements AllowAddDes
      */
     public function getAllowAddDescription(): ?bool
     {
-        return $this->getData(self::ALLOW_ADD_DESCRIPTION);
+        return (bool)$this->getData(self::ALLOW_ADD_DESCRIPTION);
     }
 
     /**

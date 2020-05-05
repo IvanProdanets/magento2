@@ -31,19 +31,12 @@ class RepositoryPlugin
      * @param CustomerInterface           $entity
      *
      * @return CustomerInterface
-     * @throws NoSuchEntityException
      */
     public function afterGet(
         CustomerRepositoryInterface $subject,
         CustomerInterface $entity
     ) {
-        $allowAddDescription = $this->allowAddDescriptionRepository->get($entity->getEmail());
-
-        $extensionAttributes = $entity->getExtensionAttributes();
-        $extensionAttributes->setAllowAddDescription($allowAddDescription);
-        $entity->setExtensionAttributes($extensionAttributes);
-
-        return $entity;
+        return $this->extendCustomer($entity);
     }
 
     /**
@@ -56,9 +49,7 @@ class RepositoryPlugin
         CustomerRepositoryInterface $subject,
         CustomerInterface $entity
     ) {
-        $allowAddDescription = $this->allowAddDescriptionRepository->get($entity->getEmail());
-
-        return $this->extendCustomer($entity, $allowAddDescription);
+        return $this->extendCustomer($entity);
     }
 
     /**
@@ -74,8 +65,7 @@ class RepositoryPlugin
         $customers = [];
 
         foreach ($searchCriteria->getItems() as $entity) {
-            $allowAddDescription = $this->allowAddDescriptionRepository->get($entity->getEmail());
-            $customers[] = $this->extendCustomer($entity, $allowAddDescription);
+            $customers[] = $this->extendCustomer($entity);
         }
 
         $searchCriteria->setItems($customers);
@@ -105,21 +95,26 @@ class RepositoryPlugin
     /**
      * Add extension attribute to model.
      *
-     * @param CustomerInterface                 $customer
-     * @param AllowAddDescriptionInterface|null $attribute
+     * @param CustomerInterface $customer
      *
      * @return CustomerInterface
      */
-    private function extendCustomer(
-        CustomerInterface $customer,
-        ?AllowAddDescriptionInterface $attribute
-    ): CustomerInterface {
-        if ($attribute === null) {
+    private function extendCustomer(CustomerInterface $customer): CustomerInterface
+    {
+        $extensionAttributes = $customer->getExtensionAttributes();
+        if ($extensionAttributes && $extensionAttributes->getAllowAddDescription()) {
+            return $customer;
+        }
+
+        try {
+            /** @var AllowAddDescriptionInterface $allowAddDescription */
+            $allowAddDescription = $this->allowAddDescriptionRepository->get($customer->getEmail());
+        } catch (NoSuchEntityException $e) {
             return $customer;
         }
 
         $extensionAttributes = $customer->getExtensionAttributes();
-        $extensionAttributes->setAllowAddDescription($attribute);
+        $extensionAttributes->setAllowAddDescription($allowAddDescription);
         $customer->setExtensionAttributes($extensionAttributes);
 
         return $customer;
