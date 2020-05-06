@@ -6,9 +6,9 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="sortOrder" xsi:type="number">999</item>
-                    <item name="dataType" xsi:type="string">boolean</item>
+                    <item name="dataType" xsi:type="string">string</item>
                     <item name="formElement" xsi:type="string">checkbox</item>
-                    <item name="source" xsi:type="string">customer.extension_attributes.allow_add_description.allow_add_description</item>
+                    <item name="source" xsi:type="string">customer</item>
                     <item name="prefer" xsi:type="string">toggle</item>
                     <item name="label" xsi:type="string" translate="true">Allow Add Description</item>
                     <item name="valueMap" xsi:type="array">

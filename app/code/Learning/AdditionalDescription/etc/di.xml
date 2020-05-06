@@ -23,4 +23,8 @@
         <plugin name="Learning_AdditionalDescription::AttributesLoad"
                 type="Learning\AdditionalDescription\Plugin\Model\Customer\AttributesLoad" sortOrder="1"/>
     </type>
+    <type name="Magento\Customer\Model\Customer\DataProviderWithDefaultAddresses">
+        <plugin name="Learning_AdditionalDescription::DataProviderPlugin"
+                type="Learning\AdditionalDescription\Plugin\Model\Customer\DataProviderPlugin" sortOrder="1"/>
+    </type>
 </config>

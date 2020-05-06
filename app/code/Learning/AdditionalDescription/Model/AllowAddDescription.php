@@ -5,10 +5,19 @@ namespace Learning\AdditionalDescription\Model;
 
 use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionExtensionInterface;
 use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface;
+use Learning\AdditionalDescription\Model\ResourceModel\AllowAddDescription as AllowAddDescriptionResourceModel;
 use Magento\Framework\Model\AbstractExtensibleModel;
 
 class AllowAddDescription extends AbstractExtensibleModel implements AllowAddDescriptionInterface
 {
+
+    /**
+     * Model initialization.
+     */
+    protected function _construct()
+    {
+        $this->_init(AllowAddDescriptionResourceModel::class);
+    }
 
     /**
      * Retrieve permission id.

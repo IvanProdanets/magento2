@@ -4,11 +4,19 @@ declare(strict_types = 1);
 namespace Learning\AdditionalDescription\Model;
 
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
+use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription as AdditionalDescriptionResourceModel;
 use Magento\Framework\Api\ExtensionAttributesInterface;
 use Magento\Framework\Model\AbstractModel;
 
 class AdditionalDescription extends AbstractModel implements AdditionalDescriptionInterface
 {
+    /**
+     * Model initialization.
+     */
+    protected function _construct()
+    {
+        $this->_init(AdditionalDescriptionResourceModel::class);
+    }
 
     /**
      * Retrieve product additional description id.
