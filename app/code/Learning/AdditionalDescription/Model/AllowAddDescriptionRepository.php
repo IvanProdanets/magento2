@@ -15,7 +15,6 @@ use Magento\CatalogGraphQl\Model\Resolver\Products\DataProvider\Product\Collecti
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
 class AllowAddDescriptionRepository implements AllowAddDescriptionRepositoryInterface
@@ -70,7 +69,7 @@ class AllowAddDescriptionRepository implements AllowAddDescriptionRepositoryInte
     public function save(AllowAddDescriptionInterface $allowAddDescription): AllowAddDescriptionInterface
     {
         try {
-            $this->resource->save($allowAddDescription);
+            $this->resource->save($this->prepareData($allowAddDescription));
         } catch (\Exception $exception) {
             throw new CouldNotSaveException(
                 __('Could not save customer allow add description: %1', $exception->getMessage()),
@@ -175,5 +174,27 @@ class AllowAddDescriptionRepository implements AllowAddDescriptionRepositoryInte
     public function deleteById(int $id): bool
     {
         return $this->delete($this->getById($id));
+    }
+
+    /**
+     * Prepare model for saving.
+     *
+     * @param AllowAddDescriptionInterface $allowAddDescription
+     *
+     * @return AllowAddDescriptionInterface
+     */
+    private function prepareData(AllowAddDescriptionInterface $allowAddDescription): AllowAddDescriptionInterface
+    {
+        // Update model if already exist.
+        try {
+            /** @var AllowAddDescriptionInterface $allowAddDescription */
+            $existedAllowAddDescription = $this->get($allowAddDescription->getCustomerEmail());
+            $existedAllowAddDescription->setAllowAddDescription($allowAddDescription->getAllowAddDescription());
+            $allowAddDescription = $existedAllowAddDescription;
+        } catch (NoSuchEntityException $e) {
+            // Do nothing.
+        }
+
+        return $allowAddDescription;
     }
 }

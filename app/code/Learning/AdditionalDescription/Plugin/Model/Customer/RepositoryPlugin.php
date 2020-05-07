@@ -31,7 +31,7 @@ class RepositoryPlugin
      * RepositoryPlugin constructor.
      *
      * @param AllowAddDescriptionRepositoryInterface $allowAddDescriptionRepository
-     * @param AllowAddDescriptionFactory    $allowAddDescriptionFactory
+     * @param AllowAddDescriptionInterfaceFactory    $allowAddDescriptionFactory
      */
     public function __construct(
         AllowAddDescriptionRepositoryInterface $allowAddDescriptionRepository,
@@ -101,7 +101,14 @@ class RepositoryPlugin
         CustomerRepositoryInterface $subject,
         CustomerInterface $entity
     ) {
-        return $this->createOrUpdateAllowDescription($entity);
+        $extensionAttributes = $entity->getExtensionAttributes();
+        $allowAddDescription = $extensionAttributes->getAllowAddDescription();
+
+        $allowAddDescription = $this->saveAllowDescription($allowAddDescription, $entity);
+        $extensionAttributes->setAllowAddDescription($allowAddDescription);
+        $entity->setExtensionAttributes($extensionAttributes);
+
+        return $entity;
     }
 
     /**
@@ -133,35 +140,45 @@ class RepositoryPlugin
     }
 
     /**
-     * @param CustomerInterface $customer
+     * Save AllowAddDescription in DB.
      *
-     * @return CustomerInterface
+     * @param AllowAddDescriptionInterface|null $allowAddDescription
+     * @param CustomerInterface                 $customer
+     *
+     * @return AllowAddDescriptionInterface
      */
-    private function createOrUpdateAllowDescription(CustomerInterface $customer): CustomerInterface
-    {
-        $customerData = $this->request->getPostValue('customer');
-        $allowAddDescriptionValue =
-            (bool)(int)$customerData[AllowAddDescriptionInterface::ALLOW_ADD_DESCRIPTION] ?? false;
-        $extensionAttributes = $customer->getExtensionAttributes();
-        $allowAddDescription = $extensionAttributes->getAllowAddDescription();
-
-        // Create AllowAddDescription if not exist
+    private function saveAllowDescription(
+        ?AllowAddDescriptionInterface $allowAddDescription,
+        CustomerInterface $customer
+    ): AllowAddDescriptionInterface {
+        // Create AllowAddDescription if not exist.
         if ($allowAddDescription === null) {
             /** @var AllowAddDescription $allowAddDescription */
             $allowAddDescription = $this->allowAddDescriptionFactory->create();
             $allowAddDescription->setCustomerEmail($customer->getEmail());
         }
 
-        // Update AllowAddDescription
-        $allowAddDescription->setAllowAddDescription($allowAddDescriptionValue);
+        // Update AllowAddDescription.
+        $allowAddDescription->setAllowAddDescription($this->isAllowedAddDescription());
+
         try {
             $allowAddDescription = $this->allowAddDescriptionRepository->save($allowAddDescription);
-            $extensionAttributes->setAllowAddDescription($allowAddDescription);
-            $customer->setExtensionAttributes($extensionAttributes);
         } catch (CouldNotSaveException|NoSuchEntityException $e) {
-            return $customer;
+            // Do nothing.
         }
 
-        return $customer;
+        return $allowAddDescription;
+    }
+
+    /**
+     * Get AllowAddDescription from request. FALSE by default.
+     *
+     * @return bool
+     */
+    private function isAllowedAddDescription(): bool
+    {
+        $customerData = $this->request->getPostValue('customer');
+
+        return (bool) (int) $customerData[AllowAddDescriptionInterface::ALLOW_ADD_DESCRIPTION] ?? false;
     }
 }

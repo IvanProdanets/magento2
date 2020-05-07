@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <!-- Get allowAddDescription by customerEmail -->
+    <route url="/V1/customers/allowAddDescription" method="GET">
+        <service class="Learning\AdditionalDescription\Api\AllowAddDescriptionRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Magento_Customer::customer"/>
+        </resources>
+    </route>
+
+    <!-- Get allowAddDescription by id -->
+    <route url="/V1/customers/allowAddDescription" method="GET">
+        <service class="Learning\AdditionalDescription\Api\AllowAddDescriptionRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Magento_Customer::customer"/>
+        </resources>
+    </route>
+
+    <!-- Create allowAddDescription -->
+    <route url="/V1/customers/allowAddDescription" method="POST">
+        <service class="Learning\AdditionalDescription\Api\AllowAddDescriptionRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Magento_Customer::manage"/>
+        </resources>
+    </route>
+</routes>
