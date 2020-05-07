@@ -13,7 +13,9 @@ use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Api\Data\CustomerSearchResultsInterface;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\Request\Http;
+use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
 class RepositoryPlugin
@@ -94,8 +96,6 @@ class RepositoryPlugin
      * @param CustomerInterface           $entity
      *
      * @return CustomerInterface
-     * @throws NoSuchEntityException
-     * @throws CouldNotSaveException
      */
     public function afterSave(
         CustomerRepositoryInterface $subject,
@@ -109,6 +109,32 @@ class RepositoryPlugin
         $entity->setExtensionAttributes($extensionAttributes);
 
         return $entity;
+    }
+
+    /**
+     * Plugin around delete customer that delete allowAddDescription if exist.
+     *
+     * @param CustomerRepositoryInterface $subject
+     * @param callable                    $deleteCustomerById Function we are wrapping around
+     * @param int                         $customerId         Input to the function
+     *
+     * @return bool
+     * @throws NoSuchEntityException|CouldNotDeleteException|LocalizedException
+     */
+    public function aroundDeleteById(
+        CustomerRepositoryInterface $subject,
+        callable $deleteCustomerById,
+        $customerId
+    ) {
+        $customer            = $subject->getById($customerId);
+        $result              = $deleteCustomerById($customerId);
+        $allowAddDescription = $customer->getExtensionAttributes()->getAllowAddDescription();
+
+        if ($allowAddDescription && $permissionId = $allowAddDescription->getPermissionId()) {
+            $this->allowAddDescriptionRepository->deleteById($permissionId);
+        }
+
+        return $result;
     }
 
     /**

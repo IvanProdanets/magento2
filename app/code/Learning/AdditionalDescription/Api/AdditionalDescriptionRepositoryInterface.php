@@ -26,6 +26,15 @@ interface AdditionalDescriptionRepositoryInterface
     ): AdditionalDescriptionInterface;
 
     /**
+     * Retrieve AdditionalDescription by product id.
+     *
+     * @param int $productId
+     * @return AdditionalDescriptionInterface
+     * @throws NoSuchEntityException
+     */
+    public function get(int $productId): AdditionalDescriptionInterface;
+
+    /**
      * Retrieve AdditionalDescription by id.
      *
      * @param int $id

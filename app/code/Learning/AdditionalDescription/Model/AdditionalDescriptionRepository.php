@@ -7,6 +7,7 @@ use Learning\AdditionalDescription\Api\AdditionalDescriptionRepositoryInterface;
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
 use Learning\AdditionalDescription\Api\AdditionalDescriptionSearchResultInterfaceFactory as SearchResultInterfaceFactory;
 use Learning\AdditionalDescription\Api\AdditionalDescriptionSearchResultInterface;
+use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface;
 use Learning\AdditionalDescription\Model\AdditionalDescriptionFactory;
 use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription as ResourceModel;
 use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\CollectionFactory;
@@ -79,6 +80,26 @@ class AdditionalDescriptionRepository implements AdditionalDescriptionRepository
         }
 
         return $this->getById($additionalDescription->getAdditionalDescriptionId());
+    }
+
+    /**
+     * Retrieve AdditionalDescription by product id.
+     *
+     * @param int $productId
+     * @return AdditionalDescriptionInterface
+     * @throws NoSuchEntityException
+     */
+    public function get(int $productId): AdditionalDescriptionInterface
+    {
+        $additionalDescription = $this->modelFactory->create();
+        $this->resource->load($additionalDescription, $productId, AdditionalDescriptionInterface::PRODUCT_ID);
+        if (!$additionalDescription->getId()) {
+            throw new NoSuchEntityException(
+                __('Unable to find customer product additional description with PRODUCT_ID "%1"', $productId)
+            );
+        }
+
+        return $additionalDescription;
     }
 
     /**

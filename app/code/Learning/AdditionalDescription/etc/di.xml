@@ -9,26 +9,30 @@
                 type="Learning\AdditionalDescription\Model\AllowAddDescription"/>
     <preference for="Learning\AdditionalDescription\Api\AllowAddDescriptionSearchResultInterface"
                 type="Learning\AdditionalDescription\Model\Data\AllowAddDescriptionSearchResult"/>
+    <!-- AllowAddDescription plugins -->
+    <type name="Magento\Customer\Api\CustomerRepositoryInterface">
+        <plugin name="Learning_AdditionalDescription::RepositoryPlugin"
+                type="Learning\AdditionalDescription\Plugin\Model\Customer\RepositoryPlugin" sortOrder="1"/>
+    </type>
+    <type name="Magento\Customer\Api\Data\CustomerInterface">
+        <plugin name="Learning_AdditionalDescription::CustomerAttributesLoad"
+                type="Learning\AdditionalDescription\Plugin\Model\Customer\AttributesLoad" sortOrder="1"/>
+    </type>
+    <type name="Magento\Customer\Model\Customer\DataProviderWithDefaultAddresses">
+        <plugin name="Learning_AdditionalDescription::DataProviderPlugin"
+                type="Learning\AdditionalDescription\Plugin\Model\Customer\DataProviderPlugin" sortOrder="1"/>
+    </type>
 
     <!-- AdditionalDescription DI -->
     <preference for="Learning\AdditionalDescription\Api\AdditionalDescriptionRepositoryInterface"
                 type="Learning\AdditionalDescription\Model\AdditionalDescriptionRepository"/>
     <preference for="Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface"
                 type="Learning\AdditionalDescription\Model\AdditionalDescription"/>
-
     <preference for="Learning\AdditionalDescription\Api\AdditionalDescriptionSearchResultInterface"
                 type="Learning\AdditionalDescription\Model\Data\AdditionalDescriptionSearchResult"/>
-
-    <type name="Magento\Customer\Api\CustomerRepositoryInterface">
-        <plugin name="Learning_AdditionalDescription::RepositoryPlugin"
-                type="Learning\AdditionalDescription\Plugin\Model\Customer\RepositoryPlugin" sortOrder="1"/>
-    </type>
-    <type name="Magento\Customer\Api\Data\CustomerInterface">
-        <plugin name="Learning_AdditionalDescription::AttributesLoad"
-                type="Learning\AdditionalDescription\Plugin\Model\Customer\AttributesLoad" sortOrder="1"/>
-    </type>
-    <type name="Magento\Customer\Model\Customer\DataProviderWithDefaultAddresses">
-        <plugin name="Learning_AdditionalDescription::DataProviderPlugin"
-                type="Learning\AdditionalDescription\Plugin\Model\Customer\DataProviderPlugin" sortOrder="1"/>
+    <!-- AdditionalDescription plugins -->
+    <type name="Magento\Catalog\Api\Data\ProductInterface">
+        <plugin name="Learning_AdditionalDescription::ProductAttributesLoad"
+                type="Learning\AdditionalDescription\Plugin\Model\Product\AttributesLoad" sortOrder="1"/>
     </type>
 </config>
