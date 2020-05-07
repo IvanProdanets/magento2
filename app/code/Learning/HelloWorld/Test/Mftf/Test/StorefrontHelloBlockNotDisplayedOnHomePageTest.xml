@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="StorefrontHelloBlockNotDisplayedOnHomePageTest">
+        <annotations>
+            <features value="HelloWorld"/>
+            <stories value="HelloWorld"/>
+            <title value="Сheck that hello block not displayed on storefront home page"/>
+            <severity value="MAJOR"/>
+            <testCaseId value="M2-63368-testCase"/>
+            <group value="helloBlock"/>
+        </annotations>
+
+        <comment userInput="Open Storefront home page" stepKey="openStorefrontHomePage"/>
+        <amOnPage url="{{StorefrontHomePage.url}}" stepKey="goToStorefrontHomePage"/>
+        <waitForPageLoad stepKey="waitForHomePage"/>
+
+        <comment userInput="Check that hello block not displayed on home page" stepKey="checkHelloBlockNotDisplayed"/>
+        <dontSee selector="{{StorefrontHomeMainSection.contentBlock}}" stepKey="dontSeeHelloBlockOnHomePage"/>
+
+    </test>
+</tests>

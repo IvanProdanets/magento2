@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Learning\HelloWorld\Api\HelloWorldInterface" type="Learning\HelloWorld\Model\HelloWorld" />
+    <type name="Learning\HelloWorld\Api\HelloWorldInterface">
+        <plugin name="Learning_HelloWorld::helloWorldBefore" type="Learning\HelloWorld\Plugin\HelloWorld\Before" sortOrder="2"/>
+        <plugin name="Learning_HelloWorld::helloWorldAfter" type="Learning\HelloWorld\Plugin\HelloWorld\After" sortOrder="3"/>
+        <plugin name="Learning_HelloWorld::helloWorldAround" type="Learning\HelloWorld\Plugin\HelloWorld\Around" sortOrder="1"/>
+    </type>
+</config>
