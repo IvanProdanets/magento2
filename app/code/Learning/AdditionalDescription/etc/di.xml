@@ -2,16 +2,20 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- AllowAddDescription DI -->
     <preference for="Learning\AdditionalDescription\Api\AllowAddDescriptionRepositoryInterface"
                 type="Learning\AdditionalDescription\Model\AllowAddDescriptionRepository"/>
-    <preference for="Learning\AdditionalDescription\Api\AdditionalDescriptionRepositoryInterface"
-                type="Learning\AdditionalDescription\Model\AdditionalDescriptionRepository"/>
     <preference for="Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface"
                 type="Learning\AdditionalDescription\Model\AllowAddDescription"/>
-    <preference for="Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface"
-                type="Learning\AdditionalDescription\Model\AdditionalDescription"/>
     <preference for="Learning\AdditionalDescription\Api\AllowAddDescriptionSearchResultInterface"
                 type="Learning\AdditionalDescription\Model\Data\AllowAddDescriptionSearchResult"/>
+
+    <!-- AdditionalDescription DI -->
+    <preference for="Learning\AdditionalDescription\Api\AdditionalDescriptionRepositoryInterface"
+                type="Learning\AdditionalDescription\Model\AdditionalDescriptionRepository"/>
+    <preference for="Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface"
+                type="Learning\AdditionalDescription\Model\AdditionalDescription"/>
+
     <preference for="Learning\AdditionalDescription\Api\AdditionalDescriptionSearchResultInterface"
                 type="Learning\AdditionalDescription\Model\Data\AdditionalDescriptionSearchResult"/>
 

@@ -3,12 +3,12 @@ declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Model;
 
+use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionExtensionInterface;
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
 use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription as AdditionalDescriptionResourceModel;
-use Magento\Framework\Api\ExtensionAttributesInterface;
-use Magento\Framework\Model\AbstractModel;
+use Magento\Framework\Model\AbstractExtensibleModel;
 
-class AdditionalDescription extends AbstractModel implements AdditionalDescriptionInterface
+class AdditionalDescription extends AbstractExtensibleModel implements AdditionalDescriptionInterface
 {
     /**
      * Model initialization.
@@ -109,23 +109,24 @@ class AdditionalDescription extends AbstractModel implements AdditionalDescripti
     /**
      * Retrieve existing extension attributes object or create a new one.
      *
-     * @return ExtensionAttributesInterface|null
+     * @return AdditionalDescriptionExtensionInterface|null
      */
-    public function getExtensionAttributes(): ?ExtensionAttributesInterface
+    public function getExtensionAttributes():
+        ?AdditionalDescriptionExtensionInterface
     {
-        // TODO: Implement getExtensionAttributes() method.
+        return $this->_getExtensionAttributes();
     }
 
     /**
      * Set an extension attributes object.
      *
-     * @param ExtensionAttributesInterface $extensionAttributes
+     * @param AdditionalDescriptionExtensionInterface $extensionAttributes
      *
      * @return AdditionalDescriptionInterface
      */
     public function setExtensionAttributes(
-        ExtensionAttributesInterface $extensionAttributes
+        AdditionalDescriptionExtensionInterface $extensionAttributes
     ): AdditionalDescriptionInterface {
-        // TODO: Implement setExtensionAttributes() method.
+        return $this->_setExtensionAttributes($extensionAttributes);
     }
 }
