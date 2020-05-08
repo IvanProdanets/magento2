@@ -46,7 +46,7 @@ class AllowAddDescription extends AbstractExtensibleModel implements AllowAddDes
      *
      * @return bool|null
      */
-    public function getAllowAddDescription(): ?bool
+    public function getIsAllowed(): ?bool
     {
         return (bool)$this->getData(self::ALLOW_ADD_DESCRIPTION);
     }
@@ -58,7 +58,7 @@ class AllowAddDescription extends AbstractExtensibleModel implements AllowAddDes
      *
      * @return AllowAddDescriptionInterface
      */
-    public function setAllowAddDescription(?bool $allow): AllowAddDescriptionInterface
+    public function setIsAllowed(?bool $allow): AllowAddDescriptionInterface
     {
         return $this->setData(self::ALLOW_ADD_DESCRIPTION, $allow);
     }

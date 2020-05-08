@@ -1,0 +1,30 @@
+<?php
+use Learning\AdditionalDescription\Block\Product\Description;
+
+/** @var Description $block */
+
+$descriptions = $block->getDescriptionList();
+//$description = $block->getDescription();
+?>
+<div class="block">
+    <div class="block-title"><strong><?= $block->escapeHtml(__('Write Your Additional description')) ?></strong></div>
+    <div class="block-content">
+
+    </div>
+<?php if ($block->isDescriptionsVisible()) : ?>
+    <?php foreach ($descriptions as $description) :?>
+        <div class="descriptions">
+            <div class="value">
+                <?php echo $block->escapeHtml($description->getAdditionalDescription()) ?>
+            </div>
+            <div class="author">
+                <?php echo $block->escapeHtml($description->getCustomerEmail()) ?>
+            </div>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+<?php if ($block->isFormVisible()) : ?>
+
+<?php endif; ?>
+</div>

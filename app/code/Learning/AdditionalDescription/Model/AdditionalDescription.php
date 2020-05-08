@@ -47,7 +47,7 @@ class AdditionalDescription extends AbstractExtensibleModel implements Additiona
      */
     public function getCustomerEmail(): ?string
     {
-        // TODO: Implement getCustomerEmail() method.
+        return $this->getData(self::CUSTOMER_EMAIL);
     }
 
     /**
@@ -59,7 +59,7 @@ class AdditionalDescription extends AbstractExtensibleModel implements Additiona
      */
     public function setCustomerEmail(?string $email): AdditionalDescriptionInterface
     {
-        // TODO: Implement setCustomerEmail() method.
+        return $this->setData(self::CUSTOMER_EMAIL, $email);
     }
 
     /**

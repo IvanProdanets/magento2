@@ -37,7 +37,7 @@ interface AllowAddDescriptionInterface extends ExtensibleDataInterface
      *
      * @return bool|null
      */
-    public function getAllowAddDescription(): ?bool;
+    public function getIsAllowed(): ?bool;
 
     /**
      * Set permission add description for customer.
@@ -46,7 +46,7 @@ interface AllowAddDescriptionInterface extends ExtensibleDataInterface
      *
      * @return AllowAddDescriptionInterface
      */
-    public function setAllowAddDescription(?bool $allow): AllowAddDescriptionInterface;
+    public function setIsAllowed(?bool $allow): AllowAddDescriptionInterface;
 
     /**
      * Retrieve customer email.

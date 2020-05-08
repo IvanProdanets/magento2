@@ -50,7 +50,7 @@ class DataProviderPlugin
 
         try {
             $allowAddDescription = $this->allowAddDescriptionRepository->get($data[$customerId]['customer']['email']);
-            $allowAddDescription = $allowAddDescription->getAllowAddDescription();
+            $allowAddDescription = $allowAddDescription->getIsAllowed();
 
             if (is_bool($allowAddDescription)) {
                 // for proper work of form and grid (for example for Yes/No properties)

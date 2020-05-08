@@ -92,7 +92,7 @@ class AllowAddDescriptionRepository implements AllowAddDescriptionRepositoryInte
     {
         $allowAddDescription = $this->modelFactory->create();
         $this->resource->load($allowAddDescription, $customerEmail, AllowAddDescriptionInterface::CUSTOMER_EMAIL);
-        if (!$allowAddDescription->getId()) {
+        if (!$allowAddDescription->getPermissionId()) {
             throw new NoSuchEntityException(
                 __('Unable to find customer allow add description with email "%1"', $customerEmail)
             );
@@ -112,7 +112,7 @@ class AllowAddDescriptionRepository implements AllowAddDescriptionRepositoryInte
     {
         $allowAddDescription = $this->modelFactory->create();
         $this->resource->load($allowAddDescription, $id);
-        if (!$allowAddDescription->getId()) {
+        if (!$allowAddDescription->getPermissionId()) {
             throw new NoSuchEntityException(
                 __('Unable to find customer allow add description with ID "%1"', $id)
             );
@@ -189,7 +189,7 @@ class AllowAddDescriptionRepository implements AllowAddDescriptionRepositoryInte
         try {
             /** @var AllowAddDescriptionInterface $allowAddDescription */
             $existedAllowAddDescription = $this->get($allowAddDescription->getCustomerEmail());
-            $existedAllowAddDescription->setAllowAddDescription($allowAddDescription->getAllowAddDescription());
+            $existedAllowAddDescription->setAllowAddDescription($allowAddDescription->getIsAllowed());
             $allowAddDescription = $existedAllowAddDescription;
         } catch (NoSuchEntityException $e) {
             // Do nothing.

@@ -185,7 +185,7 @@ class RepositoryPlugin
         }
 
         // Update AllowAddDescription.
-        $allowAddDescription->setAllowAddDescription($this->isAllowedAddDescription());
+        $allowAddDescription->setIsAllowed($this->isAllowedAddDescription());
 
         try {
             $allowAddDescription = $this->allowAddDescriptionRepository->save($allowAddDescription);
