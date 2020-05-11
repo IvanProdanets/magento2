@@ -1,0 +1,46 @@
+.additional-description-block {
+    max-width: 500px;
+}
+
+a.add-description {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #1979c3 !important;
+    background: white !important;
+}
+
+a.edit-description {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.description {
+    margin-top: 14px;
+    margin-bottom: 14px;
+}
+
+.content {
+    min-height: 40px;
+    width: 100%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.footer {
+    min-height: 40px;
+    display: flex;
+}
+
+.actions, .author {
+    width: 50%;
+}
+
+.author {
+    color: gray;
+    text-align: right;
+    margin: auto;
+}
+
+#modal-form {
+    display: none;
+}

@@ -1,0 +1,41 @@
+<?php
+use Learning\AdditionalDescription\Block\Product\Form;
+
+/** @var Form $block */
+$block->getAction();
+?>
+
+<?php if ($block->canCustomerAddDescription()) : ?>
+    <div id="modal-form">
+        <form action="<?= $block->escapeUrl($block->getAction()) ?>" class="additional-description-form" method="post" id="additional-description-form">
+            <?= $block->getBlockHtml('formkey') ?>
+            <fieldset>
+                <input type="hidden"
+                       id="description_id"
+                       name="description_id"
+                       value="1"/>
+                <legend class="legend description-legend"><span><?= $block->escapeHtml(__("You're writing description to:")) ?></span><strong><?= $block->escapeHtml($block->getProduct()->getName()) ?></strong></legend><br />
+                <div class="field description-field-text">
+                    <label for="description_field" class="label"><span><?= $block->escapeHtml(__('Additional Description')) ?></span></label>
+                    <div class="control">
+                        <textarea name="additional_description" id="description_field" cols="7" rows="5"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+            <div class="actions-toolbar additional-description-form-actions">
+                <div class="primary actions-primary">
+                    <button type="submit" class="action submit primary"><span><?= $block->escapeHtml(__('Submit description')) ?></span></button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+<script type="text/x-magento-init">
+    {
+        ".open-modal-form": {
+            "Learning_AdditionalDescription/js/modal-form": {}
+        }
+    }
+</script>
+
+<?php endif; ?>

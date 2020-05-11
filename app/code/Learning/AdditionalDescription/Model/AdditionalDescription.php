@@ -25,7 +25,7 @@ class AdditionalDescription extends AbstractExtensibleModel implements Additiona
      */
     public function getAdditionalDescriptionId(): ?int
     {
-        return $this->getData(self::DESCRIPTION_ID);
+        return (int) $this->getData(self::DESCRIPTION_ID);
     }
 
     /**
@@ -91,7 +91,7 @@ class AdditionalDescription extends AbstractExtensibleModel implements Additiona
      */
     public function getProductId(): ?int
     {
-        return $this->getData(self::PRODUCT_ID);
+        return (int) $this->getData(self::PRODUCT_ID);
     }
 
     /**

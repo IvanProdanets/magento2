@@ -4,27 +4,38 @@ use Learning\AdditionalDescription\Block\Product\Description;
 /** @var Description $block */
 
 $descriptions = $block->getDescriptionList();
-//$description = $block->getDescription();
 ?>
-<div class="block">
-    <div class="block-title"><strong><?= $block->escapeHtml(__('Write Your Additional description')) ?></strong></div>
+<div class="additional-description-block">
     <div class="block-content">
-
+        <?php if ($block->canCustomerAddDescription()) : ?>
+            <a class="action primary add-description open-modal-form"
+                href="#">
+                <?= __('Add')?>
+            </a>
+        <?php endif; ?>
+        <?php if (count($descriptions) > 0) : ?>
+            <?php foreach ($descriptions as $description) :?>
+                <div class="description">
+                    <div class="content">
+                        <?php echo $block->escapeHtml($description->getAdditionalDescription()) ?>
+                    </div>
+                    <div class="footer">
+                        <div class="actions">
+                            <?php if ($block->isEditButtonVisible($description)) : ?>
+                                <a class="action primary edit-description open-modal-form"
+                                   data-id="<?= $block->getId() ?>"
+                                   href="#">
+                                    <?= __('Edit')?>
+                                </a>
+                            <?php endif;?>
+                        </div>
+                        <div class="author">
+                            <?php echo $block->escapeHtml($description->getCustomerEmail()) ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <?php echo $block->getChildHtml() ?>
     </div>
-<?php if ($block->isDescriptionsVisible()) : ?>
-    <?php foreach ($descriptions as $description) :?>
-        <div class="descriptions">
-            <div class="value">
-                <?php echo $block->escapeHtml($description->getAdditionalDescription()) ?>
-            </div>
-            <div class="author">
-                <?php echo $block->escapeHtml($description->getCustomerEmail()) ?>
-            </div>
-        </div>
-    <?php endforeach; ?>
-<?php endif; ?>
-
-<?php if ($block->isFormVisible()) : ?>
-
-<?php endif; ?>
 </div>

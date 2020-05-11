@@ -2,19 +2,24 @@
 
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-<!--        <update handle="review_product_form_component"/>-->
+    <head>
+        <css src="Learning_AdditionalDescription::css/style.css"/>
+    </head>
     <body>
         <referenceBlock name="product.info.details">
             <block class="Learning\AdditionalDescription\Block\Product\Description" name="additionalDescriptions.tab"
-                   as="additionalDescriptions" template="Learning_AdditionalDescription::description.phtml" group="detailed_info" cacheable="false">
+                   as="additionalDescriptions" template="Learning_AdditionalDescription::description.phtml"
+                   group="detailed_info" cacheable="false">
                 <arguments>
                     <argument name="sort_order" xsi:type="string">100</argument>
                 </arguments>
-                <!--                <block class="Magento\Review\Block\Form" name="product.additionalDescription.form" as="review_form" ifconfig="catalog/review/active">-->
                 <block class="Learning\AdditionalDescription\Block\Product\Form"
-                       name="product.additionalDescription.form" as="additional_description_form" cacheable="false">
-                    <!--                    <container name="product.review.form.fields.before" as="form_fields_before" label="Review Form Fields Before"/>-->
+                       name="product.additionalDescription.form" template="Learning_AdditionalDescription::form.phtml"
+                       as="description.form">
                 </block>
+                <!--                <block class="Learning\AdditionalDescription\Block\Product\Form" name="product.additionalDescription.form" as="description_form">-->
+                <!--                    <container name="product.review.form.fields.before" as="form_fields_before" label="Review Form Fields Before"/>-->
+                <!--                </block>-->
             </block>
         </referenceBlock>
     </body>

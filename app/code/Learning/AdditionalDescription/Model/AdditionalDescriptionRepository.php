@@ -5,10 +5,9 @@ namespace Learning\AdditionalDescription\Model;
 
 use Learning\AdditionalDescription\Api\AdditionalDescriptionRepositoryInterface;
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
-use Learning\AdditionalDescription\Api\AdditionalDescriptionSearchResultInterfaceFactory as SearchResultInterfaceFactory;
+use Learning\AdditionalDescription\Api\AdditionalDescriptionSearchResultInterfaceFactory
+    as SearchResultInterfaceFactory;
 use Learning\AdditionalDescription\Api\AdditionalDescriptionSearchResultInterface;
-use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface;
-use Learning\AdditionalDescription\Model\AdditionalDescriptionFactory;
 use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription as ResourceModel;
 use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\CollectionFactory;
 use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\Collection;
@@ -16,7 +15,6 @@ use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
 class AdditionalDescriptionRepository implements AdditionalDescriptionRepositoryInterface
