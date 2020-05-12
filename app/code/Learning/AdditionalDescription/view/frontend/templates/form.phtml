@@ -13,7 +13,7 @@ $block->getAction();
                 <input type="hidden"
                        id="description_id"
                        name="description_id"
-                       value="1"/>
+                       value=""/>
                 <legend class="legend description-legend"><span><?= $block->escapeHtml(__("You're writing description to:")) ?></span><strong><?= $block->escapeHtml($block->getProduct()->getName()) ?></strong></legend><br />
                 <div class="field description-field-text">
                     <label for="description_field" class="label"><span><?= $block->escapeHtml(__('Additional Description')) ?></span></label>
@@ -22,18 +22,13 @@ $block->getAction();
                     </div>
                 </div>
             </fieldset>
-            <div class="actions-toolbar additional-description-form-actions">
-                <div class="primary actions-primary">
-                    <button type="submit" class="action submit primary"><span><?= $block->escapeHtml(__('Submit description')) ?></span></button>
-                </div>
-            </div>
         </form>
     </div>
 
 <script type="text/x-magento-init">
     {
-        ".open-modal-form": {
-            "Learning_AdditionalDescription/js/modal-form": {}
+        "*": {
+            "Learning_AdditionalDescription/js/description": {}
         }
     }
 </script>

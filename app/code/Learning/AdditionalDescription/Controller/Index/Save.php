@@ -12,9 +12,15 @@ use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\ResponseInterface;
+use Magento\Framework\Controller\Result\Json;
+use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Data\Form\FormKey\Validator;
+use Magento\Framework\Exception\AuthenticationException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\Validation\ValidationException;
+use Magento\Framework\Webapi\Response;
 
 class Save extends Action implements HttpPostActionInterface
 {
@@ -30,45 +36,91 @@ class Save extends Action implements HttpPostActionInterface
     /** @var CurrentCustomerService */
     private $customerService;
 
+    /** @var Validator */
+    private $validator;
+
+    /**
+     * Save constructor.
+     *
+     * @param Context                               $context
+     * @param AdditionalDescriptionRepository       $repository
+     * @param SearchCriteriaBuilder                 $criteriaBuilder
+     * @param AdditionalDescriptionInterfaceFactory $factory
+     * @param CurrentCustomerService                $customerService
+     * @param Validator                             $validator
+     */
     public function __construct(
         Context $context,
         AdditionalDescriptionRepository $repository,
         SearchCriteriaBuilder $criteriaBuilder,
         AdditionalDescriptionInterfaceFactory $factory,
-        CurrentCustomerService $customerService
+        CurrentCustomerService $customerService,
+        Validator $validator
     ) {
         parent::__construct($context);
         $this->additionalDescription = $factory;
         $this->repository            = $repository;
         $this->criteriaBuilder       = $criteriaBuilder;
         $this->customerService       = $customerService;
+        $this->validator             = $validator;
     }
 
     /**
      * Execute action based on request and return result
      *
      * @return ResultInterface|ResponseInterface
-     * @throws NoSuchEntityException|CouldNotSaveException
      */
     public function execute()
     {
-        $redirectUrl = $this->_redirect->getRefererUrl();
+        /** @var Json $result */
+        $result = $this->resultFactory->create(ResultFactory::TYPE_JSON);
 
+        try {
+            $this->validateRequest();
+        } catch (AuthenticationException|ValidationException $e) {
+            $result->setHttpResponseCode(Response::STATUS_CODE_500);
+            $result->setData([ 'error' => $e ]);
+
+            return $result;
+        }
+
+        try {
+            $value = $this->_request->getParam('additional_description');
+            if ($id = $this->_request->getParam('description_id')) {
+                $additionalDescription = $this->repository->getById((int) $id);
+            } else {
+                $additionalDescription = $this->additionalDescription->create();
+                $additionalDescription->setCustomerEmail($this->customerService->getCustomer()->getEmail());
+            }
+            $additionalDescription->setAdditionalDescription($value);
+
+            $this->repository->save($additionalDescription);
+            $result->setHttpResponseCode(Response::HTTP_OK);
+            $result->setData(['success' => __('Additional description has been saved')]);
+        } catch (NoSuchEntityException|CouldNotSaveException $e) {
+            $result->setHttpResponseCode(Response::STATUS_CODE_500);
+            $result->setData([ 'error' => $e ]);
+        }
+
+        return $result;
+    }
+
+    /**
+     * @throws AuthenticationException
+     * @throws ValidationException
+     */
+    private function validateRequest(): void
+    {
         if (!$this->customerService->canCustomerAddDescription()) {
-            return $this->_redirect($redirectUrl);
+            throw new AuthenticationException(__('An authentication error occurred. Verify and try again.'));
         }
 
-        $value = $this->_request->getParam('additional_description');
-        if ($id = $this->_request->getParam('description_id')) {
-            $additionalDescription = $this->repository->getById((int) $id);
-        } else {
-            $additionalDescription = $this->additionalDescription->create();
-            $additionalDescription->setCustomerEmail($this->customerService->getCustomer()->getEmail());
+        if (!$this->validator->validate($this->_request)) {
+            throw new ValidationException(__('Invalid form data'));
         }
-        $additionalDescription->setAdditionalDescription($value);
 
-        $this->repository->save($additionalDescription);
-
-        return $this->_redirect($redirectUrl);
+        if (!$this->_request->getParam('description_id')) {
+            throw new ValidationException(__('Invalid form data'));
+        }
     }
 }

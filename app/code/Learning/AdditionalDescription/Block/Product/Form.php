@@ -13,8 +13,7 @@ class Form extends BaseTemplate
     public function getAction()
     {
         return $this->getUrl(
-            'additional/index/save',
-            [ 'id' => $this->getProduct()->getId() ]
+            'additional/index/save'
         );
     }
 }

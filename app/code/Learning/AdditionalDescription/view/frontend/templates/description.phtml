@@ -5,7 +5,7 @@ use Learning\AdditionalDescription\Block\Product\Description;
 
 $descriptions = $block->getDescriptionList();
 ?>
-<div class="additional-description-block">
+<div id="additional-description-block" class="additional-description-block">
     <div class="block-content">
         <?php if ($block->canCustomerAddDescription()) : ?>
             <a class="action primary add-description open-modal-form"
@@ -23,7 +23,7 @@ $descriptions = $block->getDescriptionList();
                         <div class="actions">
                             <?php if ($block->isEditButtonVisible($description)) : ?>
                                 <a class="action primary edit-description open-modal-form"
-                                   data-id="<?= $block->getId() ?>"
+                                   data-id="<?= $description->getAdditionalDescriptionId() ?>"
                                    href="#">
                                     <?= __('Edit')?>
                                 </a>
