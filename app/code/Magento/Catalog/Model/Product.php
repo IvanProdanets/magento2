@@ -2661,7 +2661,7 @@ class Product extends \Magento\Catalog\Model\AbstractModel implements
      */
     public function getId()
     {
-        return $this->_getData('entity_id');
+        return (int) $this->_getData('entity_id');
     }
 
     /**

@@ -81,26 +81,6 @@ class AdditionalDescriptionRepository implements AdditionalDescriptionRepository
     }
 
     /**
-     * Retrieve AdditionalDescription by product id.
-     *
-     * @param int $productId
-     * @return AdditionalDescriptionInterface
-     * @throws NoSuchEntityException
-     */
-    public function get(int $productId): AdditionalDescriptionInterface
-    {
-        $additionalDescription = $this->modelFactory->create();
-        $this->resource->load($additionalDescription, $productId, AdditionalDescriptionInterface::PRODUCT_ID);
-        if (!$additionalDescription->getId()) {
-            throw new NoSuchEntityException(
-                __('Unable to find customer product additional description with PRODUCT_ID "%1"', $productId)
-            );
-        }
-
-        return $additionalDescription;
-    }
-
-    /**
      * Retrieve AdditionalDescription by id.
      *
      * @param int $id

@@ -30,9 +30,15 @@
                 type="Learning\AdditionalDescription\Model\AdditionalDescription"/>
     <preference for="Learning\AdditionalDescription\Api\AdditionalDescriptionSearchResultInterface"
                 type="Learning\AdditionalDescription\Model\Data\AdditionalDescriptionSearchResult"/>
+    <preference for="Learning\AdditionalDescription\Api\AdditionalDescriptionManagementInterface"
+                type="Learning\AdditionalDescription\Model\AdditionalDescriptionManagement"/>
     <!-- AdditionalDescription plugins -->
     <type name="Magento\Catalog\Api\Data\ProductInterface">
         <plugin name="Learning_AdditionalDescription::ProductAttributesLoad"
                 type="Learning\AdditionalDescription\Plugin\Model\Product\AttributesLoad" sortOrder="1"/>
+    </type>
+    <type name="Magento\Catalog\Api\ProductRepositoryInterface">
+        <plugin name="Learning_AdditionalDescription::RepositoryPlugin"
+                type="Learning\AdditionalDescription\Plugin\Model\Product\RepositoryPlugin" sortOrder="1"/>
     </type>
 </config>

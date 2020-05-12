@@ -7,7 +7,6 @@ use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
 interface AdditionalDescriptionRepositoryInterface
@@ -24,15 +23,6 @@ interface AdditionalDescriptionRepositoryInterface
     public function save(
         AdditionalDescriptionInterface $additionalDescription
     ): AdditionalDescriptionInterface;
-
-    /**
-     * Retrieve AdditionalDescription by product id.
-     *
-     * @param int $productId
-     * @return AdditionalDescriptionInterface
-     * @throws NoSuchEntityException
-     */
-    public function get(int $productId): AdditionalDescriptionInterface;
 
     /**
      * Retrieve AdditionalDescription by id.

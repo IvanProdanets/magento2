@@ -189,7 +189,7 @@ class RepositoryPlugin
 
         try {
             $allowAddDescription = $this->allowAddDescriptionRepository->save($allowAddDescription);
-        } catch (CouldNotSaveException|NoSuchEntityException $e) {
+        } catch (NoSuchEntityException|CouldNotSaveException $e) {
             // Do nothing.
         }
 

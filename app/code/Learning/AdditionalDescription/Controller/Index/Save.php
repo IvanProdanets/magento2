@@ -7,7 +7,6 @@ use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterfaceFactory;
 use Learning\AdditionalDescription\Model\AdditionalDescriptionRepository;
 use Learning\AdditionalDescription\Service\CurrentCustomerService;
-use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
@@ -27,9 +26,6 @@ class Save extends Action implements HttpPostActionInterface
     /** @var AdditionalDescriptionRepository */
     private $repository;
 
-    /** @var SearchCriteriaBuilder */
-    private $criteriaBuilder;
-
     /** @var AdditionalDescriptionInterface */
     private $additionalDescription;
 
@@ -44,7 +40,6 @@ class Save extends Action implements HttpPostActionInterface
      *
      * @param Context                               $context
      * @param AdditionalDescriptionRepository       $repository
-     * @param SearchCriteriaBuilder                 $criteriaBuilder
      * @param AdditionalDescriptionInterfaceFactory $factory
      * @param CurrentCustomerService                $customerService
      * @param Validator                             $validator
@@ -52,7 +47,6 @@ class Save extends Action implements HttpPostActionInterface
     public function __construct(
         Context $context,
         AdditionalDescriptionRepository $repository,
-        SearchCriteriaBuilder $criteriaBuilder,
         AdditionalDescriptionInterfaceFactory $factory,
         CurrentCustomerService $customerService,
         Validator $validator
@@ -60,7 +54,6 @@ class Save extends Action implements HttpPostActionInterface
         parent::__construct($context);
         $this->additionalDescription = $factory;
         $this->repository            = $repository;
-        $this->criteriaBuilder       = $criteriaBuilder;
         $this->customerService       = $customerService;
         $this->validator             = $validator;
     }
@@ -85,7 +78,7 @@ class Save extends Action implements HttpPostActionInterface
         }
 
         try {
-            $value = $this->_request->getParam('additional_description');
+            $value = $this->_request->getParam(AdditionalDescriptionInterface::ADDITIONAL_DESCRIPTION);
             if ($id = $this->_request->getParam('description_id')) {
                 $additionalDescription = $this->repository->getById((int) $id);
             } else {
@@ -112,7 +105,9 @@ class Save extends Action implements HttpPostActionInterface
     private function validateRequest(): void
     {
         if (!$this->customerService->canCustomerAddDescription()) {
-            throw new AuthenticationException(__('An authentication error occurred. Verify and try again.'));
+            throw new AuthenticationException(
+                __('You dont have right permission to edit additional description')
+            );
         }
 
         if (!$this->validator->validate($this->_request)) {
@@ -120,7 +115,7 @@ class Save extends Action implements HttpPostActionInterface
         }
 
         if (!$this->_request->getParam('description_id')) {
-            throw new ValidationException(__('Invalid form data'));
+            throw new ValidationException(__('Invalid request params'));
         }
     }
 }

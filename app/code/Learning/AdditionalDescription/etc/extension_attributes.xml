@@ -5,7 +5,7 @@
                    type="Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface"/>
     </extension_attributes>
     <extension_attributes for="Magento\Catalog\Api\Data\ProductInterface">
-        <attribute code="additional_description"
-                   type="Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface"/>
+        <attribute code="additional_descriptions"
+                   type="Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface[]"/>
     </extension_attributes>
 </config>

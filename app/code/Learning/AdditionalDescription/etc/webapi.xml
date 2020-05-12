@@ -26,4 +26,19 @@
             <resource ref="Magento_Customer::manage"/>
         </resources>
     </route>
+
+    <!-- Add AdditionalDescription -->
+    <route url="/V1/products/additionalDescription" method="GET">
+        <service class="Learning\AdditionalDescription\Api\AdditionalDescriptionRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Magento_Catalog::products"/>
+        </resources>
+    </route>
+
+    <route url="/V1/products/additionalDescription" method="POST">
+        <service class="Learning\AdditionalDescription\Api\AdditionalDescriptionManagementInterface" method="save"/>
+        <resources>
+            <resource ref="Magento_Catalog::products"/>
+        </resources>
+    </route>
 </routes>
