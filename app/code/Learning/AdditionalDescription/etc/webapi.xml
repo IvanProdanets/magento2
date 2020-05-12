@@ -38,7 +38,10 @@
     <route url="/V1/products/additionalDescription" method="POST">
         <service class="Learning\AdditionalDescription\Api\AdditionalDescriptionManagementInterface" method="save"/>
         <resources>
-            <resource ref="Magento_Catalog::products"/>
+            <resource ref="self"/>
         </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
     </route>
 </routes>

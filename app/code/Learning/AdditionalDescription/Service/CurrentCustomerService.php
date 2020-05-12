@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Service;
 
+use Magento\Authorization\Model\UserContextInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Model\Session;
 use Magento\Framework\Exception\LocalizedException;
@@ -20,18 +21,24 @@ class CurrentCustomerService
     /** @var CustomerInterface */
     private $currentCustomer;
 
+    /** @var UserContextInterface */
+    private $userContext;
+
     /**
      * CurrentCustomerService constructor.
      *
-     * @param Session          $customerSession
-     * @param ManagerInterface $messageManager
+     * @param UserContextInterface $userContext
+     * @param Session              $customerSession
+     * @param ManagerInterface     $messageManager
      */
     public function __construct(
+        UserContextInterface $userContext,
         Session $customerSession,
         ManagerInterface $messageManager
     ) {
-        $this->messageManager  = $messageManager;
+        $this->userContext     = $userContext;
         $this->customerSession = $customerSession;
+        $this->messageManager  = $messageManager;
     }
 
     /**
@@ -64,6 +71,25 @@ class CurrentCustomerService
     /**
      * @return bool
      */
+    public function canUserAddDescription(): bool
+    {
+        switch ($this->userContext->getUserType()) {
+            case UserContextInterface::USER_TYPE_ADMIN:
+                $permission = $this->canAdminAddDescription();
+                break;
+            case UserContextInterface::USER_TYPE_CUSTOMER:
+                $permission = $this->canCustomerAddDescription();
+                break;
+            default:
+                $permission = false;
+        }
+
+        return $permission;
+    }
+
+    /**
+     * @return bool
+     */
     public function canCustomerAddDescription(): bool
     {
         if (!$customer = $this->getCustomer()) {
@@ -75,5 +101,13 @@ class CurrentCustomerService
         }
 
         return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canAdminAddDescription(): bool
+    {
+        return true;
     }
 }

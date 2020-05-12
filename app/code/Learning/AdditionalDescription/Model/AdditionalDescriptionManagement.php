@@ -60,7 +60,7 @@ class AdditionalDescriptionManagement implements AdditionalDescriptionManagement
      */
     private function validate(): bool
     {
-        if (!$this->customer->canCustomerAddDescription()) {
+        if (!$this->customer->canUserAddDescription()) {
             throw new NotEnoughPermissions(__('You don\'t have permission to edit additional description'));
         }
 
