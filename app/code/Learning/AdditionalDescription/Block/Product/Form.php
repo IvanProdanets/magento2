@@ -13,7 +13,7 @@ class Form extends BaseTemplate
     public function getAction()
     {
         return $this->getUrl(
-            'additional/index/save'
+            'additionalDescription/index/save'
         );
     }
 }

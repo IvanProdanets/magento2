@@ -19,7 +19,7 @@ define(
         };
 
         const getDescription = (id) => {
-            const action = '/additional/index/index?id=' + id;
+            const action = '/additionalDescription/index/index?id=' + id;
 
             $.ajax({
                 url: action,
@@ -66,7 +66,7 @@ define(
         const init = () => {
             $(document).on('click', modalButton, function () {
                 $modal.modal(getModalOptions());
-                $modal.trigger("reset");
+                $descriptionField.text('');
                 $modal.trigger('openModal');
                 let descriptionId = $(this).attr('data-id') || null;
                 if (descriptionId !== null) {
