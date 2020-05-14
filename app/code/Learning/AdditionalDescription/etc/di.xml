@@ -41,4 +41,24 @@
         <plugin name="Learning_AdditionalDescription::RepositoryPlugin"
                 type="Learning\AdditionalDescription\Plugin\Model\Product\RepositoryPlugin" sortOrder="1"/>
     </type>
+
+    <virtualType name="Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\Collection"
+                 type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">catalog_product_additional_description</argument>
+            <argument name="resourceModel" xsi:type="string">
+                Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription
+            </argument>
+        </arguments>
+    </virtualType>
+    <type
+        name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="additional_descriptions_form_data_source" xsi:type="string">
+                    Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\Collection
+                </item>
+            </argument>
+        </arguments>
+    </type>
 </config>

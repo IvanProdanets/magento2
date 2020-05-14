@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Controller\Adminhtml\Product;
 
-use Learning\AdditionalDescription\Api\AllowAddDescriptionRepositoryInterface;
+use Learning\AdditionalDescription\Api\AdditionalDescriptionRepositoryInterface;
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
@@ -16,18 +16,18 @@ use Magento\Framework\View\Result\Page;
 
 class Edit extends Action implements HttpGetActionInterface
 {
-    /** @var AllowAddDescriptionRepositoryInterface */
+    /** @var AdditionalDescriptionRepositoryInterface */
     private $descriptionRepository;
 
     /**
      * Edit constructor.
      *
      * @param Context                                $context
-     * @param AllowAddDescriptionRepositoryInterface $descriptionRepository
+     * @param AdditionalDescriptionRepositoryInterface $descriptionRepository
      */
     public function __construct(
         Context $context,
-        AllowAddDescriptionRepositoryInterface $descriptionRepository
+        AdditionalDescriptionRepositoryInterface $descriptionRepository
     ) {
         parent::__construct($context);
         $this->descriptionRepository = $descriptionRepository;
@@ -50,7 +50,8 @@ class Edit extends Action implements HttpGetActionInterface
         } catch (NoSuchEntityException $e) {
             $result = $this->resultRedirectFactory->create();
             $this->messageManager->addErrorMessage(__('Could not find Additional description'));
-            $result->setPath('*/*');
+
+            return $result->setPath('*/*');
         }
 
         return $result;

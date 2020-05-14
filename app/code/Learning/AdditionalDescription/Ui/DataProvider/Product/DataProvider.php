@@ -50,7 +50,10 @@ class DataProvider extends AbstractDataProvider
      */
     public function getData(): array
     {
-        $this->getCollection()->addProductFilter((int)$this->request->getParam('current_product_id'));
+        $productId = $this->request->getParam('current_product_id');
+        if ($productId) {
+            $this->getCollection()->addProductFilter((int)$productId);
+        }
 
         $arrItems = [
             'totalRecords' => $this->getCollection()->getSize(),
