@@ -25,6 +25,20 @@
             </argument>
         </argument>
     </dataSource>
+<!--    <dataSource name="additional_descriptions_grid_listing_data_source" component="Magento_Ui/js/grid/provider">-->
+<!--        <settings>-->
+<!--            <storageConfig>-->
+<!--                <param name="cacheRequests" xsi:type="boolean">false</param>-->
+<!--            </storageConfig>-->
+<!--            <updateUrl path="mui/index/render"/>-->
+<!--        </settings>-->
+<!--        <dataProvider class="Learning\AdditionalDescription\Ui\DataProvider\Product\DataProvider" name="additional_descriptions_grid_listing_data_source">-->
+<!--            <settings>-->
+<!--                <requestFieldName>entity_id</requestFieldName>-->
+<!--                <primaryFieldName>id</primaryFieldName>-->
+<!--            </settings>-->
+<!--        </dataProvider>-->
+<!--    </dataSource>-->
     <listingToolbar name="listing_top">
         <filters name="listing_filters">
             <argument name="data" xsi:type="array">
@@ -70,8 +84,6 @@
                     <item name="filter" xsi:type="string">text</item>
                     <item name="label" xsi:type="string" translate="true">Additional Description</item>
                     <item name="sortOrder" xsi:type="number">20</item>
-<!--                    <item name="truncate" xsi:type="number">50</item>-->
-<!--                    <item name="nl2br" xsi:type="boolean">true</item>-->
                     <item name="escape" xsi:type="boolean">true</item>
                 </item>
             </argument>
@@ -86,10 +98,12 @@
                 </item>
             </argument>
         </column>
-        <column name="product_id">
+        <column name="name">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="visible" xsi:type="boolean">false</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">Product</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
                 </item>
             </argument>
         </column>
@@ -105,7 +119,7 @@
         <actionsColumn name="actions" sortOrder="240" class="Learning\AdditionalDescription\Ui\Component\Listing\Columns\DescriptionActions">
             <settings>
                 <label translate="true">Actions</label>
-                <indexField>blog_id</indexField>
+                <indexField>id</indexField>
             </settings>
         </actionsColumn>
     </columns>

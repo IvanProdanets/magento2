@@ -3,12 +3,12 @@ declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Ui\DataProvider\Product;
 
-use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
+use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\Grid\Collection;
+use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\Grid\CollectionFactory;
 use Magento\Framework\Api\Filter;
+use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\RequestInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
-use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\Collection;
-use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\CollectionFactory;
 
 class DataProvider extends AbstractDataProvider
 {
@@ -40,7 +40,7 @@ class DataProvider extends AbstractDataProvider
 
         $this->collectionFactory = $collectionFactory;
         $this->collection        = $this->collectionFactory->create();
-        $this->request           = $request;
+        $this->request           = $request ?? ObjectManager::getInstance()->get(RequestInterface::class);
     }
 
     /**
@@ -50,7 +50,7 @@ class DataProvider extends AbstractDataProvider
      */
     public function getData(): array
     {
-        $this->getCollection()->addProductFilter((int)$this->request->getParam('current_product_id', 0));
+        $this->getCollection()->addProductFilter((int)$this->request->getParam('current_product_id'));
 
         $arrItems = [
             'totalRecords' => $this->getCollection()->getSize(),
@@ -75,15 +75,16 @@ class DataProvider extends AbstractDataProvider
     {
         $field = $filter->getField();
 
-        if (in_array(
-            $field,
-            [
-                AdditionalDescriptionInterface::DESCRIPTION_ID,
-                AdditionalDescriptionInterface::CUSTOMER_EMAIL,
-                AdditionalDescriptionInterface::PRODUCT_ID,
-            ]
-        )) {
-            $filter->setField($field);
+        if (in_array($field, ['id', 'additional_description', 'customer_email'])) {
+            $filter->setField('main_table.' . $field);
+        }
+
+        if (in_array($field, ['sku'])) {
+            $filter->setField('cpe.' . $field);
+        }
+
+        if ($field === 'name') {
+            $filter->setField('cpev.value');
         }
 
         parent::addFilter($filter);
