@@ -86,10 +86,6 @@ class DataProvider extends AbstractDataProvider
             $filter->setField('cpe.' . $field);
         }
 
-        if ($field === 'name') {
-            $filter->setField('cpev.value');
-        }
-
         parent::addFilter($filter);
     }
 }

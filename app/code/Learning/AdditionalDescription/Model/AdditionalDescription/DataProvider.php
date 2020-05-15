@@ -4,17 +4,11 @@ declare(strict_types = 1);
 namespace Learning\AdditionalDescription\Model\AdditionalDescription;
 
 use Learning\AdditionalDescription\Model\AdditionalDescription;
-use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\Collection;
 use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\CollectionFactory;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class DataProvider extends AbstractDataProvider
 {
-    /**
-     * @var Collection
-     */
-    protected $collection;
-
     /**
      * @var array
      */
@@ -23,23 +17,23 @@ class DataProvider extends AbstractDataProvider
     /**
      * DataProvider constructor.
      *
-     * @param                   $name
-     * @param                   $primaryFieldName
-     * @param                   $requestFieldName
+     * @param string            $name
+     * @param string            $primaryFieldName
+     * @param string            $requestFieldName
      * @param CollectionFactory $collectionFactory
      * @param array             $meta
      * @param array             $data
      */
     public function __construct(
-        $name,
-        $primaryFieldName,
-        $requestFieldName,
+        string $name,
+        string $primaryFieldName,
+        string $requestFieldName,
         CollectionFactory $collectionFactory,
         array $meta = [],
         array $data = []
     ) {
-        $this->collection = $collectionFactory->create();
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
+        $this->collection = $collectionFactory->create();
     }
 
     /**
@@ -57,7 +51,7 @@ class DataProvider extends AbstractDataProvider
 
         /** @var AdditionalDescription $additionalDescription */
         foreach ($items as $additionalDescription) {
-            $this->loadedData[$additionalDescription->getAdditionalDescriptionId()] = $additionalDescription->getData();
+            $this->loadedData[$additionalDescription->getId()] = $additionalDescription->getData();
         }
 
         return $this->loadedData;

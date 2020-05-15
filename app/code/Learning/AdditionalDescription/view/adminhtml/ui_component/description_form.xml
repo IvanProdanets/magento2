@@ -13,7 +13,7 @@
         </item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
-    <dataSource name="description_form">
+    <dataSource name="description_form_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">Learning\AdditionalDescription\Model\AdditionalDescription\DataProvider</argument>
             <argument name="name" xsi:type="string">description_form_data_source</argument>
@@ -29,7 +29,7 @@
 
     <fieldset name="description_details">
         <settings>
-            <label translate="true">General</label>
+            <label translate="true">Description Details</label>
         </settings>
 
         <field formElement="hidden" name="id">
@@ -47,7 +47,7 @@
                 </validation>
             </settings>
         </field>
-        <field formElement="text" name="cusomer_email">
+        <field formElement="input" name="customer_email">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">AdditionalDescription</item>
@@ -56,11 +56,11 @@
             <settings>
                 <dataType>text</dataType>
                 <label>Customer email</label>
-                <dataScope>cusomer_email</dataScope>
+                <dataScope>customer_email</dataScope>
                 <disabled>true</disabled>
             </settings>
         </field>
-        <field formElement="text" name="product_id">
+        <field formElement="input" name="product_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">AdditionalDescription</item>
@@ -68,7 +68,7 @@
             </argument>
             <settings>
                 <dataType>text</dataType>
-                <label>Product ID</label>
+                <label translate="true">Product ID</label>
                 <dataScope>product_id</dataScope>
                 <disabled>true</disabled>
             </settings>
@@ -77,7 +77,7 @@
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="source" xsi:type="string">AdditionalDescription</item>
-                    <item name="rows" xsi:type="number">5</item>
+                    <item name="rows" xsi:type="number">10</item>
                 </item>
             </argument>
             <settings>
