@@ -29,8 +29,8 @@ class DescriptionActions extends Column
                 'href'   => $this->context->getUrl(
                     'additionalDescription/product/edit',
                     [
-                        AdditionalDescriptionInterface::DESCRIPTION_ID =>
-                            $item[AdditionalDescriptionInterface::DESCRIPTION_ID]
+                        'id' => $item[AdditionalDescriptionInterface::DESCRIPTION_ID],
+                        'productId' => $item[AdditionalDescriptionInterface::PRODUCT_ID]
                     ]
                 ),
                 'label'  => __('Edit'),

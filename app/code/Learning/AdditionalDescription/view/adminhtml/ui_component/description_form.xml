@@ -13,6 +13,17 @@
         </item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
     </argument>
+    <settings>
+        <buttons>
+            <button class="Learning\AdditionalDescription\Ui\Component\Control\AdditionalDescription\BackButton" name="back"/>
+            <button name="reset">
+                <class>reset</class>
+                <label translate="true">Reset</label>
+            </button>
+            <button class="Learning\AdditionalDescription\Ui\Component\Control\AdditionalDescription\SaveButton" name="save"/>
+            <button class="Learning\AdditionalDescription\Ui\Component\Control\AdditionalDescription\DeleteButton" name="delete"/>
+        </buttons>
+    </settings>
     <dataSource name="description_form_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
             <argument name="class" xsi:type="string">Learning\AdditionalDescription\Model\AdditionalDescription\DataProvider</argument>
