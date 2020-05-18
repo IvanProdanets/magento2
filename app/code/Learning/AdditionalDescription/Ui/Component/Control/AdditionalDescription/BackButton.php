@@ -18,4 +18,23 @@ class BackButton extends GenericButton
             'url'            => $this->getBackUrl(),
         ];
     }
+
+    /**
+     * Get URL for back.
+     *
+     * @return string
+     */
+    private function getBackUrl(): string
+    {
+
+        $id = $this->context->getRequestParam('productId');
+        if ($id) {
+            return $this->context->getUrl(
+                'catalog/product/edit',
+                ['id' => $id]
+            );
+        }
+
+        return $this->context->getUrl('*/*/');
+    }
 }

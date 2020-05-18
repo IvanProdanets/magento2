@@ -8,7 +8,7 @@ use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 class SaveButton implements ButtonProviderInterface
 {
     /**
-     * Retrieve button-specified settings
+     * Retrieve button-specified settings.
      *
      * @return array
      */

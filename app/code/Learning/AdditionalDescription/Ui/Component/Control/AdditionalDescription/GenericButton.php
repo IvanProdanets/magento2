@@ -22,25 +22,6 @@ class GenericButton implements ButtonProviderInterface
     }
 
     /**
-     * Get URL for back.
-     *
-     * @return string
-     */
-    protected function getBackUrl(): string
-    {
-
-        $id = $this->context->getRequestParam('productId');
-        if ($id) {
-            return $this->context->getUrl(
-                'catalog/product/edit',
-                ['id' => $id]
-            );
-        }
-
-        return $this->context->getUrl('*/*/');
-    }
-
-    /**
      * Retrieve button-specified settings.
      *
      * @return array
