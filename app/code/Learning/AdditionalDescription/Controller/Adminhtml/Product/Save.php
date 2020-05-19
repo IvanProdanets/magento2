@@ -12,7 +12,7 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Save Blog Action class.
+ * Save Additional description Action class.
  */
 class Save extends Action implements HttpPostActionInterface
 {

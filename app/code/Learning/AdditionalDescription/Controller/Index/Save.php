@@ -5,6 +5,7 @@ namespace Learning\AdditionalDescription\Controller\Index;
 
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterfaceFactory;
+use Learning\AdditionalDescription\Model\AdditionalDescription;
 use Learning\AdditionalDescription\Model\AdditionalDescriptionRepository;
 use Learning\AdditionalDescription\Service\CurrentCustomerService;
 use Magento\Framework\App\Action\Action;
@@ -72,7 +73,7 @@ class Save extends Action implements HttpPostActionInterface
             $this->validateRequest();
         } catch (AuthenticationException|ValidationException $e) {
             $result->setHttpResponseCode(Response::STATUS_CODE_500);
-            $result->setData([ 'error' => $e ]);
+            $result->setData([ 'error' => $e->getMessage() ]);
 
             return $result;
         }
@@ -82,8 +83,10 @@ class Save extends Action implements HttpPostActionInterface
             if ($id = $this->_request->getParam('description_id')) {
                 $additionalDescription = $this->repository->getById((int) $id);
             } else {
+                /** @var AdditionalDescription $additionalDescription */
                 $additionalDescription = $this->additionalDescription->create();
                 $additionalDescription->setCustomerEmail($this->customerService->getCustomer()->getEmail());
+                $additionalDescription->setProductId((int) $this->_request->getParam('product_id', 0));
             }
             $additionalDescription->setAdditionalDescription($value);
 
@@ -92,7 +95,7 @@ class Save extends Action implements HttpPostActionInterface
             $result->setData(['success' => __('Additional description has been saved')]);
         } catch (NoSuchEntityException|CouldNotSaveException $e) {
             $result->setHttpResponseCode(Response::STATUS_CODE_500);
-            $result->setData([ 'error' => $e ]);
+            $result->setData([ 'error' => $e->getMessage() ]);
         }
 
         return $result;
@@ -104,18 +107,18 @@ class Save extends Action implements HttpPostActionInterface
      */
     private function validateRequest(): void
     {
-        if (!$this->customerService->canCustomerAddDescription()) {
-            throw new AuthenticationException(
-                __('You dont have right permission to edit additional description')
-            );
-        }
-
         if (!$this->validator->validate($this->_request)) {
             throw new ValidationException(__('Invalid form data'));
         }
 
-        if (!$this->_request->getParam('description_id')) {
+        if (!$this->_request->getParam('product_id')) {
             throw new ValidationException(__('Invalid request params'));
+        }
+
+        if (!$this->customerService->canCustomerAddDescription()) {
+            throw new AuthenticationException(
+                __('You dont have right permission to edit additional description')
+            );
         }
     }
 }

@@ -42,7 +42,7 @@
                 type="Learning\AdditionalDescription\Plugin\Model\Product\RepositoryPlugin" sortOrder="1"/>
     </type>
 
-    <virtualType name="Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\Collection"
+    <virtualType name="Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\Grid\Collection"
                  type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">catalog_product_additional_description</argument>
@@ -56,7 +56,7 @@
         <arguments>
             <argument name="collections" xsi:type="array">
                 <item name="additional_descriptions_form_data_source" xsi:type="string">
-                    Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\Collection
+                    Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\Grid\Collection
                 </item>
             </argument>
         </arguments>
