@@ -3,8 +3,6 @@ declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Test\Integration\Controller\Index;
 
-use Learning\AdditionalDescription\Api\AdditionalDescriptionRepositoryInterface;
-use Learning\AdditionalDescription\Model\AdditionalDescriptionRepository;
 use Learning\AdditionalDescription\Test\Integration\Controller\BaseTestController;
 use Magento\Framework\Webapi\Response;
 
@@ -28,15 +26,15 @@ class IndexTest extends BaseTestController
      */
     public function testIndexActionReturnData()
     {
-        $id = 1;
+        $id = $this->dataHelper->getLatestDescription([
+            'customer_email' => 'test1.customer@example.com'
+        ])->getAdditionalDescriptionId();
         $this->getRequest()->setParam('id', $id);
         $this->dispatch('additionalDescription/index/index');
         $response = $this->getResponse();
         $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
 
-        /** @var AdditionalDescriptionRepositoryInterface $repository */
-        $repository = $this->_objectManager->get(AdditionalDescriptionRepository::class);
-        $additionalDescription = $repository->getById($id);
+        $additionalDescription = $this->additionalDescriptionRepository->getById($id);
         $this->assertJson($response->getContent(), $additionalDescription->getData());
     }
 }

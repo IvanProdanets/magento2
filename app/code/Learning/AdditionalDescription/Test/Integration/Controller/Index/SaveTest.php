@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace Learning\AdditionalDescription\Test\Integration\Controller\Index;
 
 use Learning\AdditionalDescription\Test\Integration\Controller\BaseTestController;
+use Magento\Catalog\Model\Product;
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Webapi\Response;
@@ -16,6 +17,7 @@ class SaveTest extends BaseTestController
      *
      * @magentoDbIsolation enabled
      * @magentoDataFixture loadCustomer
+     * @magentoDataFixture loadProduct
      */
     public function testSaveActionValidationSuccess()
     {
@@ -24,21 +26,23 @@ class SaveTest extends BaseTestController
         // Test that request required params not empty.
         $this->dispatch('additionalDescription/index/save');
         $this->assertEquals(Response::STATUS_CODE_500, $this->getResponse()->getStatusCode());
-        $this->assertJson(json_encode(['error' => __('Invalid request params')]));
+        $this->assertJson(json_encode(['error' => __('Invalid reque st params')]));
 
         // Test that 'form_key' validation successful
-        $this->prepareRequestData(['product_id', 1]);
+        $product = $this->_objectManager->create(Product::class);
+        $productId = (int) $product->getIdBySku('simple_test');
+        $this->prepareRequestData(['product_id', $productId]);
         $this->dispatch('additionalDescription/index/save');
         $this->assertEquals(Response::STATUS_CODE_500, $this->getResponse()->getStatusCode());
         $this->assertJson(json_encode(['error' => __('Invalid form data')]));
 
-        // Test that customer without permission cant save description
-        $customer = $this->accountManagement->authenticate('customer@example.com', 'password');
+        // Test that customer without permission cant save description.
+        $customer = $this->logAsCustomer();
         $this->prepareRequestData([
             'form_key'               => $this->formKey->getFormKey(),
             'additional_description' => 'Test additional description',
             'customer_email'         => $customer->getEmail(),
-            'product_id'             => 1,
+            'product_id'             => $productId,
         ]);
         $this->dispatch('additionalDescription/index/save');
         $this->assertEquals(Response::STATUS_CODE_500, $this->getResponse()->getStatusCode());
@@ -55,11 +59,13 @@ class SaveTest extends BaseTestController
      */
     public function testSaveActionCreateDescription()
     {
+        $product = $this->_objectManager->create(Product::class);
+        $productId = (int) $product->getIdBySku('simple_test');
         $customer = $this->logAsCustomerWithPermission();
         $data = [
             'form_key'               => $this->formKey->getFormKey(),
             'additional_description' => 'New Additional description',
-            'product_id'             => 1,
+            'product_id'             => $productId,
         ];
         $this->prepareRequestData($data);
         $this->dispatch('additionalDescription/index/save');
@@ -67,7 +73,7 @@ class SaveTest extends BaseTestController
         $this->assertEquals(Response::HTTP_OK, $this->getResponse()->getStatusCode());
         $this->assertJson(json_encode(['success' => __('Additional description has been saved')]));
 
-        $lastDescription = $this->getLatestDescription()->getData();
+        $lastDescription = $this->dataHelper->getLatestDescription()->getData();
         unset($lastDescription['id']);
         unset($data['form_key']);
         $data['customer_email'] = $customer->getEmail();
@@ -83,7 +89,9 @@ class SaveTest extends BaseTestController
     public function testSaveActionUpdateDescription()
     {
         $customer = $this->logAsCustomerWithPermission();
-        $additionalDescription = $this->additionalDescriptionRepository->getById(1);
+        $additionalDescription = $this->dataHelper->getLatestDescription([
+            'customer_email' => 'test1.customer@example.com'
+        ]);
 
         $data = [
             'form_key'               => $this->formKey->getFormKey(),
@@ -96,7 +104,7 @@ class SaveTest extends BaseTestController
         $this->assertEquals(Response::HTTP_OK, $this->getResponse()->getStatusCode());
         $this->assertJson(json_encode(['success' => __('Additional description has been saved')]));
 
-        $lastDescription = $this->getLatestDescription()->getData();
+        $lastDescription = $this->dataHelper->getLatestDescription()->getData();
         unset($lastDescription['id']);
         unset($data['form_key']);
         $data['customer_email'] = $customer->getEmail();
@@ -120,7 +128,19 @@ class SaveTest extends BaseTestController
      */
     private function logAsCustomerWithPermission(): CustomerInterface
     {
-        $customer = $this->accountManagement->authenticate('customer2@example.com', 'password');
+        $customer = $this->accountManagement->authenticate('test1.customer@example.com', 'password');
+        $this->session->setCustomerDataAsLoggedIn($customer);
+
+        return $customer;
+    }
+
+    /**
+     * @return CustomerInterface
+     * @throws LocalizedException
+     */
+    private function logAsCustomer(): CustomerInterface
+    {
+        $customer = $this->accountManagement->authenticate('test.customer@example.com', 'password');
         $this->session->setCustomerDataAsLoggedIn($customer);
 
         return $customer;

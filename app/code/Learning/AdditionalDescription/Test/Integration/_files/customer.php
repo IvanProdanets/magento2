@@ -1,30 +1,14 @@
 <?php
-use Magento\Customer\Model\CustomerRegistry;
 
-$objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
-/** @var $repository \Magento\Customer\Api\CustomerRepositoryInterface */
-$repository = $objectManager->create(\Magento\Customer\Api\CustomerRepositoryInterface::class);
-$customer = $objectManager->create(\Magento\Customer\Model\Customer::class);
-/** @var CustomerRegistry $customerRegistry */
-$customerRegistry = $objectManager->get(CustomerRegistry::class);
-/** @var Magento\Customer\Model\Customer $customer */
-$customer->setWebsiteId(1)
-    ->setId(1)
-    ->setEmail('customer@example.com')
-    ->setPassword('password')
-    ->setGroupId(1)
-    ->setStoreId(1)
-    ->setIsActive(1)
-    ->setPrefix('Mr.')
-    ->setFirstname('John')
-    ->setMiddlename('A')
-    ->setLastname('Smith')
-    ->setSuffix('Esq.')
-    ->setDefaultBilling(1)
-    ->setDefaultShipping(1)
-    ->setTaxvat('12')
-    ->setGender(0);
+use Learning\AdditionalDescription\Test\Integration\Helper\DataHelper;
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\Customer\Model\Customer;
 
-$customer->isObjectNew(true);
-$customer->save();
-$customerRegistry->remove($customer->getId());
+/** @var DataHelper $dataHelper */
+$dataHelper = Bootstrap::getObjectManager()->create(DataHelper::class);
+
+/** @var Customer $customer */
+$customer = $dataHelper->createCustomer([
+    'email' => 'test.customer@example.com',
+    'password' => 'password',
+]);

@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Test\Integration\Helper;
 
+use Learning\AdditionalDescription\Api\AdditionalDescriptionRepositoryInterface;
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
 use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface;
 use Learning\AdditionalDescription\Model\AdditionalDescription;
@@ -12,6 +13,9 @@ use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Model\Customer;
+use Magento\Framework\Api\SearchCriteriaBuilder;
+use Magento\Framework\Api\SortOrder;
+use Magento\Framework\Exception\InputException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\ObjectManagerInterface;
 use Magento\TestFramework\Helper\Bootstrap;
@@ -26,23 +30,35 @@ class DataHelper
     /** @var Random */
     private $mathRandom;
 
+    /** @var AdditionalDescriptionRepositoryInterface */
+    private $additionalDescriptionRepository;
+
+    /** @var SortOrder */
+    private $sortOrder;
+
+    /** @var SearchCriteriaBuilder */
+    private $criteriaBuilder;
+
     /**
      * DataHelper constructor.
      */
     public function __construct()
     {
-        $this->objectManager = Bootstrap::getObjectManager();
-        $this->mathRandom = $this->objectManager->create(Random::class);
-
+        $this->objectManager                   = Bootstrap::getObjectManager();
+        $this->mathRandom                      = $this->objectManager->create(Random::class);
+        $this->additionalDescriptionRepository = $this->objectManager
+            ->get(AdditionalDescriptionRepositoryInterface::class);
+        $this->sortOrder                       = $this->objectManager->get(SortOrder::class);
+        $this->criteriaBuilder                 = $this->objectManager->get(SearchCriteriaBuilder::class);
     }
 
     /**
      * @param array $data
      *
-     * @return CustomerInterface
+     * @return Customer
      * @throws \Exception
      */
-    public function createCustomer(array $data = []): CustomerInterface
+    public function createCustomer(array $data = []): Customer
     {
         /** @var Customer $customer */
         $customer = $this->objectManager->create(Customer::class);
@@ -69,10 +85,10 @@ class DataHelper
     /**
      * @param array $data
      *
-     * @return AllowAddDescriptionInterface
+     * @return AllowAddDescription
      * @throws \Exception
      */
-    public function createAllowAddDecription(array $data = []): AllowAddDescriptionInterface
+    public function createAllowAddDecription(array $data = []): AllowAddDescription
     {
         /** @var AllowAddDescription $allowAddDescription */
         $allowAddDescription = $this->objectManager->create(AllowAddDescription::class);
@@ -86,10 +102,12 @@ class DataHelper
     /**
      * @param array $data
      *
-     * @return ProductInterface
+     * @return Product
+     * @throws \Exception
      */
-    public function createProduct(array $data = []): ProductInterface
+    public function createProduct(array $data = []): Product
     {
+        /** @var Product $product */
         $product = $this->objectManager->create(Product::class);
         $product->setTypeId($data['type'] ?? 'simple')
             ->setAttributeSetId(4)
@@ -110,10 +128,10 @@ class DataHelper
     /**
      * @param array $data
      *
-     * @return AdditionalDescriptionInterface
+     * @return AdditionalDescription
      * @throws \Exception
      */
-    public function createAdditionalDescription(array $data = []): AdditionalDescriptionInterface
+    public function createAdditionalDescription(array $data = []): AdditionalDescription
     {
         /** @var AdditionalDescription $additionalDescription */
         $additionalDescription = $this->objectManager->create(AdditionalDescription::class);
@@ -142,4 +160,29 @@ class DataHelper
         }
     }
 
+    /**
+     * Get latest Additional Description.
+     *
+     * @param array $params
+     *
+     * @return AdditionalDescriptionInterface|null
+     * @throws InputException
+     */
+    public function getLatestDescription(array $params = []): ?AdditionalDescriptionInterface
+    {
+        $sortOrder = $this->sortOrder
+            ->setField(AdditionalDescriptionInterface::DESCRIPTION_ID)
+            ->setDirection(SortOrder::SORT_DESC);
+
+        if (!empty($params)) {
+            foreach ($params as $field => $value) {
+                $this->criteriaBuilder->addFilter($field, $value);
+            }
+        }
+
+        $criteria = $this->criteriaBuilder->setSortOrders([$sortOrder])->create();
+        $result = $this->additionalDescriptionRepository->getList($criteria)->getItems();
+
+        return reset($result) ?? null;
+    }
 }

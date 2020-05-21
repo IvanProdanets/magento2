@@ -1,30 +1,24 @@
 <?php
-use Magento\Customer\Model\CustomerRegistry;
 
-$objectManager = \Magento\TestFramework\Helper\Bootstrap::getObjectManager();
-/** @var $repository \Magento\Customer\Api\CustomerRepositoryInterface */
-$repository = $objectManager->create(\Magento\Customer\Api\CustomerRepositoryInterface::class);
-$customer = $objectManager->create(\Magento\Customer\Model\Customer::class);
-/** @var CustomerRegistry $customerRegistry */
-$customerRegistry = $objectManager->get(CustomerRegistry::class);
-/** @var Magento\Customer\Model\Customer $customer */
-$customer->setWebsiteId(1)
-    ->setId(1)
-    ->setEmail('customer@example.com')
-    ->setPassword('password')
-    ->setGroupId(1)
-    ->setStoreId(1)
-    ->setIsActive(1)
-    ->setPrefix('Mr.')
-    ->setFirstname('John')
-    ->setMiddlename('A')
-    ->setLastname('Smith')
-    ->setSuffix('Esq.')
-    ->setDefaultBilling(1)
-    ->setDefaultShipping(1)
-    ->setTaxvat('12')
-    ->setGender(0);
+use Magento\Customer\Model\Customer;
+use Magento\Framework\Registry;
+use Magento\TestFramework\Helper\Bootstrap;
+use Magento\Integration\Model\Oauth\Token\RequestThrottler;
 
-$customer->isObjectNew(true);
-$customer->save();
-$customerRegistry->remove($customer->getId());
+/** @var Registry $registry */
+$registry = Bootstrap::getObjectManager()->get(Registry::class);
+$registry->unregister('isSecureArea');
+$registry->register('isSecureArea', true);
+
+/** @var Customer $customer */
+$customer = Bootstrap::getObjectManager()->create(Customer::class);
+$customer = $customer->setWebsiteId(1)->loadByEmail('test.customer@example.com');
+$customer->delete();
+
+$registry->unregister('isSecureArea');
+$registry->register('isSecureArea', false);
+
+/* Unlock account if it was locked for tokens retrieval */
+/** @var RequestThrottler $throttler */
+$throttler = Bootstrap::getObjectManager()->create(RequestThrottler::class);
+$throttler->resetAuthenticationFailuresCount('test.customer@example.com', RequestThrottler::USER_TYPE_CUSTOMER);

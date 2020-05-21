@@ -7,9 +7,9 @@ use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Webapi\Response;
 use Magento\Framework\Webapi\Rest\Request;
 
-///**
-// * @magentoDbIsolation enabled
-// */
+/**
+ * @magentoDbIsolation enabled
+ */
 class AdditionalDescriptionManagementTest extends BaseWebApi
 {
     const RESOURCE_PATH = '/V1/products/additionalDescription';

@@ -7,6 +7,7 @@ use Learning\AdditionalDescription\Api\AllowAddDescriptionRepositoryInterface;
 use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface;
 use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterfaceFactory;
 use Learning\AdditionalDescription\Model\AllowAddDescription;
+use Learning\AdditionalDescription\Test\Integration\Helper\DataHelper;
 use Magento\Framework\Exception\AuthenticationException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\InputException;
@@ -21,8 +22,6 @@ use Magento\TestFramework\Helper\Customer as CustomerHelper;
 
 class BaseWebApi extends WebapiAbstract
 {
-    const ADMIN_TOKEN_PATH = '/all/V1/integration/admin/token';
-    const CUSTOMER_TOKEN_PATH = '/all/V1/integration/customer/token';
     const DEFAULT_ADMIN_NAME = 'admin';
     const DEFAULT_ADMIN_PASSWORD = 'Password123';
     /**
@@ -126,5 +125,25 @@ class BaseWebApi extends WebapiAbstract
     protected function getCustomerToken(string $username, string $password): ?string
     {
         return $this->customerTokenService->createCustomerAccessToken($username, $password);
+    }
+
+    public static function loadCustomerWithPermission(): void
+    {
+        include __DIR__ . '/../Integration/_files/customerWithPermission.php';
+    }
+
+    public static function loadCustomerWithPermissionRollback(): void
+    {
+        include __DIR__ . '/../Integration/_files/customerWithPermission_rollback.php';
+    }
+
+    public static function loadCustomer(): void
+    {
+        include __DIR__ . '/../Integration/_files/customer.php';
+    }
+
+    public static function loadCustomerRollback(): void
+    {
+        include __DIR__ . '/../Integration/_files/customer_rollback.php';
     }
 }
