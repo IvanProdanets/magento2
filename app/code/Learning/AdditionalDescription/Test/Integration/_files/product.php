@@ -4,10 +4,12 @@ use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\Product\Attribute\Source\Status;
 use Magento\Catalog\Model\Product\Visibility;
 use Magento\TestFramework\Helper\Bootstrap;
+use Learning\AdditionalDescription\Test\Integration\Helper\DataHelper;
 
-/** @var $product Product */
-$product = Bootstrap::getObjectManager()
-                    ->create(Product::class);
+/** @var DataHelper $dataHelper */
+$dataHelper = Bootstrap::getObjectManager()->create(DataHelper::class);
+/** @var Product $product */
+$product = $dataHelper->createProduct(['sku' => 'simple']);
 $product
     ->setTypeId('simple')
     ->setId(1)
@@ -24,12 +26,3 @@ $product
     ->setStockData(['use_config_manage_stock' => 0])
     ->save();
 
-$customDesignProduct = Bootstrap::getObjectManager()
-                                ->create(Product::class, ['data' => $product->getData()]);
-
-$customDesignProduct->setUrlKey('custom-design-simple-product')
-                    ->setId(2)
-                    ->setRowId(2)
-                    ->setSku('custom-design-simple-product')
-                    ->setCustomDesign('Magento/blank')
-                    ->save();

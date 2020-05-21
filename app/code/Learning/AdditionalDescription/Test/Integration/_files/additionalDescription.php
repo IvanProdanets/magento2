@@ -4,7 +4,7 @@ use Learning\AdditionalDescription\Model\AdditionalDescription;
 use Magento\TestFramework\Helper\Bootstrap;
 
 include __DIR__ . '/customerWithPermission.php';
-include __DIR__ . '/products.php';
+include __DIR__ . '/product.php';
 
 $objectManager = Bootstrap::getObjectManager();
 

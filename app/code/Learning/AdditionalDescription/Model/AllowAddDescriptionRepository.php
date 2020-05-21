@@ -69,7 +69,8 @@ class AllowAddDescriptionRepository implements AllowAddDescriptionRepositoryInte
     public function save(AllowAddDescriptionInterface $allowAddDescription): AllowAddDescriptionInterface
     {
         try {
-            $this->resource->save($this->prepareData($allowAddDescription));
+            $allowAddDescription = $this->prepareData($allowAddDescription);
+            $this->resource->save($allowAddDescription);
         } catch (\Exception $exception) {
             throw new CouldNotSaveException(
                 __('Could not save customer allow add description: %1', $exception->getMessage()),
@@ -189,10 +190,12 @@ class AllowAddDescriptionRepository implements AllowAddDescriptionRepositoryInte
         try {
             /** @var AllowAddDescriptionInterface $allowAddDescription */
             $existedAllowAddDescription = $this->get($allowAddDescription->getCustomerEmail());
-            $existedAllowAddDescription->setAllowAddDescription($allowAddDescription->getIsAllowed());
+            $existedAllowAddDescription->setIsAllowed($allowAddDescription->getIsAllowed());
             $allowAddDescription = $existedAllowAddDescription;
         } catch (NoSuchEntityException $e) {
-            // Do nothing.
+            $allowAddDescription->isObjectNew(true);
+
+            return $allowAddDescription;
         }
 
         return $allowAddDescription;
