@@ -8,9 +8,6 @@ use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Webapi\Response;
 use Magento\Framework\Webapi\Rest\Request;
 
-/**
- * @magentoDbIsolation enabled
- */
 class AllowAdditionalDescriptionRepositoryTest extends BaseWebApi
 {
     const RESOURCE_PATH = '/V1/customers/allowAddDescription';
@@ -27,7 +24,7 @@ class AllowAdditionalDescriptionRepositoryTest extends BaseWebApi
         $allowAddDescription = $this->allowAddDescriptionRepository->get('test1.customer@example.com');
         $serviceInfo = [
             'rest' => [
-                'resourcePath' => self::RESOURCE_PATH . '?id='. $allowAddDescription->getPermissionId(),
+                'resourcePath' => self::RESOURCE_PATH . '?id=' . $allowAddDescription->getPermissionId(),
                 'httpMethod'   => Request::HTTP_METHOD_GET,
             ],
         ];

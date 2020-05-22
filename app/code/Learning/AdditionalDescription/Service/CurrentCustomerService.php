@@ -4,6 +4,7 @@ declare(strict_types = 1);
 namespace Learning\AdditionalDescription\Service;
 
 use Magento\Authorization\Model\UserContextInterface;
+use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Model\Session;
 use Magento\Framework\Exception\LocalizedException;
@@ -24,21 +25,27 @@ class CurrentCustomerService
     /** @var UserContextInterface */
     private $userContext;
 
+    /** @var CustomerRepositoryInterface */
+    private $customerRepository;
+
     /**
      * CurrentCustomerService constructor.
      *
-     * @param UserContextInterface $userContext
-     * @param Session              $customerSession
-     * @param ManagerInterface     $messageManager
+     * @param UserContextInterface        $userContext
+     * @param Session                     $customerSession
+     * @param ManagerInterface            $messageManager
+     * @param CustomerRepositoryInterface $customerRepository
      */
     public function __construct(
         UserContextInterface $userContext,
         Session $customerSession,
-        ManagerInterface $messageManager
+        ManagerInterface $messageManager,
+        CustomerRepositoryInterface $customerRepository
     ) {
-        $this->userContext     = $userContext;
-        $this->customerSession = $customerSession;
-        $this->messageManager  = $messageManager;
+        $this->userContext        = $userContext;
+        $this->customerSession    = $customerSession;
+        $this->messageManager     = $messageManager;
+        $this->customerRepository = $customerRepository;
     }
 
     /**
@@ -48,19 +55,30 @@ class CurrentCustomerService
      */
     public function getCustomer(): ?CustomerInterface
     {
-        if (!$this->customerSession->isLoggedIn()) {
-            return null;
-        }
 
         if ($this->currentCustomer) {
             return $this->currentCustomer;
+        }
+
+        if ($customerId = $this->userContext->getUserId())
+        {
+            try {
+                $this->currentCustomer = $this->customerRepository->getById($customerId);
+
+                return $this->currentCustomer;
+            } catch (NoSuchEntityException|LocalizedException $e) {
+                $this->messageManager->addErrorMessage($e->getMessage());
+            }
+        }
+
+        if (!$this->customerSession->isLoggedIn()) {
+            return null;
         }
 
         try {
             $this->currentCustomer = $this->customerSession->getCustomerData();
         } catch (NoSuchEntityException|LocalizedException $e) {
             $this->messageManager->addErrorMessage($e->getMessage());
-            $this->currentCustomer = null;
 
             return null;
         }

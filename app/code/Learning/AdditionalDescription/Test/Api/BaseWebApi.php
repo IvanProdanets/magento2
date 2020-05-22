@@ -24,6 +24,7 @@ class BaseWebApi extends WebapiAbstract
 {
     const DEFAULT_ADMIN_NAME = 'admin';
     const DEFAULT_ADMIN_PASSWORD = 'Password123';
+
     /**
      * Overwrite const from CustomerHelper
      */
@@ -122,28 +123,72 @@ class BaseWebApi extends WebapiAbstract
      * @return string|null
      * @throws AuthenticationException
      */
-    protected function getCustomerToken(string $username, string $password): ?string
+    protected function getCustomerToken(string $username, string $password = 'password'): ?string
     {
-        return $this->customerTokenService->createCustomerAccessToken($username, $password);
+         return $this->customerTokenService->createCustomerAccessToken($username, $password);
     }
 
+    /**
+     * Load product fixtures.
+     */
+    public static function loadProduct(): void
+    {
+        include __DIR__ . '/../Integration/_files/product.php';
+    }
+
+    /**
+     * Load product fixture rollback.
+     */
+    public static function loadProductRollback(): void
+    {
+        include __DIR__ . '/../Integration/_files/product_rollback.php';
+    }
+
+    /**
+     * Load customer with allow add description permission fixture.
+     */
     public static function loadCustomerWithPermission(): void
     {
         include __DIR__ . '/../Integration/_files/customerWithPermission.php';
     }
 
+    /**
+     * Load customer with allow add description permission rollback fixture.
+     */
     public static function loadCustomerWithPermissionRollback(): void
     {
         include __DIR__ . '/../Integration/_files/customerWithPermission_rollback.php';
     }
 
+    /**
+     * Load customer fixture.
+     */
     public static function loadCustomer(): void
     {
         include __DIR__ . '/../Integration/_files/customer.php';
     }
 
+    /**
+     * Load customer rollback fixture.
+     */
     public static function loadCustomerRollback(): void
     {
         include __DIR__ . '/../Integration/_files/customer_rollback.php';
+    }
+
+    /**
+     * Load Additional description fixture.
+     */
+    public static function loadAdditionalDescription(): void
+    {
+        include __DIR__ . '/../Integration/_files/additionalDescription.php';
+    }
+
+    /**
+     * Load Additional description rollback fixture.
+     */
+    public static function loadAdditionalDescriptionRollback(): void
+    {
+        include __DIR__ . '/../Integration/_files/additionalDescription_rollback.php';
     }
 }

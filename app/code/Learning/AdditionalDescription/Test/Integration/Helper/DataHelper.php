@@ -165,13 +165,13 @@ class DataHelper
      *
      * @param array $params
      *
-     * @return AdditionalDescriptionInterface|null
+     * @return AdditionalDescription|null
      * @throws InputException
      */
-    public function getLatestDescription(array $params = []): ?AdditionalDescriptionInterface
+    public function getLatestDescription(array $params = []): ?AdditionalDescription
     {
         $sortOrder = $this->sortOrder
-            ->setField(AdditionalDescriptionInterface::DESCRIPTION_ID)
+            ->setField(AdditionalDescription::DESCRIPTION_ID)
             ->setDirection(SortOrder::SORT_DESC);
 
         if (!empty($params)) {
@@ -183,6 +183,6 @@ class DataHelper
         $criteria = $this->criteriaBuilder->setSortOrders([$sortOrder])->create();
         $result = $this->additionalDescriptionRepository->getList($criteria)->getItems();
 
-        return reset($result) ?? null;
+        return !empty($result) ? reset($result) : null;
     }
 }

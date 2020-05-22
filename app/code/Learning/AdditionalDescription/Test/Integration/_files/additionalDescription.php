@@ -9,7 +9,12 @@ use Magento\TestFramework\Helper\Bootstrap;
 /** @var DataHelper $dataHelper */
 $dataHelper = Bootstrap::getObjectManager()->create(DataHelper::class);
 
-$additionalDescription = $dataHelper->createAdditionalDescription([
-    'customer_email' => $customer->getEmail(),
-    'product_id'     => $product->getId(),
-]);
+try {
+    $additionalDescription = $dataHelper->createAdditionalDescription(
+        [
+            'customer_email' => $customer->getEmail(),
+            'product_id'     => $product->getId(),
+        ]);
+} catch (Exception $e) {
+    //
+}
