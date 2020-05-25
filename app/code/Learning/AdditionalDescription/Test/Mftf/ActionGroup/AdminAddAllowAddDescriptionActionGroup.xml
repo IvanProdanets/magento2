@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="AdminAddAllowAddDescriptionActionGroup">
+        <annotations>
+            <description>Goes to the Admin Customers grid page. Click Allow Add description toggle</description>
+        </annotations>
+        <!-- Maybe it extra action group-->
+    </actionGroup>
+</actionGroups>

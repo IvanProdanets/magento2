@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="StorefrontAdditionalDescriptionDisplayedTest">
+        <annotations>
+            <features value="AdditionalDescription"/>
+            <stories value="AdditionalDescription"/>
+            <title value="Сheck that Additional description displayed on product details page"/>
+            <severity value="MAJOR"/>
+            <testCaseId value="M2-63368-testCase"/>
+            <group value="AdditionalDescription"/>
+        </annotations>
+
+        <comment userInput="Open Storefront product details page" stepKey="openStorefrontProductDetailsPage"/>
+        <amOnPage url="{{StorefrontProductPage.url}}" stepKey="goToStorefrontIndexPage"/>
+        <waitForPageLoad stepKey="waitForIndexPage"/>
+
+        <comment userInput="Check that hello block displayed on index page" stepKey="checkHelloBlockDisplayed"/>
+        <seeElement selector="{{StorefrontIndexMainSection.helloBlock}}" stepKey="seeHelloBlockOnIndexPage"/>
+
+        <comment userInput="Check that block print correct greeting" stepKey="checkHelloBlockPrintCorrectData"/>
+        <grabTextFrom selector="{{StorefrontIndexMainSection.greetingText}}" stepKey="grabHelloBlockClass"/>
+        <assertEquals stepKey="assertGreetingIsCorrect">
+            <expectedResult type="string">beforeHello World from Magento2!after</expectedResult>
+            <actualResult type="variable">$grabHelloBlockClass</actualResult>
+        </assertEquals>
+
+    </test>
+</tests>

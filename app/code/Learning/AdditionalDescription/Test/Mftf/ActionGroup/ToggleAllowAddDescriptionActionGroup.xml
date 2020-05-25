@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="ToggleAllowAddDescriptionActionGroup">
+        <annotations>
+            <description>Clicks on the Allow add description toggle.</description>
+        </annotations>
+
+        <click selector="{{AdminCustomerInformationTabSection.enableAllowAddDescription}}" stepKey="toggleEnabled"/>
+    </actionGroup>
+</actionGroups>
