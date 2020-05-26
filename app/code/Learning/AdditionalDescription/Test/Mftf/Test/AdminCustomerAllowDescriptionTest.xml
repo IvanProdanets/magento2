@@ -35,18 +35,15 @@
             <argument name="customer" value="$$firstCustomer$$"/>
         </actionGroup>
 
-        <!--Set Allow add description to 'Enabled'-->
-
         <!--Select Account information tab-->
         <click selector="{{AdminCustomerInformationSection.accountInformation}}" stepKey="openAccountInfoTabOfFirstCustomer"/>
         <waitForPageLoad stepKey="waitForAccountInfoOfFirstCustomer"/>
         <seeElement selector="{{AdminCustomerInformationTabSection.customerAllowAddDescription}}" stepKey="assertThatToggleDisplayed"/>
 
-        <!-- Enable addting additional description foe customer -->
+        <!-- Enable addting additional description for customer -->
         <actionGroup ref="ToggleAllowAddDescriptionActionGroup" stepKey="enableAddDescriptionToggle"/>
         <seeCheckboxIsChecked selector="{{AdminCustomerInformationTabSection.customerAllowAddDescription}}" stepKey="assertThatToggleEnabled"/>
         <click selector="{{AdminCustomerMainActionsSection.saveButton}}" stepKey="clickSaveButton"/>
-<!--        <actionGroup ref="AdminAddAllowAddDescriptionActionGroup" stepKey="saveAllowAddDescriptionForFirstCustomer"/>-->
 
         <actionGroup ref="AdminLogoutActionGroup" stepKey="logout"/>
 
@@ -57,6 +54,7 @@
         <waitForPageLoad stepKey="waitForStoreFrontProductPageLoad"/>
         <seeElement selector="{{StorefrontProductInfoMainSection.productAdditionalDescriptionTab}}" stepKey="assertProductAdditionalDescriptionTabDisplayed"/>
         <click selector="{{StorefrontProductInfoMainSection.productAdditionalDescriptionTab}}" stepKey="clickDashboardAmount"/>
+
         <!-- Assert First customer see 'Add' description button on Product Details Page-->
         <seeElement selector="{{StorefrontProductInfoMainSection.additionalDescriptionBlock}}" stepKey="seeAdditionalDescriptionBlock"/>
         <seeElement selector="{{StorefrontProductInfoMainSection.addAdditionalDescriptionButton}}" stepKey="seeAddAdditionalDescriptionButton"/>

@@ -93,22 +93,24 @@ class RepositoryPlugin
 
     /**
      * @param CustomerRepositoryInterface $subject
-     * @param CustomerInterface           $entity
+     * @param CustomerInterface           $result
+     * @param CustomerInterface           $customer
      *
      * @return CustomerInterface
      */
     public function afterSave(
         CustomerRepositoryInterface $subject,
-        CustomerInterface $entity
+        CustomerInterface $result,
+        CustomerInterface $customer
     ) {
-        $extensionAttributes = $entity->getExtensionAttributes();
+        $extensionAttributes = $customer->getExtensionAttributes();
         $allowAddDescription = $extensionAttributes->getAllowAddDescription();
 
-        $allowAddDescription = $this->saveAllowDescription($allowAddDescription, $entity);
+        $allowAddDescription = $this->saveAllowDescription($allowAddDescription, $result);
         $extensionAttributes->setAllowAddDescription($allowAddDescription);
-        $entity->setExtensionAttributes($extensionAttributes);
+        $result->setExtensionAttributes($extensionAttributes);
 
-        return $entity;
+        return $result;
     }
 
     /**
@@ -185,7 +187,10 @@ class RepositoryPlugin
         }
 
         // Update AllowAddDescription.
-        $allowAddDescription->setIsAllowed($this->isAllowedAddDescription());
+        // @TODO Refactore this mapper method isAllowedAddDescription()
+        if ($this->isAllowedAddDescription()) {
+            $allowAddDescription->setIsAllowed(true);
+        }
 
         try {
             $allowAddDescription = $this->allowAddDescriptionRepository->save($allowAddDescription);
