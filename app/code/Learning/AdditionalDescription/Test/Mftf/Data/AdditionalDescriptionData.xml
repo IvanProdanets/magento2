@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+    <entity name="AdditionalDescription" type="additional_description">
+        <data key="additional_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec tempus orci quam, vitae laoreet purus consectetur dictum. Cras ut est in quam porttitor sollicitudin sit amet a felis. Ut tincidunt nisl sed purus mollis pellentesque. Nam sit amet blandit arcu. Vestibulum mi magna, vestibulum sed enim sit amet, lobortis mollis sapien. Proin sed sagittis metus. Suspendisse rutrum, ante id vestibulum cursus, velit massa scelerisque massa, a bibendum diam augue nec arcu. Aenean lacinia nibh eu venenatis dictum. Suspendisse potenti. Praesent ex elit, pulvinar eu lectus non, venenatis aliquam magna.</data>
+    </entity>
+</entities>

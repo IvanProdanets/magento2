@@ -20,6 +20,7 @@
             </createData>
         </before>
         <after>
+            <actionGroup ref="AdminClearCustomersFiltersActionGroup" stepKey="clearFilters"/>
             <deleteData createDataKey="firstCustomer" stepKey="deleteFirstCustomer"/>
             <deleteData createDataKey="createCategory" stepKey="deleteCategory"/>
             <deleteData createDataKey="createSimpleProduct" stepKey="deleteSimpleProduct"/>
@@ -53,7 +54,7 @@
         <amOnPage url="{{StorefrontProductPage.url($createSimpleProduct.name$)}}" stepKey="goToStoreProductPage"/>
         <waitForPageLoad stepKey="waitForStoreFrontProductPageLoad"/>
         <seeElement selector="{{StorefrontProductInfoMainSection.productAdditionalDescriptionTab}}" stepKey="assertProductAdditionalDescriptionTabDisplayed"/>
-        <click selector="{{StorefrontProductInfoMainSection.productAdditionalDescriptionTab}}" stepKey="clickDashboardAmount"/>
+        <click selector="{{StorefrontProductInfoMainSection.productAdditionalDescriptionTab}}" stepKey="clickAdditionalDescriptionTab"/>
 
         <!-- Assert First customer see 'Add' description button on Product Details Page-->
         <seeElement selector="{{StorefrontProductInfoMainSection.additionalDescriptionBlock}}" stepKey="seeAdditionalDescriptionBlock"/>

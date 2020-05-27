@@ -5,6 +5,7 @@
     <section name="StorefrontProductInfoMainSection">
         <element name="productAdditionalDescriptionTab" type="block" selector="#tab-label-additionalDescriptions-title"/>
         <element name="additionalDescriptionBlock" type="block" selector=".additional-description-block"/>
+        <element name="firstAdditionalDescription" type="text" selector="div.content:first-of-type"/>
         <element name="addAdditionalDescriptionButton" type="text" selector=".add-description"/>
     </section>
 </sections>

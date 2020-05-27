@@ -179,26 +179,27 @@ class RepositoryPlugin
         ?AllowAddDescriptionInterface $allowAddDescription,
         CustomerInterface $customer
     ): AllowAddDescriptionInterface {
-        // Create AllowAddDescription if not exist.
-        if ($allowAddDescription === null) {
-            /** @var AllowAddDescription $allowAddDescription */
-            $allowAddDescription = $this->allowAddDescriptionFactory->create();
-            $allowAddDescription->setCustomerEmail($customer->getEmail());
+        // Get allow add description if exist.
+        try {
+            $newAllowAddDescription = $this->allowAddDescriptionRepository->get($customer->getEmail());
+        } catch (NoSuchEntityException $e) {
+            $newAllowAddDescription = $this->allowAddDescriptionFactory->create();
+            $newAllowAddDescription->setCustomerEmail($customer->getEmail());
         }
+        $newAllowAddDescription->setIsAllowed($allowAddDescription->getIsAllowed() ?? false);
 
         // Update AllowAddDescription.
-        // @TODO Refactore this mapper method isAllowedAddDescription()
         if ($this->isAllowedAddDescription()) {
-            $allowAddDescription->setIsAllowed(true);
+            $newAllowAddDescription->setIsAllowed(true);
         }
 
         try {
-            $allowAddDescription = $this->allowAddDescriptionRepository->save($allowAddDescription);
+            $newAllowAddDescription = $this->allowAddDescriptionRepository->save($newAllowAddDescription);
         } catch (NoSuchEntityException|CouldNotSaveException $e) {
             // Do nothing.
         }
 
-        return $allowAddDescription;
+        return $newAllowAddDescription;
     }
 
     /**
