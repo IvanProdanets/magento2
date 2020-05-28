@@ -7,4 +7,7 @@
         <var key="customer_email" entityType="customer" entityKey="email"/>
         <var key="product_id" entityType="product" entityKey="id"/>
     </entity>
+    <entity name="AdditionalDescription" type="additional_description">
+        <data key="additional_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</data>
+    </entity>
 </entities>

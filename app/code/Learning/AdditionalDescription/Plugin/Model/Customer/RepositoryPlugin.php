@@ -106,6 +106,11 @@ class RepositoryPlugin
         $extensionAttributes = $customer->getExtensionAttributes();
         $allowAddDescription = $extensionAttributes->getAllowAddDescription();
 
+        // Nothing to save.
+        if (!($allowAddDescription && $this->isAllowedAddDescription())) {
+            return $result;
+        }
+
         $allowAddDescription = $this->saveAllowDescription($allowAddDescription, $result);
         $extensionAttributes->setAllowAddDescription($allowAddDescription);
         $result->setExtensionAttributes($extensionAttributes);
