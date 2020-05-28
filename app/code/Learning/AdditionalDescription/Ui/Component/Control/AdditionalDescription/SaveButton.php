@@ -5,6 +5,9 @@ namespace Learning\AdditionalDescription\Ui\Component\Control\AdditionalDescript
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
+/**
+ * Additional description grid save button.
+ */
 class SaveButton implements ButtonProviderInterface
 {
     /**

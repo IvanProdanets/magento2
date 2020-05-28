@@ -5,6 +5,9 @@ namespace Learning\AdditionalDescription\Model\ResourceModel;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
+/**
+ * Allow add description resource model.
+ */
 class AllowAddDescription extends AbstractDb
 {
     const MAIN_TABLE = 'customer_allow_add_description';

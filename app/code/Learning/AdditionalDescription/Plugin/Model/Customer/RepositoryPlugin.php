@@ -6,8 +6,6 @@ namespace Learning\AdditionalDescription\Plugin\Model\Customer;
 use Learning\AdditionalDescription\Api\AllowAddDescriptionRepositoryInterface;
 use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface;
 use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterfaceFactory;
-use Learning\AdditionalDescription\Model\AllowAddDescription;
-use Learning\AdditionalDescription\Model\AllowAddDescriptionFactory;
 use Magento\Customer\Api\CustomerRepositoryInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Api\Data\CustomerSearchResultsInterface;
@@ -18,6 +16,9 @@ use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
+/**
+ * Customer Repository plugin.
+ */
 class RepositoryPlugin
 {
     /** @var AllowAddDescriptionRepositoryInterface */

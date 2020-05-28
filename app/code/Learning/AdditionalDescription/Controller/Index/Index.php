@@ -15,6 +15,9 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Webapi\Response;
 
+/**
+ * Storefront Index action.
+ */
 class Index extends Action implements HttpGetActionInterface
 {
     /**

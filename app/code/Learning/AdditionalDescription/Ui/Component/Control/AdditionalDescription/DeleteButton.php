@@ -3,6 +3,9 @@ declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Ui\Component\Control\AdditionalDescription;
 
+/**
+ * Additional description grid delete button.
+ */
 class DeleteButton extends GenericButton
 {
     /**

@@ -12,6 +12,9 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
+/**
+ * Delete Additional description Action class.
+ */
 class Delete extends Action implements HttpGetActionInterface
 {
     /** @var AdditionalDescriptionRepositoryInterface */

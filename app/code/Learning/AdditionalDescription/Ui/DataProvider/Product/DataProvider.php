@@ -10,6 +10,9 @@ use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\RequestInterface;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 
+/**
+ * Additional description Data provider.
+ */
 class DataProvider extends AbstractDataProvider
 {
     /** * @var Collection */

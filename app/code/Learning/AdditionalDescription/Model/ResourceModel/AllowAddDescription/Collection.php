@@ -7,6 +7,9 @@ use Learning\AdditionalDescription\Model\AllowAddDescription;
 use Learning\AdditionalDescription\Model\ResourceModel\AllowAddDescription as AllowAddDescriptionResource;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
+/**
+ * Allow add description grid collection.
+ */
 class Collection extends AbstractCollection
 {
     /**

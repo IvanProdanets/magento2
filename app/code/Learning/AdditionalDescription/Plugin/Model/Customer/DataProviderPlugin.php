@@ -10,6 +10,9 @@ use Magento\Framework\App\ObjectManager;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\Exception\NoSuchEntityException;
 
+/**
+ * Customer data provider plugin.
+ */
 class DataProviderPlugin
 {
     /** @var AllowAddDescriptionRepositoryInterface */
@@ -39,7 +42,7 @@ class DataProviderPlugin
     public function afterGetData(
         DataProviderWithDefaultAddresses $subject,
         array $data
-    ) {
+    ): array {
         if (!$customerId = $this->request->getParam('id')) {
             return $data;
         }

@@ -12,6 +12,9 @@ use Magento\Framework\Event\ManagerInterface;
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Additional description grid collection.
+ */
 class Collection extends AdditionalDescriptionCollection
 {
 

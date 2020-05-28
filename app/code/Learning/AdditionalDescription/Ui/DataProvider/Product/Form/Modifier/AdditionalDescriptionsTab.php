@@ -8,6 +8,9 @@ use Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\AbstractModifier;
 use Magento\Framework\UrlInterface;
 use Magento\Ui\Component\Form\Fieldset;
 
+/**
+ * AdditionalDescriptions tab class.
+ */
 class AdditionalDescriptionsTab extends AbstractModifier
 {
     const DESCRIPTION_FIELDSET_NAME = 'additional_descriptions_grid_fieldset';

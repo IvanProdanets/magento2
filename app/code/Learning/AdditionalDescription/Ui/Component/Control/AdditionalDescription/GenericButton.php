@@ -6,6 +6,9 @@ namespace Learning\AdditionalDescription\Ui\Component\Control\AdditionalDescript
 use Magento\Framework\View\Element\UiComponent\Context;
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
+/**
+ * Additional description base button class.
+ */
 class GenericButton implements ButtonProviderInterface
 {
     /** @var Context */

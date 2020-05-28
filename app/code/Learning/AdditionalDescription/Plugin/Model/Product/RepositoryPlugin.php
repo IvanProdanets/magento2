@@ -16,6 +16,9 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Message\ManagerInterface;
 
+/**
+ * Product Repository plugin.
+ */
 class RepositoryPlugin
 {
     /** @var AdditionalDescriptionRepositoryInterface */
@@ -36,6 +39,7 @@ class RepositoryPlugin
      * @param AdditionalDescriptionRepositoryInterface $additionalDescriptionRepository
      * @param SearchCriteriaBuilder                    $criteriaBuilder
      * @param CurrentCustomerService                   $customerService
+     * @param ManagerInterface                         $messageManager
      */
     public function __construct(
         AdditionalDescriptionRepositoryInterface $additionalDescriptionRepository,

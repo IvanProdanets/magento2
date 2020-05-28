@@ -14,6 +14,9 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Result\Page;
 
+/**
+ * Edit Additional description Action class.
+ */
 class Edit extends Action implements HttpGetActionInterface
 {
     /** @var AdditionalDescriptionRepositoryInterface */

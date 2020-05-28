@@ -6,6 +6,9 @@ namespace Learning\AdditionalDescription\Api;
 use Learning\AdditionalDescription\Api\Data\AllowAddDescriptionInterface;
 use Magento\Framework\Api\SearchResultsInterface;
 
+/**
+ * Customer allow add description search result interface.
+ */
 interface AllowAddDescriptionSearchResultInterface extends SearchResultsInterface
 {
     /**

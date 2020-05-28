@@ -27,6 +27,14 @@ class AdditionalDescriptionManagement implements AdditionalDescriptionManagement
     /** @var AdditionalDescriptionInterfaceFactory */
     private $additionalDescriptionFactory;
 
+    /**
+     * AdditionalDescriptionManagement constructor.
+     *
+     * @param CurrentCustomerService                   $customerService
+     * @param AdditionalDescriptionRepositoryInterface $descriptionRepository
+     * @param ProductRepositoryInterface               $productRepository
+     * @param AdditionalDescriptionInterfaceFactory    $additionalDescriptionFactory
+     */
     public function __construct(
         CurrentCustomerService $customerService,
         AdditionalDescriptionRepositoryInterface $descriptionRepository,

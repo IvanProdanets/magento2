@@ -8,6 +8,9 @@ use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
 use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription as AdditionalDescriptionResourceModel;
 use Magento\Framework\Model\AbstractExtensibleModel;
 
+/**
+ * Additional description model.
+ */
 class AdditionalDescription extends AbstractExtensibleModel implements AdditionalDescriptionInterface
 {
     /**

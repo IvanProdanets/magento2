@@ -7,6 +7,9 @@ use Learning\AdditionalDescription\Model\AdditionalDescription;
 use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription\CollectionFactory;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 
+/**
+ * Additional Description data provider.
+ */
 class DataProvider extends AbstractDataProvider
 {
     /**

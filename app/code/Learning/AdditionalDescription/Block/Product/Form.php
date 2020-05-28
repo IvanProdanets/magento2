@@ -3,6 +3,9 @@ declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Block\Product;
 
+/**
+ * Additional description Form template.
+ */
 class Form extends BaseTemplate
 {
     /**

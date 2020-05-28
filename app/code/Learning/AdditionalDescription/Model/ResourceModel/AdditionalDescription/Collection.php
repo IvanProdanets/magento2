@@ -7,6 +7,9 @@ use Learning\AdditionalDescription\Model\AdditionalDescription;
 use Learning\AdditionalDescription\Model\ResourceModel\AdditionalDescription as AdditionalDescriptionResource;
 use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
+/**
+ * Additional description collection.
+ */
 class Collection extends AbstractCollection
 {
     /**

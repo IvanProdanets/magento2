@@ -15,6 +15,9 @@ use Magento\Framework\Registry;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 
+/**
+ * Base template class.
+ */
 class BaseTemplate extends Template
 {
     /** @var CurrentCustomerService */

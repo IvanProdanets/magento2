@@ -7,6 +7,9 @@ use Magento\Catalog\Api\Data\ProductExtensionFactory;
 use Magento\Catalog\Api\Data\ProductExtensionInterface;
 use Magento\Catalog\Api\Data\ProductInterface;
 
+/**
+ * Product attributes load plugin.
+ */
 class AttributesLoad
 {
     /** @var ProductExtensionFactory */

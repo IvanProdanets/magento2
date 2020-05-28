@@ -13,6 +13,9 @@ use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Element\Template\Context;
 
+/**
+ * Additional Description template.
+ */
 class Description extends BaseTemplate
 {
     /** @var SearchCriteriaBuilder */

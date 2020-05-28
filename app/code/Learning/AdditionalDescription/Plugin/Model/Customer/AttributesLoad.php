@@ -7,6 +7,9 @@ use Magento\Customer\Api\Data\CustomerExtensionFactory;
 use Magento\Customer\Api\Data\CustomerExtensionInterface;
 use Magento\Customer\Api\Data\CustomerInterface;
 
+/**
+ * Customer attributes load plugin.
+ */
 class AttributesLoad
 {
     /** @var CustomerExtensionFactory */

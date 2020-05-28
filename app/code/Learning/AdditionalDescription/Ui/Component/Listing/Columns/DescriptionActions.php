@@ -6,6 +6,9 @@ namespace Learning\AdditionalDescription\Ui\Component\Listing\Columns;
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
 use Magento\Ui\Component\Listing\Columns\Column;
 
+/**
+ * Additional description actions class.
+ */
 class DescriptionActions extends Column
 {
 

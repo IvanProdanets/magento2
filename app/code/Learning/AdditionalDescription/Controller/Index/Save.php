@@ -22,6 +22,9 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Validation\ValidationException;
 use Magento\Framework\Webapi\Response;
 
+/**
+ * Storefront Save action.
+ */
 class Save extends Action implements HttpPostActionInterface
 {
     /** @var AdditionalDescriptionRepository */

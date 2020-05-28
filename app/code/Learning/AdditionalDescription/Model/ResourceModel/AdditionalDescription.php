@@ -5,6 +5,9 @@ namespace Learning\AdditionalDescription\Model\ResourceModel;
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 
+/**
+ * Additional description resource model.
+ */
 class AdditionalDescription extends AbstractDb
 {
     const MAIN_TABLE = 'catalog_product_additional_description';

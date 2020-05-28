@@ -3,6 +3,9 @@ declare(strict_types = 1);
 
 namespace Learning\AdditionalDescription\Ui\Component\Control\AdditionalDescription;
 
+/**
+ * Additional description grid back button.
+ */
 class BackButton extends GenericButton
 {
     /**

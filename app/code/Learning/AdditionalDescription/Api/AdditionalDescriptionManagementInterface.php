@@ -5,6 +5,9 @@ namespace Learning\AdditionalDescription\Api;
 
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
 
+/**
+ * Additional description management model interface.
+ */
 interface AdditionalDescriptionManagementInterface
 {
     /**
