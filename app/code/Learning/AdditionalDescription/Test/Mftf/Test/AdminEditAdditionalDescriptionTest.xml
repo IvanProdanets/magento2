@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="AdminEditAdditionalDescriptionTest">
+        <annotations>
+            <features value="AdditionalDescription"/>
+            <stories value="AdditionalDescription"/>
+            <title value="Test that admin can edit addirional description"/>
+            <severity value="MAJOR"/>
+            <testCaseId value="M2-63368-testCase"/>
+            <group value="AdditionalDescription"/>
+        </annotations>
+
+        <before>
+            <createData entity="CustomerEntityWithAllowAddDescription" stepKey="firstCustomer"/>
+            <createData entity="SimpleSubCategory" stepKey="createCategory"/>
+            <createData entity="SimpleProduct" stepKey="createSimpleProduct">
+                <requiredEntity createDataKey="createCategory"/>
+            </createData>
+            <createData entity="AdditionalDescriptionSimple" stepKey="createAdditionalDescription1">
+                <requiredEntity createDataKey="createSimpleProduct"/>
+                <requiredEntity createDataKey="firstCustomer"/>
+            </createData>
+        </before>
+        <after>
+            <deleteData createDataKey="createSimpleProduct" stepKey="deleteSimpleProduct"/>
+            <deleteData createDataKey="createCategory" stepKey="deleteCategory"/>
+            <deleteData createDataKey="firstCustomer" stepKey="deleteCustomer"/>
+        </after>
+
+        <actionGroup ref="LoginAsAdmin" stepKey="login"/>
+
+        <actionGroup ref="AdminOpenEditAdditionalDescriptionPageActionGroup" stepKey="goToAdditionalDescriptionEditPage1">
+            <argument name="id" value="$$createAdditionalDescription1.additional_description_id$$"/>
+            <argument name="productId" value="$$createSimpleProduct.id$$"/>
+        </actionGroup>
+
+        <fillField selector="{{AdminCreateAdditionalDescriptionSection.additionalDescriptionField}}"
+                   userInput="Updated description by Admin"
+                   stepKey="updateAdditionalDescriptionField"/>
+        <click selector="{{AdminMainActionsSection.save}}" stepKey="clickSaveButton"/>
+
+        <!-- Open created Additional Description edit page-->
+        <actionGroup ref="AdminOpenEditAdditionalDescriptionPageActionGroup" stepKey="goToAdditionalDescriptionEditPage2">
+            <argument name="id" value="$$createAdditionalDescription1.additional_description_id$$"/>
+            <argument name="productId" value="$$createSimpleProduct.id$$"/>
+        </actionGroup>
+
+        <!-- Assert that admin can update description -->
+        <grabValueFrom selector="{{AdminCreateAdditionalDescriptionSection.additionalDescriptionField}}"
+                      stepKey="grabUpdatedAdditionalDescription"/>
+        <assertEquals stepKey="assertAdditionalDescriptionUpdated">
+            <expectedResult type="string">Updated description by Admin</expectedResult>
+            <actualResult type="variable">$grabUpdatedAdditionalDescription</actualResult>
+        </assertEquals>
+    </test>
+</tests>

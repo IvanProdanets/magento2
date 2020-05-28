@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<actionGroups xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/actionGroupSchema.xsd">
+    <actionGroup name="AdminOpenEditAdditionalDescriptionPageActionGroup">
+        <annotations>
+            <description>Open additional description edit page.</description>
+        </annotations>
+        <arguments>
+            <argument name="id" type="string"/>
+            <argument name="productId" type="string"/>
+        </arguments>
+
+        <!-- Open created Additional Description edit page-->
+        <amOnPage url="{{AdminEditAdditionalDescriptionPage.url(id,productId)}}"
+                  stepKey="goToAdditionalDescriptionEditPage1"/>
+    </actionGroup>
+</actionGroups>

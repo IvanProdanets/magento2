@@ -4,7 +4,6 @@
           xsi:noNamespaceSchemaLocation="urn:magento:mftf:Page/etc/SectionObject.xsd">
     <section name="AdminCreateProductAdditionalDescriptionSection">
         <element name="descriptionsTab" type="button" selector="div[data-index='additional_descriptions_grid_fieldset']"/>
-<!--        <element name="gridHeader" type="text" selector="div[data-index='additional_descriptions_grid_fieldset'].admin__data-grid-header-row.row.row-gutter"/>-->
         <element name="gridHeader" type="text" selector=".admin__data-grid-header-row.row.row-gutter"/>
     </section>
 </sections>
