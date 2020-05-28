@@ -19,7 +19,6 @@
             </createData>
         </before>
         <after>
-            <actionGroup ref="AdminClearCustomersFiltersActionGroup" stepKey="clearFilters"/>
             <deleteData createDataKey="firstCustomer" stepKey="deleteFirstCustomer"/>
             <deleteData createDataKey="createCategory" stepKey="deleteCategory"/>
             <deleteData createDataKey="createSimpleProduct" stepKey="deleteSimpleProduct"/>
@@ -42,34 +41,5 @@
                     stepKey="seeAdditionalDescriptionBlock"/>
         <dontSeeElement selector="{{StorefrontProductInfoMainSection.addAdditionalDescriptionButton}}"
                     stepKey="dontSeeAddAdditionalDescriptionButton"/>
-
-<!--        &lt;!&ndash; Add additional description &ndash;&gt;-->
-<!--        <click selector="{{StorefrontProductInfoMainSection.addAdditionalDescriptionButton}}" stepKey="clickAddButton"/>-->
-<!--        <waitForElementVisible selector="{{StorefrontAdditionalDescriptionModalFormSection.additionalDescriptionField}}"-->
-<!--                               stepKey="waitForModalWindowLoad"/>-->
-<!--        <seeElement selector="{{StorefrontAdditionalDescriptionModalFormSection.additionalDescriptionField}}"-->
-<!--                    stepKey="seeAdditionalDescriptionField"/>-->
-<!--        <fillField selector="{{StorefrontAdditionalDescriptionModalFormSection.additionalDescriptionField}}"-->
-<!--                   userInput="{{AdditionalDescription.additional_description}}"-->
-<!--                   stepKey="fillAdditionalDescriptionField"/>-->
-<!--        <click selector="{{StorefrontAdditionalDescriptionModalFormSection.saveButton}}" stepKey="clickSaveButton"/>-->
-<!--        <waitForPageLoad stepKey="waitForProductAdditionalDescriptionSave"/>-->
-
-<!--        <click selector="{{StorefrontProductInfoMainSection.productAdditionalDescriptionTab}}"-->
-<!--               stepKey="clickAdditionalDescriptionTab2"/>-->
-
-        <!-- Assert that additional description added -->
-<!--        <grabTextFrom selector="{{StorefrontProductInfoMainSection.firstAdditionalDescription}}"-->
-<!--                      stepKey="grabFirstdditionalDescription"/>-->
-<!--        <assertEquals stepKey="assertAdditionalDescriptionIsCorrect">-->
-<!--            <expectedResult type="string">{{AdditionalDescription.additional_description}}</expectedResult>-->
-<!--            <actualResult type="variable">$grabFirstdditionalDescription</actualResult>-->
-<!--        </assertEquals>-->
-                <!-- Verify  additional descriptions in store front page-->
-<!--                <grabMultiple selector="{{StorefrontNavigationSection.categoryBreadcrumbs}}"  stepKey="breadcrumbs"/>-->
-<!--                <assertEquals  stepKey="verifyTheCategoryInStoreFrontPage">-->
-<!--                    <expectedResult type="array">['Home', $$createDefaultCategory.name$$,{{FirstLevelSubCat.name}}, {{SimpleSubCategory.name}}]</expectedResult>-->
-<!--                    <actualResult type="variable">breadcrumbs</actualResult>-->
-<!--                </assertEquals>-->
     </test>
 </tests>

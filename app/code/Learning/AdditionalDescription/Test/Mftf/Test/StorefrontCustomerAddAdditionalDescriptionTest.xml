@@ -19,7 +19,6 @@
             </createData>
         </before>
         <after>
-            <actionGroup ref="AdminClearCustomersFiltersActionGroup" stepKey="clearFilters"/>
             <deleteData createDataKey="firstCustomer" stepKey="deleteFirstCustomer"/>
             <deleteData createDataKey="createCategory" stepKey="deleteCategory"/>
             <deleteData createDataKey="createSimpleProduct" stepKey="deleteSimpleProduct"/>
