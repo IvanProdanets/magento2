@@ -65,5 +65,25 @@
             <expectedResult type="string">{{AdditionalDescription.additional_description}}</expectedResult>
             <actualResult type="variable">$grabFirstAdditionalDescription</actualResult>
         </assertEquals>
+
+        <click selector="{{StorefrontProductInfoMainSection.editdditionalDescriptionButton}}" stepKey="clickEditButton"/>
+        <waitForElementVisible selector="{{StorefrontAdditionalDescriptionModalFormSection.additionalDescriptionField}}"
+                               stepKey="waitForModalWindowLoad2"/>
+        <fillField selector="{{StorefrontAdditionalDescriptionModalFormSection.additionalDescriptionField}}"
+                   userInput="{{AdditionalDescription.additional_description}}Updated"
+                   stepKey="updateAdditionalDescriptionField"/>
+        <click selector="{{StorefrontAdditionalDescriptionModalFormSection.saveButton}}" stepKey="clickSaveButton1"/>
+        <waitForPageLoad stepKey="waitForProductAdditionalDescriptionSave1"/>
+
+        <click selector="{{StorefrontProductInfoMainSection.productAdditionalDescriptionTab}}"
+               stepKey="clickAdditionalDescriptionTab3"/>
+
+        <!-- Assert that customer can update description -->
+        <grabTextFrom selector="{{StorefrontProductInfoMainSection.firstAdditionalDescription}}"
+                      stepKey="grabFirstAdditionalDescriptionAfterUpdate"/>
+        <assertEquals stepKey="assertAdditionalDescriptionUpdated">
+            <expectedResult type="string">{{AdditionalDescription.additional_description}}Updated</expectedResult>
+            <actualResult type="variable">$grabFirstAdditionalDescriptionAfterUpdate</actualResult>
+        </assertEquals>
     </test>
 </tests>
