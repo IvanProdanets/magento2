@@ -4,12 +4,8 @@ declare(strict_types = 1);
 namespace Learning\AdditionalDescription\Block\Product;
 
 use Learning\AdditionalDescription\Model\AdditionalDescriptionRepository;
-use Learning\AdditionalDescription\Service\CurrentCustomerService;
+use Learning\AdditionalDescription\Service\CurrentUserService;
 use Magento\Catalog\Api\Data\ProductInterface;
-use Magento\Customer\Api\Data\CustomerInterface;
-use Magento\Customer\Model\Session;
-use Magento\Framework\Exception\LocalizedException;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Message\ManagerInterface;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Element\Template;
@@ -20,8 +16,8 @@ use Magento\Framework\View\Element\Template\Context;
  */
 class BaseTemplate extends Template
 {
-    /** @var CurrentCustomerService */
-    protected $customerService;
+    /** @var CurrentUserService */
+    protected $currentUser;
 
     /** @var AdditionalDescriptionRepository */
     protected $additionalDescriptionRepository;
@@ -39,7 +35,7 @@ class BaseTemplate extends Template
      * Description constructor.
      *
      * @param Context                         $context
-     * @param CurrentCustomerService          $customerService
+     * @param CurrentUserService              $currentUser
      * @param AdditionalDescriptionRepository $additionalDescriptionRepository
      * @param Registry                        $registry
      * @param ManagerInterface                $messageManager
@@ -47,14 +43,14 @@ class BaseTemplate extends Template
      */
     public function __construct(
         Context $context,
-        CurrentCustomerService $customerService,
+        CurrentUserService $currentUser,
         AdditionalDescriptionRepository $additionalDescriptionRepository,
         Registry $registry,
         ManagerInterface $messageManager,
         array $data = []
     ) {
         parent::__construct($context, $data);
-        $this->customerService                 = $customerService;
+        $this->currentUser                     = $currentUser;
         $this->additionalDescriptionRepository = $additionalDescriptionRepository;
         $this->registry                        = $registry;
         $this->messageManager                  = $messageManager;
@@ -79,6 +75,6 @@ class BaseTemplate extends Template
      */
     public function canCustomerAddDescription(): bool
     {
-        return $this->customerService->canCustomerAddDescription();
+        return $this->currentUser->canCustomerAddDescription();
     }
 }

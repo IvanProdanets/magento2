@@ -7,7 +7,7 @@ use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterfaceFactory;
 use Learning\AdditionalDescription\Model\AdditionalDescription;
 use Learning\AdditionalDescription\Model\AdditionalDescriptionRepository;
-use Learning\AdditionalDescription\Service\CurrentCustomerService;
+use Learning\AdditionalDescription\Service\CurrentUserService;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
@@ -33,8 +33,8 @@ class Save extends Action implements HttpPostActionInterface
     /** @var AdditionalDescriptionInterface */
     private $additionalDescription;
 
-    /** @var CurrentCustomerService */
-    private $customerService;
+    /** @var CurrentUserService */
+    private $currentUser;
 
     /** @var Validator */
     private $validator;
@@ -45,20 +45,20 @@ class Save extends Action implements HttpPostActionInterface
      * @param Context                               $context
      * @param AdditionalDescriptionRepository       $repository
      * @param AdditionalDescriptionInterfaceFactory $factory
-     * @param CurrentCustomerService                $customerService
+     * @param CurrentUserService                $currentUser
      * @param Validator                             $validator
      */
     public function __construct(
         Context $context,
         AdditionalDescriptionRepository $repository,
         AdditionalDescriptionInterfaceFactory $factory,
-        CurrentCustomerService $customerService,
+        CurrentUserService $currentUser,
         Validator $validator
     ) {
         parent::__construct($context);
         $this->additionalDescription = $factory;
         $this->repository            = $repository;
-        $this->customerService       = $customerService;
+        $this->currentUser       = $currentUser;
         $this->validator             = $validator;
     }
 
@@ -88,7 +88,7 @@ class Save extends Action implements HttpPostActionInterface
             } else {
                 /** @var AdditionalDescription $additionalDescription */
                 $additionalDescription = $this->additionalDescription->create();
-                $additionalDescription->setCustomerEmail($this->customerService->getCustomer()->getEmail());
+                $additionalDescription->setCustomerEmail($this->currentUser->getCustomer()->getEmail());
                 $additionalDescription->setProductId((int) $this->_request->getParam('product_id', 0));
             }
             $additionalDescription->setAdditionalDescription($value);
@@ -118,7 +118,7 @@ class Save extends Action implements HttpPostActionInterface
             throw new ValidationException(__('Invalid request params'));
         }
 
-        if (!$this->customerService->canCustomerAddDescription()) {
+        if (!$this->currentUser->canCustomerAddDescription()) {
             throw new AuthenticationException(
                 __('You dont have right permission to edit additional description')
             );

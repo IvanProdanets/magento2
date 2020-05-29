@@ -6,45 +6,31 @@ namespace Learning\AdditionalDescription\Model;
 use Learning\AdditionalDescription\Api\AdditionalDescriptionManagementInterface;
 use Learning\AdditionalDescription\Api\AdditionalDescriptionRepositoryInterface;
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
-use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterfaceFactory;
-use Learning\AdditionalDescription\Service\CurrentCustomerService;
-use Magento\Catalog\Api\ProductRepositoryInterface;
+use Learning\AdditionalDescription\Service\CurrentUserService;
 use Magento\Framework\Backup\Exception\NotEnoughPermissions;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 
 class AdditionalDescriptionManagement implements AdditionalDescriptionManagementInterface
 {
-    /** @var CurrentCustomerService */
+    /** @var CurrentUserService */
     private $customer;
-
-    /** @var ProductRepositoryInterface */
-    private $productRepository;
 
     /** @var AdditionalDescriptionRepositoryInterface */
     private $descriptionRepository;
 
-    /** @var AdditionalDescriptionInterfaceFactory */
-    private $additionalDescriptionFactory;
-
     /**
      * AdditionalDescriptionManagement constructor.
      *
-     * @param CurrentCustomerService                   $customerService
+     * @param CurrentUserService                       $currentUser
      * @param AdditionalDescriptionRepositoryInterface $descriptionRepository
-     * @param ProductRepositoryInterface               $productRepository
-     * @param AdditionalDescriptionInterfaceFactory    $additionalDescriptionFactory
      */
     public function __construct(
-        CurrentCustomerService $customerService,
-        AdditionalDescriptionRepositoryInterface $descriptionRepository,
-        ProductRepositoryInterface $productRepository,
-        AdditionalDescriptionInterfaceFactory $additionalDescriptionFactory
+        CurrentUserService $currentUser,
+        AdditionalDescriptionRepositoryInterface $descriptionRepository
     ) {
-        $this->customer                     = $customerService;
-        $this->descriptionRepository        = $descriptionRepository;
-        $this->productRepository            = $productRepository;
-        $this->additionalDescriptionFactory = $additionalDescriptionFactory;
+        $this->customer              = $currentUser;
+        $this->descriptionRepository = $descriptionRepository;
     }
 
     /**

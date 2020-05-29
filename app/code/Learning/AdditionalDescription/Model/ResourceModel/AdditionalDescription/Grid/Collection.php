@@ -17,27 +17,27 @@ use Psr\Log\LoggerInterface;
  */
 class Collection extends AdditionalDescriptionCollection
 {
-
-    /**
-     * Collection constructor.
-     *
-     * @param EntityFactoryInterface $entityFactory
-     * @param LoggerInterface        $logger
-     * @param FetchStrategyInterface $fetchStrategy
-     * @param ManagerInterface       $eventManager
-     * @param AdapterInterface|null  $connection
-     * @param AbstractDb|null        $resource
-     */
-    public function __construct(
-        EntityFactoryInterface $entityFactory,
-        LoggerInterface $logger,
-        FetchStrategyInterface $fetchStrategy,
-        ManagerInterface $eventManager,
-        AdapterInterface $connection = null,
-        AbstractDb $resource = null
-    ) {
-        parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
-    }
+//
+//    /**
+//     * Collection constructor.
+//     *
+//     * @param EntityFactoryInterface $entityFactory
+//     * @param LoggerInterface        $logger
+//     * @param FetchStrategyInterface $fetchStrategy
+//     * @param ManagerInterface       $eventManager
+//     * @param AdapterInterface|null  $connection
+//     * @param AbstractDb|null        $resource
+//     */
+//    public function __construct(
+//        EntityFactoryInterface $entityFactory,
+//        LoggerInterface $logger,
+//        FetchStrategyInterface $fetchStrategy,
+//        ManagerInterface $eventManager,
+//        AdapterInterface $connection = null,
+//        AbstractDb $resource = null
+//    ) {
+//        parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
+//    }
 
     /**
      * Initialize select.

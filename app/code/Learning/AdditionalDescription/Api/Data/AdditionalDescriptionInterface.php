@@ -96,7 +96,7 @@ interface AdditionalDescriptionInterface extends ExtensibleDataInterface
      *
      * @param \Learning\AdditionalDescription\Api\Data\AdditionalDescriptionExtensionInterface $extensionAttributes
      *
-     * @return AllowAddDescriptionInterface
+     * @return AdditionalDescriptionInterface
      */
     public function setExtensionAttributes(
         \Learning\AdditionalDescription\Api\Data\AdditionalDescriptionExtensionInterface $extensionAttributes

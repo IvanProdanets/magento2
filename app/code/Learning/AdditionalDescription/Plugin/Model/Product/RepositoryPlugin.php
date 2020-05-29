@@ -5,7 +5,7 @@ namespace Learning\AdditionalDescription\Plugin\Model\Product;
 
 use Learning\AdditionalDescription\Api\AdditionalDescriptionRepositoryInterface;
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
-use Learning\AdditionalDescription\Service\CurrentCustomerService;
+use Learning\AdditionalDescription\Service\CurrentUserService;
 use Magento\Catalog\Api\Data\ProductInterface;
 use Magento\Catalog\Api\ProductRepositoryInterface;
 use Magento\Customer\Api\CustomerRepositoryInterface;
@@ -27,8 +27,8 @@ class RepositoryPlugin
     /** @var SearchCriteriaBuilder */
     private $criteriaBuilder;
 
-    /** @var CurrentCustomerService */
-    private $customerService;
+    /** @var CurrentUserService */
+    private $currentUser;
 
     /** @var ManagerInterface */
     private $messageManager;
@@ -38,18 +38,18 @@ class RepositoryPlugin
      *
      * @param AdditionalDescriptionRepositoryInterface $additionalDescriptionRepository
      * @param SearchCriteriaBuilder                    $criteriaBuilder
-     * @param CurrentCustomerService                   $customerService
+     * @param CurrentUserService                   $currentUser
      * @param ManagerInterface                         $messageManager
      */
     public function __construct(
         AdditionalDescriptionRepositoryInterface $additionalDescriptionRepository,
         SearchCriteriaBuilder $criteriaBuilder,
-        CurrentCustomerService $customerService,
+        CurrentUserService $currentUser,
         ManagerInterface $messageManager
     ) {
         $this->additionalDescriptionRepository = $additionalDescriptionRepository;
         $this->criteriaBuilder                 = $criteriaBuilder;
-        $this->customerService                 = $customerService;
+        $this->currentUser                 = $currentUser;
         $this->messageManager                  = $messageManager;
     }
 
@@ -62,7 +62,7 @@ class RepositoryPlugin
     public function afterGet(
         ProductRepositoryInterface $subject,
         ProductInterface $entity
-    ) {
+    ): ProductInterface {
         return $this->extendProduct($entity);
     }
 
@@ -75,7 +75,7 @@ class RepositoryPlugin
     public function afterGetById(
         ProductRepositoryInterface $subject,
         ProductInterface $entity
-    ) {
+    ): ProductInterface {
         return $this->extendProduct($entity);
     }
 
@@ -88,7 +88,7 @@ class RepositoryPlugin
     public function afterSave(
         ProductRepositoryInterface $subject,
         ProductInterface $entity
-    ) {
+    ): ProductInterface {
         $extensionAttributes = $entity->getExtensionAttributes();
         $additionalDescriptions = $extensionAttributes->getAdditionalDescriptions();
 
@@ -128,15 +128,17 @@ class RepositoryPlugin
      */
     private function getDescriptions(ProductInterface $product): array
     {
+        $result = [];
         try {
             $criteria = $this->criteriaBuilder
                 ->addFilter(AdditionalDescriptionInterface::PRODUCT_ID, $product->getId())
                 ->create();
 
-            return $this->additionalDescriptionRepository->getList($criteria)->getItems();
+            $result = $this->additionalDescriptionRepository->getList($criteria)->getItems();
         } catch (NoSuchEntityException $e) {
-            return [];
         }
+
+        return $result;
     }
 
     /**

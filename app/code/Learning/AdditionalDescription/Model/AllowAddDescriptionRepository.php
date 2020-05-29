@@ -197,8 +197,6 @@ class AllowAddDescriptionRepository implements AllowAddDescriptionRepositoryInte
             $allowAddDescription = $existedAllowAddDescription;
         } catch (NoSuchEntityException $e) {
             $allowAddDescription->isObjectNew(true);
-
-            return $allowAddDescription;
         }
 
         return $allowAddDescription;

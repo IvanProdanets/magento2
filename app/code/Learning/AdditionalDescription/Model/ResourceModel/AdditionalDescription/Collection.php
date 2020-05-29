@@ -15,7 +15,7 @@ class Collection extends AbstractCollection
     /**
      * Resource initialization.
      */
-    public function _construct()
+    public function _construct(): void
     {
         $this->_init(AdditionalDescription::class, AdditionalDescriptionResource::class);
     }

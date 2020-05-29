@@ -13,7 +13,7 @@ class Form extends BaseTemplate
      *
      * @return string
      */
-    public function getAction()
+    public function getAction(): string
     {
         return $this->getUrl(
             'additionalDescription/index/save'

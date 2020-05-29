@@ -54,7 +54,7 @@ class RepositoryPlugin
     public function afterGet(
         CustomerRepositoryInterface $subject,
         CustomerInterface $entity
-    ) {
+    ): CustomerInterface {
         return $this->extendCustomer($entity);
     }
 
@@ -67,7 +67,7 @@ class RepositoryPlugin
     public function afterGetById(
         CustomerRepositoryInterface $subject,
         CustomerInterface $entity
-    ) {
+    ): CustomerInterface {
         return $this->extendCustomer($entity);
     }
 
@@ -103,15 +103,9 @@ class RepositoryPlugin
         CustomerRepositoryInterface $subject,
         CustomerInterface $result,
         CustomerInterface $customer
-    ) {
+    ): CustomerInterface {
         $extensionAttributes = $customer->getExtensionAttributes();
         $allowAddDescription = $extensionAttributes->getAllowAddDescription();
-
-        // Nothing to save.
-        if (!($allowAddDescription && $this->isAllowedAddDescription())) {
-            return $result;
-        }
-
         $allowAddDescription = $this->saveAllowDescription($allowAddDescription, $result);
         $extensionAttributes->setAllowAddDescription($allowAddDescription);
         $result->setExtensionAttributes($extensionAttributes);
@@ -133,7 +127,7 @@ class RepositoryPlugin
         CustomerRepositoryInterface $subject,
         callable $deleteCustomerById,
         $customerId
-    ) {
+    ): bool {
         $customer            = $subject->getById($customerId);
         $result              = $deleteCustomerById($customerId);
         $allowAddDescription = $customer->getExtensionAttributes()->getAllowAddDescription();
@@ -192,12 +186,8 @@ class RepositoryPlugin
             $newAllowAddDescription = $this->allowAddDescriptionFactory->create();
             $newAllowAddDescription->setCustomerEmail($customer->getEmail());
         }
-        $newAllowAddDescription->setIsAllowed($allowAddDescription->getIsAllowed() ?? false);
 
-        // Update AllowAddDescription.
-        if ($this->isAllowedAddDescription()) {
-            $newAllowAddDescription->setIsAllowed(true);
-        }
+        $newAllowAddDescription->setIsAllowed($this->getUpdatedIsAllowedValue($allowAddDescription));
 
         try {
             $newAllowAddDescription = $this->allowAddDescriptionRepository->save($newAllowAddDescription);
@@ -208,6 +198,28 @@ class RepositoryPlugin
         return $newAllowAddDescription;
     }
 
+    /**
+     * Update isAllowed value before saving.
+     *
+     * @param AllowAddDescriptionInterface|null $allowAddDescription
+     *
+     * @return bool
+     */
+    private function getUpdatedIsAllowedValue(?AllowAddDescriptionInterface $allowAddDescription): bool
+    {
+        $isAllowedValue = false;
+        // If exist extension attribute.
+        if ($allowAddDescription) {
+            $isAllowedValue = $allowAddDescription->getIsAllowed();
+        }
+
+        // If value pass as GET param
+        if ($this->isAllowedAddDescription()) {
+            $isAllowedValue = true;
+        }
+
+        return $isAllowedValue;
+    }
     /**
      * Get AllowAddDescription from request. FALSE by default.
      *

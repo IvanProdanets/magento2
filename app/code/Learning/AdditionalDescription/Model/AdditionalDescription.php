@@ -16,7 +16,7 @@ class AdditionalDescription extends AbstractExtensibleModel implements Additiona
     /**
      * Model initialization.
      */
-    protected function _construct()
+    protected function _construct(): void
     {
         $this->_init(AdditionalDescriptionResourceModel::class);
     }

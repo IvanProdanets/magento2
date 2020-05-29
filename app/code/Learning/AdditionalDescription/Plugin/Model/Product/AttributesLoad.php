@@ -35,7 +35,7 @@ class AttributesLoad
     public function afterGetExtensionAttributes(
         ProductInterface $entity,
         ProductExtensionInterface $extension = null
-    ) {
+    ): ProductExtensionInterface {
         return $extension ?? $this->extensionFactory->create();
     }
 }

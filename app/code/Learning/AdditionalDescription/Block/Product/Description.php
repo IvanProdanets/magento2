@@ -5,7 +5,7 @@ namespace Learning\AdditionalDescription\Block\Product;
 
 use Learning\AdditionalDescription\Api\Data\AdditionalDescriptionInterface;
 use Learning\AdditionalDescription\Model\AdditionalDescriptionRepository;
-use Learning\AdditionalDescription\Service\CurrentCustomerService;
+use Learning\AdditionalDescription\Service\CurrentUserService;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SortOrder;
 use Magento\Framework\Exception\InputException;
@@ -28,7 +28,7 @@ class Description extends BaseTemplate
      * Description constructor.
      *
      * @param Context                         $context
-     * @param CurrentCustomerService          $customerService
+     * @param CurrentUserService              $currentUser
      * @param AdditionalDescriptionRepository $additionalDescriptionRepository
      * @param SearchCriteriaBuilder           $criteriaBuilder
      * @param SortOrder                       $sortOrder
@@ -38,7 +38,7 @@ class Description extends BaseTemplate
      */
     public function __construct(
         Context $context,
-        CurrentCustomerService $customerService,
+        CurrentUserService $currentUser,
         AdditionalDescriptionRepository $additionalDescriptionRepository,
         SearchCriteriaBuilder $criteriaBuilder,
         SortOrder $sortOrder,
@@ -48,7 +48,7 @@ class Description extends BaseTemplate
     ) {
         parent::__construct(
             $context,
-            $customerService,
+            $currentUser,
             $additionalDescriptionRepository,
             $registry,
             $messageManager,
@@ -78,7 +78,7 @@ class Description extends BaseTemplate
     public function isEditButtonVisible(AdditionalDescriptionInterface $description): bool
     {
         if ($this->canCustomerAddDescription()) {
-            return $this->customerService->getCustomer()->getEmail() === $description->getCustomerEmail();
+            return $this->currentUser->getCustomer()->getEmail() === $description->getCustomerEmail();
         }
 
         return false;

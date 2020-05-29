@@ -18,7 +18,7 @@ class AdditionalDescription extends AbstractDb
      *
      * @return void
      */
-    protected function _construct()
+    protected function _construct(): void
     {
         $this->_init(self::MAIN_TABLE, self::ID_FIELD_NAME);
     }

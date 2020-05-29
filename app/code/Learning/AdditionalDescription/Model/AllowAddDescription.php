@@ -17,7 +17,7 @@ class AllowAddDescription extends AbstractExtensibleModel implements AllowAddDes
     /**
      * Model initialization.
      */
-    protected function _construct()
+    protected function _construct(): void
     {
         $this->_init(AllowAddDescriptionResourceModel::class);
     }
