@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+    <entity name="AllowAddDescription" type="customer_extension_attribute">
+        <requiredEntity type="allow_add_description">AllowAddDescription_1</requiredEntity>
+    </entity>
+    <entity name="DisallowAddDescription" type="customer_extension_attribute">
+        <requiredEntity type="allow_add_description">AllowAddDescription_0</requiredEntity>
+    </entity>
+</entities>

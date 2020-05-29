@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataProfileSchema.xsd">
+    <entity name="AdditionalDescriptionSimple" type="additional_description">
+        <data key="additional_description" unique="suffix">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</data>
+        <var key="customer_email" entityType="customer" entityKey="email"/>
+        <var key="product_id" entityType="product" entityKey="id"/>
+    </entity>
+    <entity name="AdditionalDescription" type="additional_description">
+        <data key="additional_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</data>
+    </entity>
+</entities>

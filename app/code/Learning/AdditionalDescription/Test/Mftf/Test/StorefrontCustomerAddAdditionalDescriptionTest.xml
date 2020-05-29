@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="StorefrontCustomerAddAdditionalDescriptionTest">
+        <annotations>
+            <features value="AddAdditionalDescription"/>
+            <stories value="AddAdditionalDescription"/>
+            <title value="Сheck that customer can add Additional Description to product"/>
+            <severity value="MAJOR"/>
+            <testCaseId value="M2-63368-testCase"/>
+            <group value="AdditionalDescription"/>
+        </annotations>
+        <before>
+            <createData entity="CustomerEntityWithAllowAddDescription" stepKey="firstCustomer"/>
+            <createData entity="SimpleSubCategory" stepKey="createCategory"/>
+            <createData entity="SimpleProduct" stepKey="createSimpleProduct">
+                <requiredEntity createDataKey="createCategory"/>
+            </createData>
+        </before>
+        <after>
+            <deleteData createDataKey="firstCustomer" stepKey="deleteFirstCustomer"/>
+            <deleteData createDataKey="createCategory" stepKey="deleteCategory"/>
+            <deleteData createDataKey="createSimpleProduct" stepKey="deleteSimpleProduct"/>
+        </after>
+
+        <!-- Login as first customer -->
+        <actionGroup ref="LoginToStorefrontActionGroup" stepKey="loginAsFirstCustomer">
+            <argument name="Customer" value="$$firstCustomer$$"/>
+        </actionGroup>
+
+        <amOnPage url="{{StorefrontProductPage.url($createSimpleProduct.name$)}}" stepKey="goToStoreProductPage"/>
+        <waitForPageLoad stepKey="waitForStoreFrontProductPageLoad"/>
+        <seeElement selector="{{StorefrontProductInfoMainSection.productAdditionalDescriptionTab}}"
+                    stepKey="assertProductAdditionalDescriptionTabDisplayed"/>
+        <click selector="{{StorefrontProductInfoMainSection.productAdditionalDescriptionTab}}"
+               stepKey="clickAdditionalDescriptionTab1"/>
+
+        <!-- Assert First customer see 'Add' description button on Product Details Page-->
+        <seeElement selector="{{StorefrontProductInfoMainSection.additionalDescriptionBlock}}"
+                    stepKey="seeAdditionalDescriptionBlock"/>
+        <seeElement selector="{{StorefrontProductInfoMainSection.addAdditionalDescriptionButton}}"
+                    stepKey="seeAddAdditionalDescriptionButton"/>
+
+        <!-- Add additional description -->
+        <click selector="{{StorefrontProductInfoMainSection.addAdditionalDescriptionButton}}" stepKey="clickAddButton"/>
+        <waitForElementVisible selector="{{StorefrontAdditionalDescriptionModalFormSection.additionalDescriptionField}}"
+                               stepKey="waitForModalWindowLoad"/>
+        <seeElement selector="{{StorefrontAdditionalDescriptionModalFormSection.additionalDescriptionField}}"
+                    stepKey="seeAdditionalDescriptionField"/>
+        <fillField selector="{{StorefrontAdditionalDescriptionModalFormSection.additionalDescriptionField}}"
+                   userInput="{{AdditionalDescription.additional_description}}"
+                   stepKey="fillAdditionalDescriptionField"/>
+        <click selector="{{StorefrontAdditionalDescriptionModalFormSection.saveButton}}" stepKey="clickSaveButton"/>
+        <waitForPageLoad stepKey="waitForProductAdditionalDescriptionSave"/>
+
+        <click selector="{{StorefrontProductInfoMainSection.productAdditionalDescriptionTab}}"
+               stepKey="clickAdditionalDescriptionTab2"/>
+
+        <!-- Assert that additional description added -->
+        <grabTextFrom selector="{{StorefrontProductInfoMainSection.firstAdditionalDescription}}"
+                      stepKey="grabFirstAdditionalDescription"/>
+        <assertEquals stepKey="assertAdditionalDescriptionIsCorrect">
+            <expectedResult type="string">{{AdditionalDescription.additional_description}}</expectedResult>
+            <actualResult type="variable">$grabFirstAdditionalDescription</actualResult>
+        </assertEquals>
+
+        <click selector="{{StorefrontProductInfoMainSection.editdditionalDescriptionButton}}" stepKey="clickEditButton"/>
+        <waitForElementVisible selector="{{StorefrontAdditionalDescriptionModalFormSection.additionalDescriptionField}}"
+                               stepKey="waitForModalWindowLoad2"/>
+        <fillField selector="{{StorefrontAdditionalDescriptionModalFormSection.additionalDescriptionField}}"
+                   userInput="{{AdditionalDescription.additional_description}}Updated"
+                   stepKey="updateAdditionalDescriptionField"/>
+        <click selector="{{StorefrontAdditionalDescriptionModalFormSection.saveButton}}" stepKey="clickSaveButton1"/>
+        <waitForPageLoad stepKey="waitForProductAdditionalDescriptionSave1"/>
+
+        <click selector="{{StorefrontProductInfoMainSection.productAdditionalDescriptionTab}}"
+               stepKey="clickAdditionalDescriptionTab3"/>
+
+        <!-- Assert that customer can update description -->
+        <grabTextFrom selector="{{StorefrontProductInfoMainSection.firstAdditionalDescription}}"
+                      stepKey="grabFirstAdditionalDescriptionAfterUpdate"/>
+        <assertEquals stepKey="assertAdditionalDescriptionUpdated">
+            <expectedResult type="string">{{AdditionalDescription.additional_description}}Updated</expectedResult>
+            <actualResult type="variable">$grabFirstAdditionalDescriptionAfterUpdate</actualResult>
+        </assertEquals>
+    </test>
+</tests>

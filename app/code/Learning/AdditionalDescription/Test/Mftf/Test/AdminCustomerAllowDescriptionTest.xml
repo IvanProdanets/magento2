@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="AdminCustomerAllowDescriptionTest">
+        <annotations>
+            <features value="AllowAdditionalDescription"/>
+            <stories value="AllowAdditionalDescription"/>
+            <title value="Сheck that toogle 'Allow Additional description' work properly on customer edit page"/>
+            <severity value="MAJOR"/>
+            <testCaseId value="M2-63368-testCase"/>
+            <group value="AdditionalDescription"/>
+        </annotations>
+
+        <before>
+            <createData entity="Simple_US_Customer_Multiple_Addresses" stepKey="firstCustomer"/>
+            <createData entity="SimpleSubCategory" stepKey="createCategory"/>
+            <createData entity="SimpleProduct" stepKey="createSimpleProduct">
+                <requiredEntity createDataKey="createCategory"/>
+            </createData>
+        </before>
+        <after>
+            <actionGroup ref="AdminClearCustomersFiltersActionGroup" stepKey="clearFilters"/>
+            <deleteData createDataKey="createCategory" stepKey="deleteCategory"/>
+            <deleteData createDataKey="createSimpleProduct" stepKey="deleteSimpleProduct"/>
+            <deleteData createDataKey="firstCustomer" stepKey="deleteFirstCustomer"/>
+        </after>
+
+        <actionGroup ref="LoginAsAdmin" stepKey="login"/>
+
+        <!-- Go to Customers > All Customers.-->
+        <amOnPage url="{{AdminCustomerPage.url}}" stepKey="openCustomersGridPage"/>
+
+        <!--Select created customer, Click Edit mode-->
+        <actionGroup ref="OpenEditCustomerFromAdminActionGroup" stepKey="openEditCustomerPageWithAddresses">
+            <argument name="customer" value="$$firstCustomer$$"/>
+        </actionGroup>
+
+        <!--Select Account information tab-->
+        <click selector="{{AdminCustomerInformationSection.accountInformation}}" stepKey="openAccountInfoTabOfFirstCustomer"/>
+        <waitForPageLoad stepKey="waitForAccountInfoOfFirstCustomer"/>
+        <seeElement selector="{{AdminCustomerInformationTabSection.customerAllowAddDescription}}" stepKey="assertThatToggleDisplayed"/>
+
+        <!-- Enable addting additional description for customer -->
+        <actionGroup ref="ToggleAllowAddDescriptionActionGroup" stepKey="enableAddDescriptionToggle"/>
+        <seeCheckboxIsChecked selector="{{AdminCustomerInformationTabSection.customerAllowAddDescription}}" stepKey="assertThatToggleEnabled"/>
+        <click selector="{{AdminCustomerMainActionsSection.saveButton}}" stepKey="clickSaveButton"/>
+
+        <actionGroup ref="AdminLogoutActionGroup" stepKey="logout"/>
+
+        <actionGroup ref="LoginToStorefrontActionGroup" stepKey="loginAsFirstCustomer">
+            <argument name="Customer" value="$$firstCustomer$$" />
+        </actionGroup>
+        <amOnPage url="{{StorefrontProductPage.url($createSimpleProduct.name$)}}" stepKey="goToStoreProductPage"/>
+        <waitForPageLoad stepKey="waitForStoreFrontProductPageLoad"/>
+        <seeElement selector="{{StorefrontProductInfoMainSection.productAdditionalDescriptionTab}}" stepKey="assertProductAdditionalDescriptionTabDisplayed"/>
+        <click selector="{{StorefrontProductInfoMainSection.productAdditionalDescriptionTab}}" stepKey="clickAdditionalDescriptionTab"/>
+
+        <!-- Assert First customer see 'Add' description button on Product Details Page-->
+        <seeElement selector="{{StorefrontProductInfoMainSection.additionalDescriptionBlock}}" stepKey="seeAdditionalDescriptionBlock"/>
+        <seeElement selector="{{StorefrontProductInfoMainSection.addAdditionalDescriptionButton}}" stepKey="seeAddAdditionalDescriptionButton"/>
+    </test>
+</tests>

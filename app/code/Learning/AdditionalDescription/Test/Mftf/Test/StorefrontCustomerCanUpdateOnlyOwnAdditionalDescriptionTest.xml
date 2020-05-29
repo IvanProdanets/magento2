@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="StorefrontCustomerCanUpdateOnlyOwnAdditionalDescriptionTest">
+        <annotations>
+            <features value="AddAdditionalDescription"/>
+            <stories value="AddAdditionalDescription"/>
+            <title value="Сheck that customer can edit only own Additional Description"/>
+            <severity value="MAJOR"/>
+            <testCaseId value="M2-63368-testCase"/>
+            <group value="AdditionalDescription"/>
+        </annotations>
+        <before>
+            <createData entity="CustomerEntityWithAllowAddDescription" stepKey="customer1"/>
+            <createData entity="CustomerEntityWithAllowAddDescription" stepKey="customer2"/>
+            <createData entity="SimpleSubCategory" stepKey="createCategory"/>
+            <createData entity="SimpleProduct" stepKey="createSimpleProduct">
+                <requiredEntity createDataKey="createCategory"/>
+            </createData>
+            <createData entity="AdditionalDescriptionSimple" stepKey="createAdditionalDescription1">
+                <requiredEntity createDataKey="createSimpleProduct"/>
+                <requiredEntity createDataKey="customer1"/>
+            </createData>
+            <createData entity="AdditionalDescriptionSimple" stepKey="createAdditionalDescription2">
+                <requiredEntity createDataKey="createSimpleProduct"/>
+                <requiredEntity createDataKey="customer2"/>
+            </createData>
+        </before>
+        <after>
+            <deleteData createDataKey="customer1" stepKey="deleteCustomer1"/>
+            <deleteData createDataKey="customer2" stepKey="deleteCustomer2"/>
+            <deleteData createDataKey="createCategory" stepKey="deleteCategory"/>
+            <deleteData createDataKey="createSimpleProduct" stepKey="deleteSimpleProduct"/>
+        </after>
+
+        <!-- Login as first customer -->
+        <actionGroup ref="LoginToStorefrontActionGroup" stepKey="loginAsCustomer1">
+            <argument name="Customer" value="$$customer1$$"/>
+        </actionGroup>
+
+        <amOnPage url="{{StorefrontProductPage.url($createSimpleProduct.name$)}}" stepKey="goToStoreProductPage"/>
+        <waitForPageLoad stepKey="waitForStoreFrontProductPageLoad"/>
+        <seeElement selector="{{StorefrontProductInfoMainSection.productAdditionalDescriptionTab}}"
+                    stepKey="assertProductAdditionalDescriptionTabDisplayed"/>
+        <click selector="{{StorefrontProductInfoMainSection.productAdditionalDescriptionTab}}"
+               stepKey="clickAdditionalDescriptionTab1"/>
+
+        <!-- Assert First customer dont see 'Edit' description button on Product Details Page-->
+        <seeElement
+            selector="{{StorefrontProductInfoMainSection.editButton($createAdditionalDescription1.additional_description_id$)}}"
+            stepKey="seeAddAdditionalDescriptionButtonOnOwnDescription"/>
+        <dontSeeElement
+            selector="{{StorefrontProductInfoMainSection.editButton($createAdditionalDescription2.additional_description_id$)}}"
+            stepKey="dontSeeAddAdditionalDescriptionButtonOnNotOwnDescription"/>
+    </test>
+</tests>

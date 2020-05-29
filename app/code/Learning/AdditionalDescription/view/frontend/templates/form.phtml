@@ -1,0 +1,40 @@
+<?php
+use Learning\AdditionalDescription\Block\Product\Form;
+
+/** @var Form $block */
+$block->getAction();
+?>
+
+<?php if ($block->canCustomerAddDescription()) : ?>
+    <div id="modal-form">
+        <form action="<?= $block->escapeUrl($block->getAction()) ?>" class="additional-description-form" method="post" id="additional-description-form">
+            <?= $block->getBlockHtml('formkey') ?>
+            <fieldset>
+                <input type="hidden"
+                       id="description_id"
+                       name="description_id"
+                       value=""/>
+                <input type="hidden"
+                       id="product_id"
+                       name="product_id"
+                       value="<?php echo $block->getProduct()->getId() ?? ''?>"/>
+                <legend class="legend description-legend"><span><?= $block->escapeHtml(__("You're writing description to:")) ?></span><strong><?= $block->escapeHtml($block->getProduct()->getName()) ?></strong></legend><br />
+                <div class="field description-field-text">
+                    <label for="description_field" class="label"><span><?= $block->escapeHtml(__('Additional Description')) ?></span></label>
+                    <div class="control">
+                        <textarea name="additional_description" id="description_field" cols="7" rows="5"></textarea>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Learning_AdditionalDescription/js/description": {}
+        }
+    }
+</script>
+
+<?php endif; ?>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="urn:magento:mftf:Test/etc/testSchema.xsd">
+    <test name="AdminAddtionalDescriptionGridDisplayDataTest">
+        <annotations>
+            <features value="AdditionalDescription"/>
+            <stories value="AdditionalDescription"/>
+            <title value="Test that addirionaldescription grid display data"/>
+            <severity value="MAJOR"/>
+            <testCaseId value="M2-63368-testCase"/>
+            <group value="AdditionalDescription"/>
+        </annotations>
+
+        <before>
+            <createData entity="CustomerEntityWithAllowAddDescription" stepKey="firstCustomer"/>
+            <createData entity="SimpleSubCategory" stepKey="createCategory"/>
+            <createData entity="SimpleProduct" stepKey="createSimpleProduct">
+                <requiredEntity createDataKey="createCategory"/>
+            </createData>
+            <createData entity="AdditionalDescriptionSimple" stepKey="createAdditionalDescription1">
+                <requiredEntity createDataKey="createSimpleProduct"/>
+                <requiredEntity createDataKey="firstCustomer"/>
+            </createData>
+            <createData entity="AdditionalDescriptionSimple" stepKey="createAdditionalDescription2">
+                <requiredEntity createDataKey="createSimpleProduct"/>
+                <requiredEntity createDataKey="firstCustomer"/>
+            </createData>
+        </before>
+        <after>
+            <deleteData createDataKey="createSimpleProduct" stepKey="deleteSimpleProduct"/>
+            <deleteData createDataKey="createCategory" stepKey="deleteCategory"/>
+            <deleteData createDataKey="firstCustomer" stepKey="deleteCustomer"/>
+        </after>
+
+        <actionGroup ref="LoginAsAdmin" stepKey="login"/>
+
+        <!-- Open created product edit page-->
+        <actionGroup ref="AdminProductPageOpenByIdActionGroup" stepKey="openAdminProductEditPage">
+            <argument name="productId" value="$$createSimpleProduct.id$$"/>
+        </actionGroup>
+
+        <!-- Assert that 2 rows displayed in grid -->
+        <seeElement selector="{{AdminCreateProductAdditionalDescriptionSection.descriptionsTab}}" stepKey="assertThatTabIsVisible"/>
+        <click selector="{{AdminCreateProductAdditionalDescriptionSection.descriptionsTab}}" stepKey="clickAdditionalDescriptionTab"/>
+        <wait time="10" stepKey="waitForDescriptionLoad"/>
+        <see userInput="2 records found" selector="{{AdminCreateProductAdditionalDescriptionSection.gridHeader}}" stepKey="seeRecords"/>
+    </test>
+</tests>

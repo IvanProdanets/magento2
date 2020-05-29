@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<operations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:mftf:DataGenerator/etc/dataOperation.xsd">
+    <operation name="CreateAllowAddDescription" dataType="allow_add_description" type="create">
+        <field key="is_allowed">boolean</field>
+    </operation>
+    <operation name="UpdateAllowAddDescription" dataType="allow_add_description" type="update">
+        <field key="is_allowed">boolean</field>
+    </operation>
+</operations>
