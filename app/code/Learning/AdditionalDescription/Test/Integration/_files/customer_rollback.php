@@ -23,21 +23,6 @@ try {
 } catch (NoSuchEntityException|LocalizedException $e) {
 }
 
-
-///** @var Customer $customer */
-//$customer = Bootstrap::getObjectManager()->create(Customer::class);
-//$customer = $customer->setWebsiteId(1)->loadByEmail('test.customer@example.com');
-//$customer->delete();
-
-///** @var  AllowAddDescriptionRepository $allowAddDescriptionReposiotry */
-//$allowAddDescriptionReposiotry = Bootstrap::getObjectManager()->create(AllowAddDescriptionRepository::class);
-//try {
-//    $allowAddDescription = $allowAddDescriptionReposiotry->get('test.customer@example.com');
-//    $allowAddDescriptionReposiotry->delete($allowAddDescription);
-//} catch (NoSuchEntityException|CouldNotDeleteException $e) {
-//    //
-//}
-
 $registry->unregister('isSecureArea');
 $registry->register('isSecureArea', false);
 
